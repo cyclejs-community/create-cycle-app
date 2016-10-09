@@ -1,3 +1,12 @@
+# v0.3.1 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): Patching imports on the generated files [e7f2ed5e](https://github.com/geovanisouza92/create-cycle-app/commits/e7f2ed5ed94e04eee196faebd4163a9431a92b0e)
+
+
 # v0.3.0 (2016-10-09)
 ---
 
