@@ -156,8 +156,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
   process.chdir(appFolder)
 
   // Find the right version
-  var scriptsPackage = getInstallPackage(originalDirectory, flavor)
-  var packageName = getPackageName(scriptsPackage)
+  var packageName = getPackageName(flavor)
 
   // Install dependencies
   console.log(chalk.green('Installing packages. This might take a couple minutes.'))
@@ -169,7 +168,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
     verbose && '--verbose',
     '--save-dev',
     '--save-exact',
-    scriptsPackage
+    flavor
   ].filter(function (a) { return a })
 
   // Trigger npm installation
@@ -195,18 +194,6 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
     // Execute the cycle-scripts's specific initialization
     init(appFolder, appName, streamLib, verbose, originalDirectory)
   })
-}
-
-function getInstallPackage (originalDirectory, version) {
-  var packageToInstall = 'cycle-scripts'
-  var validSemver = semver.valid(version)
-  if (validSemver) {
-    packageToInstall += '@' + version
-  } else if (version) {
-    // for tar.gz or alternative paths
-    packageToInstall = version
-  }
-  return path.resolve(originalDirectory, packageToInstall)
 }
 
 function getPackageName (installPackage) {
