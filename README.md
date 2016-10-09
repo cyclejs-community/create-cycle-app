@@ -3,6 +3,24 @@
 
 Create [Cycle.js](https://cycle.js.org/) apps with no build configuration.
 
+# How to use it
+
+> npm install --global create-cycle-app
+> create-cycle-app my-awesome-cycle-app
+
+Then choose the flavor and stream library you prefer. After installing dependencies, type:
+
+> cd my-awesome-cycle-app
+> npm start
+
+# Custom flavor
+
+You can inform which flavor you want to use:
+
+> create-cycle-app foo --flavor cycle-scripts-es-browserify
+> create-cycle-app foo --flavor cycle-scripts-es-browserify@x.y.z
+> create-cycle-app foo --flavor ./relative/path/to/cycle-scripts-es-browserify
+
 # Principles
 
 ## Single development dependency
