@@ -1,3 +1,12 @@
+# v0.3.0 (2016-10-09)
+---
+
+
+## Features
+
+- feat(create-cycle-app): Auto discover flavors [87d3ed59](https://github.com/geovanisouza92/create-cycle-app/commits/87d3ed599bea37164d5aadf912836357c96dfe53)
+
+
 # v0.2.0 (2016-10-08)
 ---
 
