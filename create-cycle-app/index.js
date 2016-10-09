@@ -22,15 +22,15 @@ if (commands.length === 0) {
     process.exit()
   }
   console.error(
-    chalk.red('Usage: create-cycle-app <project-directory> [--verbose]')
+    chalk.red('Usage: create-cycle-app <project-directory> [--scripts] [--verbose]')
   )
   process.exit(1)
 }
 
-createApp(commands[0], argv.verbose)
+createApp(commands[0], argv.verbose, argv.scripts)
 
 // Parse the command line options and run the setup
-function createApp (name, verbose) {
+function createApp (name, verbose, scriptsPkg) {
   var root = path.resolve(name)
   var appName = path.basename(root)
 
@@ -51,16 +51,66 @@ function createApp (name, verbose) {
   console.log(chalk.cyan('Fetching available flavors'))
   console.log()
 
+  var streamLibQuestion = {
+    name: 'streamLib',
+    message: 'Which stream library do you want to use?',
+    type: 'list',
+    choices: [
+      {
+        name: 'XStream, tailored for Cycle.js',
+        value: 'xstream'
+      },
+      {
+        name: 'Most.js, a blazing fast stream library',
+        value: 'most'
+      },
+      {
+        name: 'RxJS v5',
+        value: 'rxjs'
+      },
+      {
+        name: 'RxJS v4',
+        value: 'rx'
+      }
+    ]
+  }
+
+  if (scriptsPkg) {
+    // Ask just for the stream library
+    inquirer.prompt([streamLibQuestion]).then(function (answers) {
+      preparePackageJson(root, appName, scriptsPkg, answers.streamLib, verbose)
+    })
+  } else {
+    fetchFlavors(function (err, flavors) {
+      if (err) {
+        throw err
+      }
+
+      inquirer.prompt([
+        {
+          name: 'flavor',
+          message: 'Which flavor do you want to use?',
+          type: 'list',
+          choices: flavors
+        },
+        streamLibQuestion
+      ]).then(function (answers) {
+        preparePackageJson(root, appName, answers.flavor, answers.streamLib, verbose)
+      })
+    })
+  }
+}
+
+function fetchFlavors (cb) {
   // NOTE: Maybe change the method to discover flavors
-  var options = {
+  request({
     url: 'https://api.github.com/gists/0f33b55f62baca22c6bdb73b56333311',
     headers: {
       'User-Agent': 'create-cycle-app ' + VERSION
     }
-  }
-  request(options, function (err, res, body) {
+  }, function (err, res, body) {
     if (err) {
-      throw err
+      cb(err)
     }
     if (res.statusCode !== 200) {
       console.error('Flavors request failed with status: ' + res.statusCode)
@@ -68,15 +118,14 @@ function createApp (name, verbose) {
     }
 
     var gist = JSON.parse(body)
-    options = {
+    request({
       url: gist.files['flavors.json'].raw_url,
       headers: {
         'User-Agent': 'create-cycle-app ' + VERSION
       }
-    }
-    request(options, function (err, res, body) {
+    }, function (err, res, body) {
       if (err) {
-        throw err
+        cb(err)
       }
       if (res.statusCode !== 200) {
         console.error('Flavors request failed with status: ' + res.statusCode)
@@ -84,40 +133,34 @@ function createApp (name, verbose) {
       }
 
       var flavors = JSON.parse(body)
-      inquirer.prompt([
-        {
-          name: 'flavor',
-          message: 'Which flavor do you want to use?',
-          type: 'list',
-          choices: flavors
-        }
-      ]).then(function (answers) {
-
-        // Start creating the new app
-        console.log(
-          chalk.green('Creating a new Cycle.js app in ' + root + '.')
-        )
-        console.log()
-
-        // Write some package.json configuration
-        var packageJson = {
-          name: appName,
-          version: '0.1.0',
-          private: true
-        }
-        fs.writeFileSync(
-          path.join(root, 'package.json'),
-          JSON.stringify(packageJson, null, 2)
-        )
-
-        installScripts(root, appName, answers.flavor, verbose)
-      })
+      cb(null, flavors)
     })
   })
 }
 
+function preparePackageJson (root, appName, scriptsPkg, streamLib, verbose) {
+  // Start creating the new app
+  console.log(
+    chalk.green('Creating a new Cycle.js app in ' + root + '.')
+  )
+  console.log()
+
+  // Write some package.json configuration
+  var packageJson = {
+    name: appName,
+    version: '0.1.0',
+    private: true
+  }
+  fs.writeFileSync(
+    path.join(root, 'package.json'),
+    JSON.stringify(packageJson, null, 2)
+  )
+
+  installScripts(root, appName, scriptsPkg, streamLib, verbose)
+}
+
 // Install and init scripts
-function installScripts (root, appName, version, verbose) {
+function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
   var originalDirectory = process.cwd()
   process.chdir(root)
 
@@ -131,14 +174,14 @@ function installScripts (root, appName, version, verbose) {
   console.log()
 
   // Find the right version
-  var installPackage = getInstallPackage(version)
-  var packageName = getPackageName(installPackage)
+  var scriptsPackage = getInstallPackage(scriptsPkg)
+  var packageName = getPackageName(scriptsPackage)
   var args = [
     'install',
     verbose && '--verbose',
     '--save-dev',
     '--save-exact',
-    installPackage
+    scriptsPackage
   ].filter(function (a) { return a })
 
   // Trigger npm installation
@@ -162,7 +205,7 @@ function installScripts (root, appName, version, verbose) {
     var init = require(initScriptPath)
 
     // Execute the cycle-scripts's specific initialization
-    init(root, appName, verbose, originalDirectory)
+    init(root, appName, streamLib, verbose, originalDirectory)
   })
 }
 
