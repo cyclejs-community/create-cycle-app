@@ -1,6 +1,6 @@
 {
   "name": "cycle-scripts-es-browserify",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "create-cycle-app flavor using ES6 (babel) as language and Browserify as build tool",
   "main": "index.js",
   "scripts": {

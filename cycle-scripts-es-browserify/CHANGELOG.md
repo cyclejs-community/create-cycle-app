@@ -1,3 +1,12 @@
+# v0.3.0 (2016-10-09)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-browserify): Install dependencies based on choosed stream library [c580f13f](https://github.com/geovanisouza92/create-cycle-app/commits/c580f13f8ac38aa7a48f52b690e6b55a8fe239df)
+
+
 # v0.2.2 (2016-10-09)
 ---
 
