@@ -154,7 +154,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
   process.chdir(appFolder)
 
   // Find the right version
-  var scriptsPackage = getInstallPackage(flavor)
+  var scriptsPackage = getInstallPackage(originalDirectory, flavor)
   var packageName = getPackageName(scriptsPackage)
 
   // Install dependencies
@@ -195,7 +195,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
   })
 }
 
-function getInstallPackage (version) {
+function getInstallPackage (originalDirectory, version) {
   var packageToInstall = 'cycle-scripts'
   var validSemver = semver.valid(version)
   if (validSemver) {
@@ -204,7 +204,7 @@ function getInstallPackage (version) {
     // for tar.gz or alternative paths
     packageToInstall = version
   }
-  return packageToInstall
+  return path.resolve(originalDirectory, packageToInstall)
 }
 
 function getPackageName (installPackage) {
@@ -213,7 +213,7 @@ function getPackageName (installPackage) {
   } else if (~installPackage.indexOf('@')) {
     return installPackage.split('@')[0]
   }
-  return installPackage
+  return path.basename(installPackage)
 }
 
 // function checkNodeVersion (packageName) {
