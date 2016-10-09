@@ -1,0 +1,34 @@
+{
+  "name": "create-cycle-app",
+  "version": "0.1.0",
+  "description": "Create Cycle.js apps with no configuration.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "northbrook commit",
+    "release": "northbrook release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
+  },
+  "author": "Geovani de Souza <geovanisouza92@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geovanisouza92/create-cycle-app/issues"
+  },
+  "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
+  "config": {
+    "ghooks": {
+      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": "@northbrook/commit-types"
+    }
+  },
+  "devDependencies": {
+    "ghooks": "^1.3.2",
+    "northbrook": "^3.2.1",
+    "validate-commit-msg": "^2.8.2"
+  }
+}
