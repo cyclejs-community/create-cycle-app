@@ -1,3 +1,12 @@
+# v0.4.3 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(create-cycle-app): Flavor resolution [0024e346](https://github.com/geovanisouza92/create-cycle-app/commits/0024e346bb43cb95edc491e3626dc983c097f4c5)
+
+
 # v0.4.2 (2016-10-09)
 ---
 

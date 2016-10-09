@@ -1,6 +1,6 @@
 {
   "name": "create-cycle-app",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Create Cycle.js with no build configuration.",
   "main": "index.js",
   "scripts": {
