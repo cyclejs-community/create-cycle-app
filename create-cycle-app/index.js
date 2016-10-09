@@ -38,10 +38,6 @@ function createApp (name, verbose, scriptsPkg) {
     process.exit(1)
   }
 
-  console.log()
-  console.log(chalk.cyan('Fetching available flavors'))
-  console.log()
-
   var streamLibQuestion = {
     name: 'streamLib',
     message: 'Which stream library do you want to use?',
@@ -93,6 +89,10 @@ function createApp (name, verbose, scriptsPkg) {
 }
 
 function fetchFlavors (cb) {
+  console.log()
+  console.log(chalk.cyan('Fetching available flavors'))
+  console.log()
+
   // NOTE: Maybe change the method to discover flavors
   request({
     url: 'https://api.github.com/gists/0f33b55f62baca22c6bdb73b56333311',
