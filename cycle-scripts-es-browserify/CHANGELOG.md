@@ -1,3 +1,12 @@
+# v0.3.2 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): Fixing wrong xstream import [213d24e0](https://github.com/geovanisouza92/create-cycle-app/commits/213d24e003c436a96093775a112bf7fc2009318d)
+
+
 # v0.3.1 (2016-10-09)
 ---
 
