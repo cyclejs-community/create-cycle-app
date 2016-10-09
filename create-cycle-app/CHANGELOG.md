@@ -1,3 +1,12 @@
+# v0.4.0 (2016-10-09)
+---
+
+
+## Features
+
+- feat(create-cycle-app): Select the stream library + some refactoring [c6aca323](https://github.com/geovanisouza92/create-cycle-app/commits/c6aca323e12acefdb868f9504d22b808635f2fe3)
+
+
 # v0.3.0 (2016-10-09)
 ---
 
