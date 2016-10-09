@@ -19,22 +19,22 @@ if (commands.length === 0) {
     console.log(chalk.green('create-cycle-app version: ' + VERSION))
     process.exit()
   }
-  console.error(chalk.red('Usage: create-cycle-app <project-directory> [--scripts] [--verbose]'))
+  console.error(chalk.red('Usage: create-cycle-app <project-directory> [--flavor] [--verbose]'))
   process.exit(1)
 }
 
-createApp(commands[0], argv.verbose, argv.scripts)
+createApp(commands[0], argv.verbose, argv.flavor)
 
 // Parse the command line options and run the setup
-function createApp (name, verbose, scriptsPkg) {
-  var root = path.resolve(name)
-  var appName = path.basename(root)
+function createApp (name, verbose, flavor) {
+  var appFolder = path.resolve(name)
+  var appName = path.basename(appFolder)
 
   // Check the folder for files that can conflict
-  if (!pathExists.sync(name)) {
-    fs.mkdirSync(root)
-  } else if (!isSafeToCreateProjectIn(root)) {
-    console.log(chalk.red('The directory `' + name + '` contains file(s) that could conflict. Aborting.'))
+  if (!pathExists.sync(appFolder)) {
+    fs.mkdirSync(appFolder)
+  } else if (!isSafeToCreateProjectIn(appFolder)) {
+    console.log(chalk.red('The directory `' + appFolder + '` contains file(s) that could conflict. Aborting.'))
     process.exit(1)
   }
 
@@ -62,10 +62,10 @@ function createApp (name, verbose, scriptsPkg) {
     ]
   }
 
-  if (scriptsPkg) {
+  if (flavor) {
     // Ask just for the stream library
     inquirer.prompt([streamLibQuestion]).then(function (answers) {
-      preparePackageJson(root, appName, scriptsPkg, answers.streamLib, verbose)
+      preparePackageJson(appFolder, appName, flavor, answers.streamLib, verbose)
     })
   } else {
     fetchFlavors(function (err, flavors) {
@@ -82,7 +82,7 @@ function createApp (name, verbose, scriptsPkg) {
         },
         streamLibQuestion
       ]).then(function (answers) {
-        preparePackageJson(root, appName, answers.flavor, answers.streamLib, verbose)
+        preparePackageJson(appFolder, appName, answers.flavor, answers.streamLib, verbose)
       })
     })
   }
@@ -129,9 +129,9 @@ function fetchFlavors (cb) {
   })
 }
 
-function preparePackageJson (root, appName, scriptsPkg, streamLib, verbose) {
+function preparePackageJson (appFolder, appName, flavor, streamLib, verbose) {
   // Start creating the new app
-  console.log(chalk.green('Creating a new Cycle.js app in ' + root + '.'))
+  console.log(chalk.green('Creating a new Cycle.js app in ' + appFolder + '.'))
   console.log()
 
   // Write some package.json configuration
@@ -141,20 +141,20 @@ function preparePackageJson (root, appName, scriptsPkg, streamLib, verbose) {
     private: true
   }
   fs.writeFileSync(
-    path.join(root, 'package.json'),
+    path.join(appFolder, 'package.json'),
     JSON.stringify(packageJson, null, 2)
   )
 
-  installScripts(root, appName, scriptsPkg, streamLib, verbose)
+  installScripts(appFolder, appName, flavor, streamLib, verbose)
 }
 
 // Install and init scripts
-function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
+function installScripts (appFolder, appName, flavor, streamLib, verbose) {
   var originalDirectory = process.cwd()
-  process.chdir(root)
+  process.chdir(appFolder)
 
   // Find the right version
-  var scriptsPackage = getInstallPackage(scriptsPkg)
+  var scriptsPackage = getInstallPackage(flavor)
   var packageName = getPackageName(scriptsPackage)
 
   // Install dependencies
@@ -179,7 +179,7 @@ function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
     }
 
     // Validate node version
-    checkNodeVersion(packageName)
+    // checkNodeVersion(packageName)
 
     var initScriptPath = path.resolve(
       process.cwd(),
@@ -191,7 +191,7 @@ function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
     var init = require(initScriptPath)
 
     // Execute the cycle-scripts's specific initialization
-    init(root, appName, streamLib, verbose, originalDirectory)
+    init(appFolder, appName, streamLib, verbose, originalDirectory)
   })
 }
 
@@ -216,32 +216,32 @@ function getPackageName (installPackage) {
   return installPackage
 }
 
-function checkNodeVersion (packageName) {
-  var packageJsonPath = path.resolve(
-    process.cwd(),
-    'node_modules',
-    packageName,
-    'package.json'
-  )
-  var packageJson = require(packageJsonPath)
-  if (!packageJson.engines || !packageJson.engines.node) {
-    return
-  }
+// function checkNodeVersion (packageName) {
+//   var packageJsonPath = path.resolve(
+//     process.cwd(),
+//     'node_modules',
+//     packageName,
+//     'package.json'
+//   )
+//   var packageJson = require(packageJsonPath)
+//   if (!packageJson.engines || !packageJson.engines.node) {
+//     return
+//   }
+//
+//   if (!semver.satisfies(process.version, packageJsonPath.engines.node)) {
+//     console.error(
+//       chalk.red(
+//         'You are currently running Node %s but create-cycle-app requires %s. ' +
+//         'Please use a supported version of Node.\n'
+//       ),
+//       process.version,
+//       packageJsonPath.engines.node
+//     )
+//     process.exit(1)
+//   }
+// }
 
-  if (!semver.satisfies(process.version, packageJsonPath.engines.node)) {
-    console.error(
-      chalk.red(
-        'You are currently running Node %s but create-cycle-app requires %s. ' +
-        'Please use a supported version of Node.\n'
-      ),
-      process.version,
-      packageJsonPath.engines.node
-    )
-    process.exit(1)
-  }
-}
-
-function isSafeToCreateProjectIn (root) {
+function isSafeToCreateProjectIn (appFolder) {
   var whitelist = [
     '.DS_Store',
     'Thumbs.db',
@@ -251,7 +251,7 @@ function isSafeToCreateProjectIn (root) {
     'README.md',
     'LICENSE'
   ]
-  return fs.readdirSync(root)
+  return fs.readdirSync(appFolder)
     .every(function (file) {
       return whitelist.indexOf(file) >= 0
     })
