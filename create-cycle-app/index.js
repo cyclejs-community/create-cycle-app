@@ -16,14 +16,10 @@ var VERSION = require('./package.json').version
 var commands = argv._
 if (commands.length === 0) {
   if (argv.version) {
-    console.log(
-      chalk.green('create-cycle-app version: ' + VERSION)
-    )
+    console.log(chalk.green('create-cycle-app version: ' + VERSION))
     process.exit()
   }
-  console.error(
-    chalk.red('Usage: create-cycle-app <project-directory> [--scripts] [--verbose]')
-  )
+  console.error(chalk.red('Usage: create-cycle-app <project-directory> [--scripts] [--verbose]'))
   process.exit(1)
 }
 
@@ -41,9 +37,7 @@ function createApp (name, verbose, scriptsPkg) {
   if (!pathExists.sync(name)) {
     fs.mkdirSync(root)
   } else if (!isSafeToCreateProjectIn(root)) {
-    console.log(
-      chalk.red('The directory `' + name + '` contains file(s) that could conflict. Aborting.')
-    )
+    console.log(chalk.red('The directory `' + name + '` contains file(s) that could conflict. Aborting.'))
     process.exit(1)
   }
 
@@ -113,7 +107,7 @@ function fetchFlavors (cb) {
       cb(err)
     }
     if (res.statusCode !== 200) {
-      console.error('Flavors request failed with status: ' + res.statusCode)
+      console.error(chalk.red('Flavors request failed with status: ' + res.statusCode))
       return
     }
 
@@ -128,7 +122,7 @@ function fetchFlavors (cb) {
         cb(err)
       }
       if (res.statusCode !== 200) {
-        console.error('Flavors request failed with status: ' + res.statusCode)
+        console.error(chalk.red('Flavors request failed with status: ' + res.statusCode))
         return
       }
 
@@ -140,9 +134,7 @@ function fetchFlavors (cb) {
 
 function preparePackageJson (root, appName, scriptsPkg, streamLib, verbose) {
   // Start creating the new app
-  console.log(
-    chalk.green('Creating a new Cycle.js app in ' + root + '.')
-  )
+  console.log(chalk.green('Creating a new Cycle.js app in ' + root + '.'))
   console.log()
 
   // Write some package.json configuration
@@ -164,18 +156,15 @@ function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
   var originalDirectory = process.cwd()
   process.chdir(root)
 
-  // Install dependencies
-  console.log(
-    chalk.green('Installing packages. This might take a couple minutes.')
-  )
-  console.log(
-    chalk.green('Installing cycle-scripts from npm...')
-  )
-  console.log()
-
   // Find the right version
   var scriptsPackage = getInstallPackage(scriptsPkg)
   var packageName = getPackageName(scriptsPackage)
+
+  // Install dependencies
+  console.log(chalk.green('Installing packages. This might take a couple minutes.'))
+  console.log(chalk.green('Installing ' + packageName + ' from npm...'))
+  console.log()
+
   var args = [
     'install',
     verbose && '--verbose',
@@ -188,7 +177,7 @@ function installScripts (root, appName, scriptsPkg, streamLib, verbose) {
   var proc = spawn('npm', args, {stdio: 'inherit'})
   proc.on('close', function (code) {
     if (code !== 0) {
-      console.error('`npm ' + args.join(' ') + '` failed')
+      console.error(chalk.red('`npm ' + args.join(' ') + '` failed'))
       return
     }
 
