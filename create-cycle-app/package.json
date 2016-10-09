@@ -21,9 +21,6 @@
     "request": "^2.75.0",
     "semver": "^5.3.0"
   },
-  "devDependencies": {
-    "standard": "^8.3.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
