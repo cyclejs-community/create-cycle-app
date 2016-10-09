@@ -5,21 +5,21 @@ var {join} = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
 
-const basicDependencies = [
-  '@cycle/dom',
-  'xstream'
-]
+function dependencies (streamLib) {
+  var basicDependencies = [
+    '@cycle/dom',
+    'xstream'
+  ]
 
-function streamLibDeps (streamLib) {
   switch (streamLib) {
     case 'xstream':
-      return ['@cycle/xstream-run']
+      return basicDependencies.concat(['@cycle/xstream-run'])
     case 'most':
-      return ['@cycle/most-run', 'most']
+      return basicDependencies.concat(['@cycle/most-run', 'most'])
     case 'rxjs':
-      return ['@cycle/rxjs-run', 'rxjs']
+      return basicDependencies.concat(['@cycle/rxjs-run', 'rxjs'])
     case 'rx':
-      return ['@cycle/rx-run', 'rx']
+      return basicDependencies.concat(['@cycle/rx-run', 'rx'])
     default:
       throw new Error('Unsupported stream library: ' + streamLib)
   }
@@ -71,9 +71,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   var args = [
     'install'
   ].concat(
-    basicDependencies // Flavor dependencies
-  ).concat(
-    streamLibDeps(streamLib)
+    dependencies(streamLib) // Flavor dependencies
   ).concat([
     '--save',
     verbose && '--verbose'
