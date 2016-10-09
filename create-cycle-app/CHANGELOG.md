@@ -1,3 +1,13 @@
+# v0.4.2 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(create-cycle-app): Missing shebang [ff853d86](https://github.com/geovanisouza92/create-cycle-app/commits/ff853d86a8408c071a884023fe67937a27bcfa42)
+- fix(create-cycle-app): Handling various syntaxes of flavor [ce1c0873](https://github.com/geovanisouza92/create-cycle-app/commits/ce1c087305b326ecb774ec45c91cec85c0104ed5)
+
+
 # v0.4.1 (2016-10-09)
 ---
 
