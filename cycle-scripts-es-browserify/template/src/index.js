@@ -1,4 +1,4 @@
-import {run} from '@cycle/xstream-run'
+import {run} from '--RUN-LIB--'
 import {makeDOMDriver} from '@cycle/dom'
 import {App} from './app'
 

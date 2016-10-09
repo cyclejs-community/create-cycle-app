@@ -25,6 +25,77 @@ function dependencies (streamLib) {
   }
 }
 
+function replacements (streamLib) {
+  switch (streamLib) {
+    case 'xstream':
+      return [
+        '@cycle/xstream-run',
+        "import xs from 'xstream-run'",
+        'xs'
+      ]
+    case 'most':
+      return [
+        '@cycle/most-run',
+        "import * as most from 'most'",
+        'most'
+      ]
+    case 'rxjs':
+      return [
+        '@cycle/rxjs-run',
+        "import Rx from 'rxjs'",
+        'Rx.Observable'
+      ]
+    case 'rx':
+      return [
+        '@cycle/rx-run',
+        "import Rx from 'rx'",
+        'Rx.Observable'
+      ]
+    default:
+      throw new Error('Unsupported stream library: ' + streamLib)
+  }
+}
+
+function patchGitignore (appPath) {
+  // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+  // See: https://github.com/npm/npm/issues/1862
+  var gitignorePath = join(appPath, 'gitignore')
+  var dotGitignorePath = join(appPath, '.gitignore')
+  fs.move(gitignorePath, dotGitignorePath, [], function (err) {
+    if (err) {
+      // Append if there's already a `.gitignore` file there
+      if (err.code === 'EEXIST') {
+        var content = fs.readFileSync(gitignorePath)
+        fs.appendFileSync(dotGitignorePath, content)
+        fs.unlinkSync(gitignorePath)
+      } else {
+        throw err
+      }
+    }
+  })
+}
+
+function patchIndexJs (appPath, runLib) {
+  var indexJsPath = join(appPath, 'src', 'index.js')
+  var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
+  fs.writeFileSync(
+    indexJsPath,
+    content
+      .replace('--RUN-LIB--', runLib)
+  )
+}
+
+function patchAppJs (appPath, importPath, stream) {
+  var indexJsPath = join(appPath, 'src', 'app.js')
+  var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
+  fs.writeFileSync(
+    indexJsPath,
+    content
+      .replace('--IMPORT--', importPath)
+      .replace('--STREAM--', stream)
+  )
+}
+
 module.exports = function (appPath, appName, streamLib, verbose, originalDirectory) {
   var ownPackageName = require(join(__dirname, '..', 'package.json')).name
   var ownPath = join(appPath, 'node_modules', ownPackageName)
@@ -48,22 +119,10 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   // Copy flavor files
   fs.copySync(join(ownPath, 'template'), appPath)
 
-  // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
-  // See: https://github.com/npm/npm/issues/1862
-  var gitignorePath = join(appPath, 'gitignore')
-  var dotGitignorePath = join(appPath, '.gitignore')
-  fs.move(gitignorePath, dotGitignorePath, [], function (err) {
-    if (err) {
-      // Append if there's already a `.gitignore` file there
-      if (err.code === 'EEXIST') {
-        var data = fs.readFileSync(gitignorePath)
-        fs.appendFileSync(dotGitignorePath, data)
-        fs.unlinkSync(gitignorePath)
-      } else {
-        throw err
-      }
-    }
-  })
+  patchGitignore(appPath)
+  var repl = replacements(streamLib)
+  patchIndexJs(appPath, repl[0])
+  patchAppJs(appPath, repl[1], repl[2])
 
   console.log('Installing dependencies from npm...')
   console.log()

@@ -1,8 +1,8 @@
 import {div} from '@cycle/dom'
-import xs from 'xstream'
+--IMPORT--
 
 export function App (sources) {
-  const vtree$ = xs.of(
+  const vtree$ = --STREAM--.of(
     div('My Awesome Cycle.js app')
   )
   const sinks = {
