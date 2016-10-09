@@ -7,26 +7,30 @@ var chalk = require('chalk')
 var semver = require('semver')
 var argv = require('minimist')(process.argv.slice(2))
 var pathExists = require('path-exists')
+var request = require('request')
+var inquirer = require('inquirer')
+
+var VERSION = require('./package.json').version
 
 // Command line prelude (version and usage)
 var commands = argv._
 if (commands.length === 0) {
   if (argv.version) {
     console.log(
-      chalk.green('create-cycle-app version: ' + require('./package.json').version)
+      chalk.green('create-cycle-app version: ' + VERSION)
     )
     process.exit()
   }
   console.error(
-    chalk.red('Usage: create-cycle-app <project-directory> [--scripts-version] [--verbose]')
+    chalk.red('Usage: create-cycle-app <project-directory> [--verbose]')
   )
   process.exit(1)
 }
 
-createApp(commands[0], argv.verbose, argv['scripts-version'])
+createApp(commands[0], argv.verbose)
 
 // Parse the command line options and run the setup
-function createApp (name, verbose, version) {
+function createApp (name, verbose) {
   var root = path.resolve(name)
   var appName = path.basename(root)
 
@@ -43,26 +47,73 @@ function createApp (name, verbose, version) {
     process.exit(1)
   }
 
-  // TODO: Inquirer for flavor
-
-  // Start creating the new app
-  console.log(
-    chalk.green('Creating a new Cycle.js app in ' + root + '.')
-  )
+  console.log()
+  console.log(chalk.cyan('Fetching available flavors'))
   console.log()
 
-  // Write some package.json configuration
-  var packageJson = {
-    name: appName,
-    version: '0.1.0',
-    private: true
+  // NOTE: Maybe change the method to discover flavors
+  var options = {
+    url: 'https://api.github.com/gists/0f33b55f62baca22c6bdb73b56333311',
+    headers: {
+      'User-Agent': 'create-cycle-app ' + VERSION
+    }
   }
-  fs.writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(packageJson, null, 2)
-  )
+  request(options, function (err, res, body) {
+    if (err) {
+      throw err
+    }
+    if (res.statusCode !== 200) {
+      console.error('Flavors request failed with status: ' + res.statusCode)
+      return
+    }
 
-  installScripts(root, appName, version, verbose)
+    var gist = JSON.parse(body)
+    options = {
+      url: gist.files['flavors.json'].raw_url,
+      headers: {
+        'User-Agent': 'create-cycle-app ' + VERSION
+      }
+    }
+    request(options, function (err, res, body) {
+      if (err) {
+        throw err
+      }
+      if (res.statusCode !== 200) {
+        console.error('Flavors request failed with status: ' + res.statusCode)
+        return
+      }
+
+      var flavors = JSON.parse(body)
+      inquirer.prompt([
+        {
+          name: 'flavor',
+          message: 'Which flavor do you want to use?',
+          type: 'list',
+          choices: flavors
+        }
+      ]).then(function (answers) {
+
+        // Start creating the new app
+        console.log(
+          chalk.green('Creating a new Cycle.js app in ' + root + '.')
+        )
+        console.log()
+
+        // Write some package.json configuration
+        var packageJson = {
+          name: appName,
+          version: '0.1.0',
+          private: true
+        }
+        fs.writeFileSync(
+          path.join(root, 'package.json'),
+          JSON.stringify(packageJson, null, 2)
+        )
+
+        installScripts(root, appName, answers.flavor, verbose)
+      })
+    })
+  })
 }
 
 // Install and init scripts
