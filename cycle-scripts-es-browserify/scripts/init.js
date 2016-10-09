@@ -5,13 +5,27 @@ var {join} = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
 
-const dependencies = [
-  '@cycle/xstream-run',
+const basicDependencies = [
   '@cycle/dom',
   'xstream'
 ]
 
-module.exports = function (appPath, appName, verbose, originalDirectory) {
+function streamLibDeps (streamLib) {
+  switch (streamLib) {
+    case 'xstream':
+      return ['@cycle/xstream-run']
+    case 'most':
+      return ['@cycle/most-run', 'most']
+    case 'rxjs':
+      return ['@cycle/rxjs-run', 'rxjs']
+    case 'rx':
+      return ['@cycle/rx-run', 'rx']
+    default:
+      throw new Error('Unsupported stream library: ' + streamLib)
+  }
+}
+
+module.exports = function (appPath, appName, streamLib, verbose, originalDirectory) {
   var ownPackageName = require(join(__dirname, '..', 'package.json')).name
   var ownPath = join(appPath, 'node_modules', ownPackageName)
   var appPackageJson = join(appPath, 'package.json')
@@ -57,7 +71,9 @@ module.exports = function (appPath, appName, verbose, originalDirectory) {
   var args = [
     'install'
   ].concat(
-    dependencies // Flavor dependencies
+    basicDependencies // Flavor dependencies
+  ).concat(
+    streamLibDeps(streamLib)
   ).concat([
     '--save',
     verbose && '--verbose'
