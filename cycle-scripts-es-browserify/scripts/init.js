@@ -30,7 +30,7 @@ function replacements (streamLib) {
     case 'xstream':
       return [
         '@cycle/xstream-run',
-        "import xs from 'xstream-run'",
+        "import xs from 'xstream'",
         'xs'
       ]
     case 'most':
