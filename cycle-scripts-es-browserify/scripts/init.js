@@ -1,6 +1,6 @@
 'use strict'
 
-var fs = require('fs')
+var fs = require('fs-extra')
 var {join} = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
