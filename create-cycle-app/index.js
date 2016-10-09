@@ -30,9 +30,6 @@ function createApp (name, verbose, scriptsPkg) {
   var root = path.resolve(name)
   var appName = path.basename(root)
 
-  // Validate the app name against a whitelist
-  // checkAppName(appName)
-
   // Check the folder for files that can conflict
   if (!pathExists.sync(name)) {
     fs.mkdirSync(root)
@@ -244,29 +241,8 @@ function checkNodeVersion (packageName) {
   }
 }
 
-// function checkAppName (appName) {
-//   var dependencies = ['@cycle/xstream-run', '@cycle/dom', 'xstream']
-//   var devDependencies = ['browserify', 'babelify', 'babel-preset-es2015', 'mkdirp']
-//   var allDependencies = dependencies.concat(devDependencies)
-//
-//   if (allDependencies.indexOf(appName) >= 0) {
-//     console.error(
-//       chalk.red(
-//         'We cannot create a project called `' + appName + '` because a dependency with the same name exists.\n' +
-//         'Due to the way npm works, the following names are not allowed:\n\n'
-//       ),
-//       chalk.cyan(
-//         allDependencies.map(function (name) {
-//           return '  ' + name
-//         }).join('\n')
-//       ) +
-//       chalk.red('\n\nPlease choose a different project name.')
-//     )
-//   }
-// }
-
 function isSafeToCreateProjectIn (root) {
-  var validFiles = [
+  var whitelist = [
     '.DS_Store',
     'Thumbs.db',
     '.git',
@@ -277,6 +253,6 @@ function isSafeToCreateProjectIn (root) {
   ]
   return fs.readdirSync(root)
     .every(function (file) {
-      return validFiles.indexOf(file) >= 0
+      return whitelist.indexOf(file) >= 0
     })
 }
