@@ -7,6 +7,6 @@
     "northbrook-eslint"
   ],
   "eslint": {
-    "directories": ["{create-cycle-app,cycle-scripts-es-browserify}/*.js"]
+    "directories": ["*/*.js"]
   }
 }

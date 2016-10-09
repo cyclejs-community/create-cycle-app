@@ -7,7 +7,7 @@
     "test": "echo \"Maybe later\""
   },
   "keywords": [],
-  "author": "Geovani de Souza <geovanisouza92@gmail.com>",
+  "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "license": "ISC",
   "bin": {
     "create-cycle-app": "./index.js"
