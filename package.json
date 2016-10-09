@@ -4,6 +4,7 @@
   "description": "Create Cycle.js apps with no configuration.",
   "private": true,
   "scripts": {
+    "postinstall": "northbrook exec -- npm install",
     "test": "northbrook eslint",
     "commit": "northbrook commit",
     "prerelease": "npm login",
