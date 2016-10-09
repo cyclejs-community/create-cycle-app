@@ -1,3 +1,12 @@
+# v0.4.0 (2016-10-09)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-browserify): Working build script [567c0eb9](https://github.com/geovanisouza92/create-cycle-app/commits/567c0eb979baae73712cdc8cd23f620f09e743ef)
+
+
 # v0.3.2 (2016-10-09)
 ---
 
