@@ -168,7 +168,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
     verbose && '--verbose',
     '--save-dev',
     '--save-exact',
-    flavor
+    ~flavor.indexOf('./') ? path.resolve(originalDirectory, flavor) : flavor
   ].filter(function (a) { return a })
 
   // Trigger npm installation
