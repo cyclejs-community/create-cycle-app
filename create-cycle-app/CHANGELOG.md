@@ -1,3 +1,12 @@
+# v0.4.1 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(create-cycle-app): Path resolution for installation from file or folder [1585f2f9](https://github.com/geovanisouza92/create-cycle-app/commits/1585f2f9d9a524d6fb57a82dd3206b568f30dc37)
+
+
 # v0.4.0 (2016-10-09)
 ---
 
