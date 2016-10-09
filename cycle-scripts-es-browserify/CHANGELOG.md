@@ -1,3 +1,12 @@
+# v0.2.2 (2016-10-09)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): Add missing shebang [5446034a](https://github.com/geovanisouza92/create-cycle-app/commits/5446034aa08a4da305a137a747cba45203a3a253)
+
+
 # v0.2.1 (2016-10-08)
 ---
 
