@@ -1,0 +1,30 @@
+{
+  "name": "cycle-scripts-es-browserify",
+  "version": "0.1.0",
+  "description": "create-cycle-app flavor using ES6 (babel) as language and Browserify as build tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
+  },
+  "author": "Geovani de Souza <geovanisouza92@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geovanisouza92/create-cycle-app/issues"
+  },
+  "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
+  "bin": {
+    "cycle-scripts": "./index.js"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "budo": "^9.2.1",
+    "chalk": "^1.1.3",
+    "cross-spawn": "^4.0.2"
+  }
+}
