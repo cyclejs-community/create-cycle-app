@@ -3,7 +3,7 @@
 var path = require('path')
 var spawn = require('cross-spawn')
 
-var mocha = path.resolve(__dirname, '..', 'node_modules', '.bin', 'mocha')
+var mocha = path.resolve(process.cwd(), 'node_modules', '.bin', 'mocha')
 
 var args = [
   '--colors',
