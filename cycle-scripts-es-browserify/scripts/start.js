@@ -1,7 +1,10 @@
 var {join} = require('path')
 var budo = require('budo')
 var babelify = require('babelify')
+var envify = require('envify/custom')
 // var hotModuleReload = require('browserify-hmr')
+
+require('dotenv').config({silent: true})
 
 budo(join('src', 'index.js'), {
   serve: 'bundle.js',
@@ -11,8 +14,14 @@ budo(join('src', 'index.js'), {
   stream: process.stdout,
   browserify: {
     // plugin: hotModuleReload,
-    transform: babelify.configure({
-      presets: ['es2015']
-    })
+    transform: [
+      babelify.configure({
+        presets: ['es2015']
+      }),
+      envify(Object.assign({}, process.env, {
+        _: 'purge',
+        NODE_ENV: 'development'
+      }))
+    ]
   }
 })

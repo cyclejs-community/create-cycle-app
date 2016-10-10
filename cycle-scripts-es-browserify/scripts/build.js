@@ -3,6 +3,9 @@ var {join} = require('path')
 var mkdirp = require('mkdirp')
 var browserify = require('browserify')
 var babelify = require('babelify')
+var envify = require('envify/custom')
+
+require('dotenv').config({silent: true})
 
 var buildPath = join(process.cwd(), 'build')
 var publicPath = join(process.cwd(), 'public')
@@ -17,6 +20,12 @@ browserify(join(srcPath, 'index.js'))
     babelify.configure({
       presets: ['es2015']
     })
+  )
+  .transform(
+    envify(Object.assign({}, process.env, {
+      _: 'purge',
+      NODE_ENV: 'production'
+    }))
   )
   .bundle()
   .pipe(fs.createWriteStream(join(buildPath, 'bundle.js')))
