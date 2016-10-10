@@ -1,3 +1,16 @@
+# v0.7.0 (2016-10-10)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-browserify): Take off training wheels: copy scripts/config. from the cycle-scr [226fd6ef](https://github.com/geovanisouza92/create-cycle-app/commits/226fd6ef8b1202291e1dfeb5c76dfe9e99056dbf)
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): resolution error of mocha binary [29f80cda](https://github.com/geovanisouza92/create-cycle-app/commits/29f80cdae4fa7a4a106b54b2c246d0763f9bb539)
+
+
 # v0.6.0 (2016-10-10)
 ---
 
