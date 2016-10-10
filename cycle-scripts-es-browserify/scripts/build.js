@@ -1,3 +1,5 @@
+'use strict'
+
 var fs = require('fs-extra')
 var {join} = require('path')
 var mkdirp = require('mkdirp')

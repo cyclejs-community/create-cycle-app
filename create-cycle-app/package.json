@@ -2,7 +2,6 @@
   "name": "create-cycle-app",
   "version": "0.4.3",
   "description": "Create Cycle.js with no build configuration.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Maybe later\""
   },
@@ -10,7 +9,7 @@
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "license": "ISC",
   "bin": {
-    "create-cycle-app": "./index.js"
+    "create-cycle-app": "./bin/create-cycle-app.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",

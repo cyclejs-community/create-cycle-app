@@ -1,3 +1,5 @@
+'use strict'
+
 var {join} = require('path')
 var budo = require('budo')
 var babelify = require('babelify')
