@@ -1,3 +1,13 @@
+# v0.5.0 (2016-10-09)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-browserify): Adding envify configuration [69274e3f](https://github.com/geovanisouza92/create-cycle-app/commits/69274e3fd2b7328c62ac91a1bf2c62c68936c280)
+- feat(cycle-scripts-es-browserify): Adding uglify on build [9e099cd0](https://github.com/geovanisouza92/create-cycle-app/commits/9e099cd088c0a3aa3b38a4797c1f5036230842f9)
+
+
 # v0.4.0 (2016-10-09)
 ---
 
