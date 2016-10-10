@@ -51,8 +51,8 @@ Each flavor must expose these commands:
 - `npm start`: Start development server (possibly with [ live | hot module ] reload)
 - `npm test`: Run the default test tool for each language
 - `npm run build`: Generate a production-ready build content, on the `build` folder
-- `npm run take-out-bike-wheels`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on `cycle-scripts`. This is irreversible.
+- `npm run take-off-training-wheels`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on the flavored `cycle-scripts`. This is irreversible.
 
 ## No lock-in
 
-This is a tool focused on Cycle.js begginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running the `take-out-bike-wheels` command.
+This is a tool focused on Cycle.js begginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running the `take-off-training-wheels` command.

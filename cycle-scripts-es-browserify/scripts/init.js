@@ -109,7 +109,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
     'start': 'cycle-scripts start',
     'test': 'cycle-scripts test',
     'build': 'cycle-scripts build',
-    'take-out-bike-wheels': 'cycle-scripts take-out-bike-wheels'
+    'take-off-training-wheels': 'cycle-scripts take-off-training-wheels'
   }
   fs.writeFileSync(
     appPackageJson,
@@ -156,7 +156,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
     console.log(chalk.cyan('  npm run build'))
     console.log('    Bundles the app into static files for production')
     console.log()
-    console.log(chalk.cyan('  npm run take-out-bike-wheels'))
+    console.log(chalk.cyan('  npm run take-off-training-wheels'))
     console.log('    Removes this tool and copies build dependencies, configuration files')
     console.log('    and scripts into the app directory. If you do this, you can\'t go back!')
     console.log()
