@@ -1,3 +1,12 @@
+# v0.6.0 (2016-10-10)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-browserify): adding basic test script with sample test file [61860939](https://github.com/geovanisouza92/create-cycle-app/commits/6186093926e41e5aff7b6c01844dc4d1b00964b5)
+
+
 # v0.5.0 (2016-10-09)
 ---
 
