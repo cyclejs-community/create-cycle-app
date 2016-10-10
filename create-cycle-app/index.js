@@ -156,11 +156,12 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
   process.chdir(appFolder)
 
   // Find the right version
+  var local = ~flavor.indexOf('./')
   var packageName = getPackageName(flavor)
 
   // Install dependencies
   console.log(chalk.green('Installing packages. This might take a couple minutes.'))
-  console.log(chalk.green('Installing ' + packageName + ' from npm...'))
+  console.log(chalk.green('Installing ' + packageName + ' from ' + (local ? 'local' : 'npm') + '...'))
   console.log()
 
   var args = [
@@ -168,7 +169,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
     verbose && '--verbose',
     '--save-dev',
     '--save-exact',
-    ~flavor.indexOf('./') ? path.resolve(originalDirectory, flavor) : flavor
+    local ? path.resolve(originalDirectory, flavor) : flavor
   ].filter(function (a) { return a })
 
   // Trigger npm installation
