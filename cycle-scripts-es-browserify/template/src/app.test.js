@@ -1,7 +1,7 @@
 var assert = require('assert')
 
 describe('App', function () {
-  it('should contain a welcoming message', function () {
-    // TODO
+  it('should test something', function () {
+    // TODO: Add your tests here
   })
 })
