@@ -4,6 +4,7 @@ var mkdirp = require('mkdirp')
 var browserify = require('browserify')
 var babelify = require('babelify')
 var envify = require('envify/custom')
+var exorcist = require('exorcist')
 
 require('dotenv').config({silent: true})
 
@@ -15,10 +16,11 @@ mkdirp.sync(buildPath)
 
 fs.copySync(publicPath, buildPath)
 
-browserify(join(srcPath, 'index.js'))
+browserify(join(srcPath, 'index.js'), {debug: true})
   .transform(
     babelify.configure({
-      presets: ['es2015']
+      presets: ['es2015'],
+      sourceMaps: true
     })
   )
   .transform(
@@ -27,5 +29,7 @@ browserify(join(srcPath, 'index.js'))
       NODE_ENV: 'production'
     }))
   )
+  .transform('uglifyify', {global: true})
   .bundle()
+  .pipe(exorcist(join(buildPath, 'bundle.js.map')))
   .pipe(fs.createWriteStream(join(buildPath, 'bundle.js')))

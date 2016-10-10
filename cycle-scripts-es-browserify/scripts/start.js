@@ -14,6 +14,8 @@ budo(join('src', 'index.js'), {
   stream: process.stdout,
   browserify: {
     // plugin: hotModuleReload,
+    debug: true,
+    insertGlobals: true,
     transform: [
       babelify.configure({
         presets: ['es2015']

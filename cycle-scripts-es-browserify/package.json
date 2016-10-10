@@ -28,6 +28,8 @@
     "cross-spawn": "^4.0.2",
     "dotenv": "^2.0.0",
     "envify": "^3.4.1",
+    "uglifyify": "^3.0.3",
+    "exorcist": "^0.4.0",
     "fs-extra": "^0.30.0",
     "mkdirp": "^0.5.1"
   }
