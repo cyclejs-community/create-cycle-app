@@ -1,7 +1,7 @@
 'use strict'
 
 var fs = require('fs-extra')
-var {join} = require('path')
+var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
 
@@ -59,8 +59,8 @@ function replacements (streamLib) {
 function patchGitignore (appPath) {
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
-  var gitignorePath = join(appPath, 'gitignore')
-  var dotGitignorePath = join(appPath, '.gitignore')
+  var gitignorePath = path.join(appPath, 'gitignore')
+  var dotGitignorePath = path.join(appPath, '.gitignore')
   fs.move(gitignorePath, dotGitignorePath, [], function (err) {
     if (err) {
       // Append if there's already a `.gitignore` file there
@@ -76,7 +76,7 @@ function patchGitignore (appPath) {
 }
 
 function patchIndexJs (appPath, runLib) {
-  var indexJsPath = join(appPath, 'src', 'index.js')
+  var indexJsPath = path.join(appPath, 'src', 'index.js')
   var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexJsPath,
@@ -86,7 +86,7 @@ function patchIndexJs (appPath, runLib) {
 }
 
 function patchAppJs (appPath, importPath, stream) {
-  var indexJsPath = join(appPath, 'src', 'app.js')
+  var indexJsPath = path.join(appPath, 'src', 'app.js')
   var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexJsPath,
@@ -96,10 +96,36 @@ function patchAppJs (appPath, importPath, stream) {
   )
 }
 
+function successMsg (appName, appPath) {
+  console.log()
+  console.log('Success! Created ' + appName + ' at ' + appPath)
+  console.log('Inside that directory, you can run several commands:')
+  console.log()
+  console.log(chalk.cyan('  npm start'))
+  console.log('    Starts the development server')
+  console.log()
+  console.log(chalk.cyan('  npm test'))
+  console.log('    Start the test runner')
+  console.log()
+  console.log(chalk.cyan('  npm run build'))
+  console.log('    Bundles the app into static files for production')
+  console.log()
+  console.log(chalk.cyan('  npm run take-off-training-wheels'))
+  console.log('    Removes this tool and copies build dependencies, configuration files')
+  console.log('    and scripts into the app directory. If you do this, you can\'t go back!')
+  console.log()
+  console.log('We suggest that you begin by typing:')
+  console.log()
+  console.log(chalk.cyan('  cd ' + appName))
+  console.log(chalk.cyan('  npm start'))
+  console.log()
+  console.log('Happy cycling!')
+}
+
 module.exports = function (appPath, appName, streamLib, verbose, originalDirectory) {
-  var ownPackageName = require(join(__dirname, '..', 'package.json')).name
-  var ownPath = join(appPath, 'node_modules', ownPackageName)
-  var appPackageJson = join(appPath, 'package.json')
+  var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
+  var ownPath = path.join(appPath, 'node_modules', ownPackageName)
+  var appPackageJson = path.join(appPath, 'package.json')
   var appPackage = require(appPackageJson)
 
   // Manipulate app's package.json
@@ -117,7 +143,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   )
 
   // Copy flavor files
-  fs.copySync(join(ownPath, 'template'), appPath)
+  fs.copySync(path.join(ownPath, 'template'), appPath)
 
   patchGitignore(appPath)
   var repl = replacements(streamLib)
@@ -134,37 +160,15 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   ).concat([
     '--save',
     verbose && '--verbose'
-  ]).filter(function (a) { return a })
+  ]).filter(Boolean)
 
   var proc = spawn('npm', args, {stdio: 'inherit'})
   proc.on('close', function (code) {
     if (code !== 0) {
-      console.error('`npm ' + args.join(' ') + '` failed')
+      console.error(chalk.red('`npm ' + args.join(' ') + '` failed'))
       return
     }
 
-    console.log()
-    console.log('Success! Created ' + appName + ' at ' + appPath)
-    console.log('Inside that directory, you can run several commands:')
-    console.log()
-    console.log(chalk.cyan('  npm start'))
-    console.log('    Starts the development server')
-    console.log()
-    console.log(chalk.cyan('  npm test'))
-    console.log('    Start the test runner')
-    console.log()
-    console.log(chalk.cyan('  npm run build'))
-    console.log('    Bundles the app into static files for production')
-    console.log()
-    console.log(chalk.cyan('  npm run take-off-training-wheels'))
-    console.log('    Removes this tool and copies build dependencies, configuration files')
-    console.log('    and scripts into the app directory. If you do this, you can\'t go back!')
-    console.log()
-    console.log('We suggest that you begin by typing:')
-    console.log()
-    console.log(chalk.cyan('  cd ' + appName))
-    console.log(chalk.cyan('  npm start'))
-    console.log()
-    console.log('Happy cycling!')
+    successMsg(appName, appPath)
   })
 }

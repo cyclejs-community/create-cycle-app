@@ -1,6 +1,6 @@
 'use strict'
 
-var {join} = require('path')
+var path = require('path')
 var budo = require('budo')
 var babelify = require('babelify')
 var envify = require('envify/custom')
@@ -8,7 +8,7 @@ var envify = require('envify/custom')
 
 require('dotenv').config({silent: true})
 
-budo(join('src', 'index.js'), {
+budo(path.join('src', 'index.js'), {
   serve: 'bundle.js',
   dir: 'public',
   live: '*.{css,html}',

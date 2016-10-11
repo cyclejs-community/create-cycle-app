@@ -1,7 +1,7 @@
 'use strict'
 
 var fs = require('fs-extra')
-var {join} = require('path')
+var path = require('path')
 var mkdirp = require('mkdirp')
 var browserify = require('browserify')
 var babelify = require('babelify')
@@ -10,15 +10,15 @@ var exorcist = require('exorcist')
 
 require('dotenv').config({silent: true})
 
-var buildPath = join(process.cwd(), 'build')
-var publicPath = join(process.cwd(), 'public')
-var srcPath = join(process.cwd(), 'src')
+var buildPath = path.join(process.cwd(), 'build')
+var publicPath = path.join(process.cwd(), 'public')
+var srcPath = path.join(process.cwd(), 'src')
 
 mkdirp.sync(buildPath)
 
 fs.copySync(publicPath, buildPath)
 
-browserify(join(srcPath, 'index.js'), {debug: true})
+browserify(path.join(srcPath, 'index.js'), {debug: true})
   .transform(
     babelify.configure({
       presets: ['es2015'],
@@ -33,5 +33,5 @@ browserify(join(srcPath, 'index.js'), {debug: true})
   )
   .transform('uglifyify', {global: true})
   .bundle()
-  .pipe(exorcist(join(buildPath, 'bundle.js.map')))
-  .pipe(fs.createWriteStream(join(buildPath, 'bundle.js')))
+  .pipe(exorcist(path.join(buildPath, 'bundle.js.map')))
+  .pipe(fs.createWriteStream(path.join(buildPath, 'bundle.js')))
