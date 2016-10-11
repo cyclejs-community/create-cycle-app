@@ -1,0 +1,24 @@
+{
+  "name": "cycle-scripts-ts-browserify",
+  "version": "0.0.0",
+  "description": "create-cycle-app flavor using TypeScript as language and Browserify as build tool",
+  "scripts": {
+    "test": "echo \"Maybe later\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
+  },
+  "author": "Geovani Souza <geovanisouza92@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geovanisouza92/create-cycle-app/issues"
+  },
+  "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
+  "bin": {
+    "cycle-scripts": "./index.js"
+  },
+  "dependencies": {
+    "cross-spawn": "^4.0.2"
+  }
+}

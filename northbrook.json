@@ -1,7 +1,8 @@
 {
   "packages": [
     "create-cycle-app",
-    "cycle-scripts-es-browserify"
+    "cycle-scripts-es-browserify",
+    "cycle-scripts-ts-browserify"
   ],
   "plugins": [
     "northbrook-eslint"
