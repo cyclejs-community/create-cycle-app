@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
   "bin": {
-    "cycle-scripts": "./bin/cycle-scripts.js"
+    "cycle-scripts": "./index.js"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.16.0",
