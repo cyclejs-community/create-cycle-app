@@ -1,3 +1,12 @@
+# v0.4.4 (2016-10-10)
+---
+
+
+## Bug Fixes
+
+- fix(create-cycle-app): bin script [1ea5dac1](https://github.com/geovanisouza92/create-cycle-app/commits/1ea5dac1addd67cefce3b0bdcf3c6b6fca5ed0e7)
+
+
 # v0.4.3 (2016-10-09)
 ---
 
