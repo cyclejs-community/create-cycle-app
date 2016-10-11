@@ -1,3 +1,12 @@
+# v0.7.1 (2016-10-10)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): bin script [e3c6a369](https://github.com/geovanisouza92/create-cycle-app/commits/e3c6a369608d1c94515a8b2011d0f15920ffe996)
+
+
 # v0.7.0 (2016-10-10)
 ---
 
