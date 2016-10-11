@@ -12,7 +12,7 @@ var pathExists = require('path-exists')
 var request = require('request')
 var inquirer = require('inquirer')
 
-var VERSION = require(path.resolve(__dirname, '..', 'package.json')).version
+var VERSION = require(path.resolve(__dirname, 'package.json')).version
 
 // Command line prelude (version and usage)
 var commands = argv._

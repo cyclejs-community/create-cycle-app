@@ -9,7 +9,7 @@
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "license": "ISC",
   "bin": {
-    "create-cycle-app": "./bin/create-cycle-app.js"
+    "create-cycle-app": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",
