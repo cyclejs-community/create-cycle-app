@@ -11,7 +11,7 @@ require('dotenv').config({silent: true})
 budo(path.join('src', 'index.js'), {
   serve: 'bundle.js',
   dir: 'public',
-  live: '*.{css,html}',
+  live: true,
   port: 8000,
   stream: process.stdout,
   browserify: {
