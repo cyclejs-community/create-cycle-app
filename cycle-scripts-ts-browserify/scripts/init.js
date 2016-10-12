@@ -38,15 +38,15 @@ function replacements (streamLib) {
     case 'most':
       return [
         '@cycle/most-run',
-        "import * as most, {Stream} from 'most'",
+        "import * as most from 'most'",
         'most-typings',
-        'Stream',
+        'most.Stream',
         'most'
       ]
     case 'rxjs':
       return [
         '@cycle/rxjs-run',
-        "import Rx from 'rxjs'",
+        "import * as Rx from 'rxjs'",
         'rxjs-typings',
         'Rx.Observable',
         'Rx.Observable'
@@ -54,7 +54,7 @@ function replacements (streamLib) {
     case 'rx':
       return [
         '@cycle/rx-run',
-        "import Rx from 'rx'",
+        "import * as Rx from 'rx'",
         'rx-typings',
         'Rx.Observable',
         'Rx.Observable'

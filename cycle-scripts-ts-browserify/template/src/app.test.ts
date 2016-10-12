@@ -1,4 +1,4 @@
-/// <reference path="../typings/globals/mocha/index.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 import assert from 'assert'
 
