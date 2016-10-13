@@ -2,11 +2,9 @@
 
 var path = require('path')
 var budo = require('budo')
-var tsify = require('tsify')
-// var envify = require('envify/custom')
 // var hotModuleReload = require('browserify-hmr')
 
-// require('dotenv').config({silent: true})
+require('dotenv').config({silent: true})
 
 budo(path.join('src', 'index.ts'), {
   serve: 'bundle.js',
@@ -14,18 +12,5 @@ budo(path.join('src', 'index.ts'), {
   live: true,
   port: 8000,
   stream: process.stdout,
-  browserify: {
-    plugin: [
-      // hotModuleReload,
-      tsify
-    ],
-    debug: true,
-    insertGlobals: true
-    // transform: [
-    //   envify(Object.assign({}, process.env, {
-    //     _: 'purge',
-    //     NODE_ENV: 'development'
-    //   }))
-    // ]
-  }
+  browserifyArgs: '-p tsify -d --insert-globals -t [ envify --_ purge --NODE_ENV development ]'.split(' ')
 })
