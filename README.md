@@ -55,4 +55,4 @@ Each flavor must expose these commands:
 
 ## No lock-in
 
-This is a tool focused on Cycle.js begginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
+This is a tool focused on Cycle.js beginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
