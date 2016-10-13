@@ -1,3 +1,12 @@
+# v0.7.2 (2016-10-13)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): LiveReload was not reloading [c18c470e](https://github.com/geovanisouza92/create-cycle-app/commits/c18c470e8f46d2fcc1ea42512dbb2b0a260e4cd3)
+
+
 # v0.7.1 (2016-10-10)
 ---
 
