@@ -160,6 +160,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   patchIndexTs(appPath, repl[0])
   patchAppTs(appPath, repl[1], repl[2], repl[3], repl[4])
 
+  // TODO: Remember to remove @types/core-js and @cycle/base after cyclejs/cyclejs#454
   console.log('Installing dependencies from npm...')
   console.log()
 
