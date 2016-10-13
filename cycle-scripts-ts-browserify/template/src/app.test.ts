@@ -1,6 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
-
-import assert from 'assert'
+import * as assert from 'assert'
 
 describe('App', () => {
   it('should test something', () => {

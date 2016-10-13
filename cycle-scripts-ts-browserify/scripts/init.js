@@ -19,7 +19,7 @@ function dependencies (streamLib) {
     case 'rxjs':
       return basicDependencies.concat(['@cycle/rxjs-run', 'rxjs'])
     case 'rx':
-      return basicDependencies.concat(['@cycle/rx-run', 'rx'])
+      return basicDependencies.concat(['@cycle/rx-run', 'rx', '@types/rx'])
     default:
       throw new Error('Unsupported stream library: ' + streamLib)
   }
@@ -179,25 +179,6 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
       return
     }
 
-    console.log('Installing typings definitions...')
-    console.log()
-
-    args = [
-      path.join(appPath, 'node_modules', '.bin', 'typings'),
-      'install'
-    ]
-    proc = spawn(
-      'node',
-      [path.join(appPath, 'node_modules', '.bin', 'typings'), 'install'],
-      {stdio: 'inherit'}
-    )
-    proc.on('close', function (code) {
-      if (code !== 0) {
-        console.error(chalk.red('`typings install` failed'))
-        return
-      }
-
-      successMsg(appName, appPath)
-    })
+    successMsg(appName, appPath)
   })
 }
