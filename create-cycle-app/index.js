@@ -40,28 +40,12 @@ function createApp (name, verbose, flavor) {
     process.exit(1)
   }
 
-  var coreFlavors = [
-    {
-      name: 'ES6 (babel) + Browserify',
-      value: 'cycle-scripts-es-browserify'
-    },
-    {
-      name: 'TypeScript + Browserify',
-      value: 'cycle-scripts-ts-browserify'
-    },
-    {
-      name: 'ES6 (babel) + Webpack',
-      value: 'cycle-scripts-es-webpack'
-    },
-    {
-      name: 'TypeScript + Webpack',
-      value: 'cycle-scripts-ts-webpack'
-    },
+  var coreFlavors = require('./flavors.json').concat([
     {
       name: 'Discover more...',
       value: 'run-discovery'
     }
-  ]
+  ])
 
   var streamLibQuestion = {
     name: 'streamLib',
