@@ -3,12 +3,11 @@
 var fs = require('fs-extra')
 var path = require('path')
 var mkdirp = require('mkdirp')
-var webpack = require("webpack");
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+var webpack = require('webpack')
+var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 var buildPath = path.join(process.cwd(), 'build')
 var publicPath = path.join(process.cwd(), 'public')
-var srcPath = path.join(process.cwd(), 'src')
 
 mkdirp.sync(buildPath)
 
@@ -36,12 +35,12 @@ var compiler = webpack({
     new ProgressBarPlugin(),
     new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
-});
+})
 
-compiler.run(function(err, stats) {
+compiler.run(function (err, stats) {
   if (err) {
     console.log(err)
   } else {
     fs.copySync(publicPath, buildPath)
   }
-});
+})
