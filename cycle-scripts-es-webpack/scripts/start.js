@@ -1,9 +1,8 @@
 'use strict'
 
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var ENV = process.env.NODE_ENV;
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+var webpack = require('webpack')
+var WebpackDevServer = require('webpack-dev-server')
+var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 var config = {
   entry: [
@@ -31,17 +30,16 @@ var config = {
     new webpack.HotModuleReplacementPlugin(),
     new ProgressBarPlugin()
   ]
-};
+}
 
-
-var compiler = webpack(config);
+var compiler = webpack(config)
 var server = new WebpackDevServer(compiler, {
   historyApiFallback: true,
   hot: true,
-  contentBase: "./public",
+  contentBase: './public',
   stats: {
     colors: true,
     inline: true
-  },
-});
-server.listen(8000);
+  }
+})
+server.listen(8000)
