@@ -40,6 +40,29 @@ function createApp (name, verbose, flavor) {
     process.exit(1)
   }
 
+  var coreFlavors = [
+    {
+      name: 'ES6 (babel) + Browserify',
+      value: 'cycle-scripts-es-browserify'
+    },
+    {
+      name: 'TypeScript + Browserify',
+      value: 'cycle-scripts-ts-browserify'
+    },
+    {
+      name: 'ES6 (babel) + Webpack',
+      value: 'cycle-scripts-es-webpack'
+    },
+    {
+      name: 'TypeScript + Webpack',
+      value: 'cycle-scripts-ts-webpack'
+    },
+    {
+      name: 'Discover more...',
+      value: 'run-discovery'
+    }
+  ]
+
   var streamLibQuestion = {
     name: 'streamLib',
     message: 'Which stream library do you want to use?',
@@ -61,7 +84,10 @@ function createApp (name, verbose, flavor) {
         name: 'RxJS v4',
         value: 'rx'
       }
-    ]
+    ],
+    when: function (currentAnswers) {
+      return currentAnswers.flavor !== 'run-discovery'
+    }
   }
 
   if (flavor) {
@@ -70,29 +96,45 @@ function createApp (name, verbose, flavor) {
       preparePackageJson(appFolder, appName, flavor, answers.streamLib, verbose)
     })
   } else {
-    fetchFlavors(function (err, flavors) {
-      if (err) {
-        throw err
-      }
+    inquirer.prompt([
+      {
+        name: 'flavor',
+        message: 'Which flavor do you want to use?',
+        type: 'list',
+        choices: coreFlavors
+      },
+      streamLibQuestion
+    ]).then(function (answers) {
+      // When run-discovery was choosed, we need to discover
+      // flavors somewhere else
+      if (answers.flavor === 'run-discovery') {
+        discoverFlavors(function (err, flavors) {
+          if (err) {
+            throw err
+          }
 
-      inquirer.prompt([
-        {
-          name: 'flavor',
-          message: 'Which flavor do you want to use?',
-          type: 'list',
-          choices: flavors
-        },
-        streamLibQuestion
-      ]).then(function (answers) {
+          inquirer.prompt([
+            {
+              name: 'flavor',
+              message: 'Which flavor do you want to use?',
+              type: 'list',
+              choices: flavors
+            },
+            streamLibQuestion
+          ]).then(function (answers) {
+            preparePackageJson(appFolder, appName, answers.flavor, answers.streamLib, verbose)
+          })
+        })
+      } else {
         preparePackageJson(appFolder, appName, answers.flavor, answers.streamLib, verbose)
-      })
+      }
     })
   }
 }
 
-function fetchFlavors (cb) {
+function discoverFlavors (cb) {
   console.log()
-  console.log(chalk.cyan('Fetching available flavors'))
+  console.log(chalk.cyan('Discovering available flavors...'))
   console.log()
 
   // NOTE: Maybe change the method to discover flavors
