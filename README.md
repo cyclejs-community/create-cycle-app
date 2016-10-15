@@ -43,10 +43,10 @@ Each flavor represents a pair of programming language and build tool. All the un
 
 ### Available flavors
 
-- cycle-scripts-es-browserify: ES6 (babel) + Browserify
-- cycle-scripts-ts-browserify: TypeScript + Browserify
-- cycle-scripts-es-webpack: ES6 (babel) + Webpack
-- cycle-scripts-ts-webpack: TypeScript + Webpack
+- [cycle-scripts-es-browserify](./cycle-scripts-es-browserify/): ES6 (babel) + Browserify
+- [cycle-scripts-ts-browserify](./cycle-scripts-ts-browserify/): TypeScript + Browserify
+- [cycle-scripts-es-webpack](./cycle-scripts-es-webpack/): ES6 (babel) + Webpack
+- [cycle-scripts-ts-webpack](./cycle-scripts-ts-webpack/): TypeScript + Webpack
 
 ## Simple commands
 
