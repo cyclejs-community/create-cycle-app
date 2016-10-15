@@ -1,3 +1,12 @@
+# v0.7.3 (2016-10-15)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): avoid running tests inside node_modules and other directories [dd184c24](https://github.com/geovanisouza92/create-cycle-app/commits/dd184c24bbd52461084b24a6432afc59ddcdaf68)
+
+
 # v0.7.2 (2016-10-13)
 ---
 
