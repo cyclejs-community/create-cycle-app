@@ -1,6 +1,6 @@
 {
   "name": "cycle-scripts-ts-webpack",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "create-cycle-app flavor using TypeScript as language and Webpack as build tool",
   "scripts": {
     "test": "echo \"Maybe later\""
