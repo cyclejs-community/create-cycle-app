@@ -11,7 +11,7 @@ var args = [
   '--require',
   'babel-register',
   !process.env.CI && (console.log(chalk.green.bold('Enabling watch mode')) || '--watch'),
-  '**/*.test.js'
+  'src/**/*.test.js'
 ].filter(Boolean)
 
 spawn(mocha, args, {stdio: 'inherit'})
