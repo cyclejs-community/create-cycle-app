@@ -40,12 +40,14 @@ function createApp (name, verbose, flavor) {
     process.exit(1)
   }
 
-  var coreFlavors = require('./flavors.json').concat([
-    {
-      name: 'Discover more...',
-      value: 'run-discovery'
-    }
-  ])
+  var coreFlavors = require('./flavors.json')
+    // TODO: Uncomment to enable proper discovery
+    // .concat([
+    //   {
+    //     name: 'Discover more...',
+    //     value: 'run-discovery'
+    //   }
+    // ])
 
   var streamLibQuestion = {
     name: 'streamLib',
