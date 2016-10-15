@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "postinstall": "northbrook exec -- npm install",
-    "test": "northbrook eslint",
+    "test": "northbrook eslint && standard */*.js */scripts/*.js",
     "commit": "northbrook commit",
     "release": "northbrook release"
   },
