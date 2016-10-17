@@ -28,29 +28,29 @@ function dependencies (streamLib) {
 function replacements (streamLib) {
   switch (streamLib) {
     case 'xstream':
-      return [
-        '@cycle/xstream-run',
-        "import xs from 'xstream'",
-        'xs'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/xstream-run',
+        '--IMPORT--': "import xs from 'xstream'",
+        '--STREAM--': 'xs'
+      }
     case 'most':
-      return [
-        '@cycle/most-run',
-        "import * as most from 'most'",
-        'most'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/most-run',
+        '--IMPORT--': "import * as most from 'most'",
+        '--STREAM--': 'most'
+      }
     case 'rxjs':
-      return [
-        '@cycle/rxjs-run',
-        "import Rx from 'rxjs'",
-        'Rx.Observable'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/rxjs-run',
+        '--IMPORT--': "import Rx from 'rxjs'",
+        '--STREAM--': 'Rx.Observable'
+      }
     case 'rx':
-      return [
-        '@cycle/rx-run',
-        "import Rx from 'rx'",
-        'Rx.Observable'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/rx-run',
+        '--IMPORT--': "import Rx from 'rx'",
+        '--STREAM--': 'Rx.Observable'
+      }
     default:
       throw new Error('Unsupported stream library: ' + streamLib)
   }
@@ -75,24 +75,29 @@ function patchGitignore (appPath) {
   })
 }
 
-function patchIndexJs (appPath, runLib) {
+function replaceTags (content, tags) {
+  var newContent = content
+  Object.keys(tags).forEach(function (tag) {
+    newContent = newContent.replace(tag, tags[tag])
+  })
+  return newContent
+}
+
+function patchIndexJs (appPath, tags) {
   var indexJsPath = path.join(appPath, 'src', 'index.js')
   var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexJsPath,
-    content
-      .replace('--RUN-LIB--', runLib)
+    replaceTags(content, tags)
   )
 }
 
-function patchAppJs (appPath, importPath, stream) {
+function patchAppJs (appPath, tags) {
   var indexJsPath = path.join(appPath, 'src', 'app.js')
   var content = fs.readFileSync(indexJsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexJsPath,
-    content
-      .replace('--IMPORT--', importPath)
-      .replace('--STREAM--', stream)
+    replaceTags(content, tags)
   )
 }
 
@@ -146,9 +151,9 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   fs.copySync(path.join(ownPath, 'template'), appPath)
 
   patchGitignore(appPath)
-  var repl = replacements(streamLib)
-  patchIndexJs(appPath, repl[0])
-  patchAppJs(appPath, repl[1], repl[2])
+  var tags = replacements(streamLib)
+  patchIndexJs(appPath, tags)
+  patchAppJs(appPath, tags)
 
   console.log('Installing dependencies from npm...')
   console.log()

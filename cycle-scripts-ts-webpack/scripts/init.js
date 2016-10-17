@@ -28,40 +28,48 @@ function dependencies (streamLib) {
 function replacements (streamLib) {
   switch (streamLib) {
     case 'xstream':
-      return [
-        '@cycle/xstream-run',
-        "import xs, {Stream} from 'xstream'",
-        'xstream-typings',
-        'Stream',
-        'xs'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/xstream-run',
+        '--IMPORT--': "import xs, {Stream} from 'xstream'",
+        '--DOM-TYPINGS--': 'xstream-typings',
+        '--STREAM-TYPE--': 'Stream',
+        '--STREAM--': 'xs'
+      }
     case 'most':
-      return [
-        '@cycle/most-run',
-        "import * as most from 'most'",
-        'most-typings',
-        'most.Stream',
-        'most'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/most-run',
+        '--IMPORT--': "import * as most from 'most'",
+        '--DOM-TYPINGS--': 'most-typings',
+        '--STREAM-TYPE--': 'most.Stream',
+        '--STREAM--': 'most'
+      }
     case 'rxjs':
-      return [
-        '@cycle/rxjs-run',
-        "import * as Rx from 'rxjs'",
-        'rxjs-typings',
-        'Rx.Observable',
-        'Rx.Observable'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/rxjs-run',
+        '--IMPORT--': "import * as Rx from 'rxjs'",
+        '--DOM-TYPINGS--': 'rxjs-typings',
+        '--STREAM-TYPE--': 'Rx.Observable',
+        '--STREAM--': 'Rx.Observable'
+      }
     case 'rx':
-      return [
-        '@cycle/rx-run',
-        "import * as Rx from 'rx'",
-        'rx-typings',
-        'Rx.Observable',
-        'Rx.Observable'
-      ]
+      return {
+        '--RUN-LIB--': '@cycle/rx-run',
+        '--IMPORT--': "import * as Rx from 'rx'",
+        '--DOM-TYPINGS--': 'rx-typings',
+        '--STREAM-TYPE--': 'Rx.Observable',
+        '--STREAM--': 'Rx.Observable'
+      }
     default:
       throw new Error('Unsupported stream library: ' + streamLib)
   }
+}
+
+function replaceTags (content, tags) {
+  var newContent = content
+  Object.keys(tags).forEach(function (tag) {
+    newContent = newContent.replace(tag, tags[tag])
+  })
+  return newContent
 }
 
 function patchGitignore (appPath) {
@@ -83,26 +91,21 @@ function patchGitignore (appPath) {
   })
 }
 
-function patchIndexTs (appPath, runLib) {
+function patchIndexTs (appPath, tags) {
   var indexTsPath = path.join(appPath, 'src', 'index.ts')
   var content = fs.readFileSync(indexTsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexTsPath,
-    content
-      .replace('--RUN-LIB--', runLib)
+    replaceTags(content, tags)
   )
 }
 
-function patchAppTs (appPath, importPath, domTypings, streamType, stream) {
+function patchAppTs (appPath, tags) {
   var indexTsPath = path.join(appPath, 'src', 'app.ts')
   var content = fs.readFileSync(indexTsPath, {encoding: 'utf-8'})
   fs.writeFileSync(
     indexTsPath,
-    content
-      .replace('--IMPORT--', importPath)
-      .replace('--DOM-TYPINGS--', domTypings)
-      .replace('--STREAM-TYPE--', streamType)
-      .replace('--STREAM--', stream)
+    replaceTags(content, tags)
   )
 }
 
@@ -156,9 +159,9 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   fs.copySync(path.join(ownPath, 'template'), appPath)
 
   patchGitignore(appPath)
-  var repl = replacements(streamLib)
-  patchIndexTs(appPath, repl[0])
-  patchAppTs(appPath, repl[1], repl[2], repl[3], repl[4])
+  var tags = replacements(streamLib)
+  patchIndexTs(appPath, tags)
+  patchAppTs(appPath, tags)
 
   // TODO: Remove @types/core-js after cyclejs/cyclejs#454
   console.log('Installing dependencies from npm...')
