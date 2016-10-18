@@ -204,22 +204,22 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
 
   // Install dependencies
   console.log(chalk.green('Installing packages. This might take a couple minutes.'))
-  console.log(chalk.green('Installing ' + packageName + ' from ' + (local ? 'local' : 'npm') + '...'))
+  console.log(chalk.green('Installing ' + packageName + ' from ' + (local ? 'local' : 'yarn') + '...'))
   console.log()
 
   var args = [
-    'install',
+    'add',
     verbose && '--verbose',
-    '--save-dev',
-    '--save-exact',
+    '--dev',
+    '--exact',
     local ? path.resolve(originalDirectory, flavor) : flavor
   ].filter(function (a) { return a })
 
-  // Trigger npm installation
-  var proc = spawn('npm', args, {stdio: 'inherit'})
+  // Trigger yarn installation
+  var proc = spawn('yarn', args, {stdio: 'inherit'})
   proc.on('close', function (code) {
     if (code !== 0) {
-      console.error(chalk.red('`npm ' + args.join(' ') + '` failed'))
+      console.error(chalk.red('`yarn ' + args.join(' ') + '` failed'))
       return
     }
 

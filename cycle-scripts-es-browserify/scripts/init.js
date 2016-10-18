@@ -106,23 +106,23 @@ function successMsg (appName, appPath) {
   console.log('Success! Created ' + appName + ' at ' + appPath)
   console.log('Inside that directory, you can run several commands:')
   console.log()
-  console.log(chalk.cyan('  npm start'))
+  console.log(chalk.cyan('  yarn start'))
   console.log('    Starts the development server')
   console.log()
-  console.log(chalk.cyan('  npm test'))
+  console.log(chalk.cyan('  yarn test'))
   console.log('    Start the test runner')
   console.log()
-  console.log(chalk.cyan('  npm run build'))
+  console.log(chalk.cyan('  yarn run build'))
   console.log('    Bundles the app into static files for production')
   console.log()
-  console.log(chalk.cyan('  npm run take-off-training-wheels'))
+  console.log(chalk.cyan('  yarn run take-off-training-wheels'))
   console.log('    Removes this tool and copies build dependencies, configuration files')
   console.log('    and scripts into the app directory. If you do this, you can\'t go back!')
   console.log()
   console.log('We suggest that you begin by typing:')
   console.log()
   console.log(chalk.cyan('  cd ' + appName))
-  console.log(chalk.cyan('  npm start'))
+  console.log(chalk.cyan('  yarn start'))
   console.log()
   console.log('Happy cycling!')
 }
@@ -158,11 +158,11 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   patchIndexJs(appPath, tags)
   patchAppJs(appPath, tags)
 
-  console.log('Installing dependencies from npm...')
+  console.log('Installing dependencies from yarn...')
   console.log()
 
   var args = [
-    'install'
+    'add'
   ].concat(
     dependencies(streamLib) // Flavor dependencies
   ).concat([
@@ -170,10 +170,10 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
     verbose && '--verbose'
   ]).filter(Boolean)
 
-  var proc = spawn('npm', args, {stdio: 'inherit'})
+  var proc = spawn('yarn', args, {stdio: 'inherit'})
   proc.on('close', function (code) {
     if (code !== 0) {
-      console.error(chalk.red('`npm ' + args.join(' ') + '` failed'))
+      console.error(chalk.red('`yarn ' + args.join(' ') + '` failed'))
       return
     }
 
