@@ -19,34 +19,6 @@ Then choose the flavor and stream library you prefer. After installing dependenc
   $ npm start
   ```
 
-# Commands
-
-Each project is provided with these [npm scripts](https://docs.npmjs.com/misc/scripts):
-
-## npm start
-
-This will start a development server listening on your machine address with port 8000. The flavors have enabled Live Reload in order to refresh the browser when the code changes.
-
-## npm test
-
-This will run the test script outputing results in console. The TypeScript flavors could create a `test` folder, with compiled JavaScript. This folder is *gitignored*.
-
-## npm run build
-
-This will bundle app files as static assets on `build` folder, optimized for production. This folder is *gitignored*.
-
-# Custom flavor
-
-You can inform which flavor you want to use:
-
-  ```sh
-  $ create-cycle-app foo --flavor cycle-scripts-es-browserify
-
-  $ create-cycle-app foo --flavor cycle-scripts-es-browserify@x.y.z
-
-  $ create-cycle-app foo --flavor ./relative/path/to/cycle-scripts-es-browserify
-  ```
-
 # Principles
 
 ## Single development dependency
@@ -68,16 +40,28 @@ Each flavor represents a pair of programming language and build tool. All the un
 
 Each flavor expose these commands:
 
-- `npm start`: Start development server (possibly with [ live | hot module ] reload)
-- `npm test`: Run the default test tool for each language
-- `npm run build`: Generate a production-ready build content, on the `build` folder
+- `npm start`: Start development server (possibly with [ live | hot module ] reload) listening on port 8000
+- `npm test`: Run the default test tool for each language (some flavors could create a `test` folder, but this folder is *gitignored*)
+- `npm run build`: Generate a production-ready build content, on the `build` folder (this folder is *gitignored*)
 - `npm run take-off-training-wheels`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on the flavored `cycle-scripts`. This is irreversible.
 
 ## No lock-in
 
 This is a tool focused on Cycle.js beginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
 
-# How to create a custom flavor
+# Custom flavor
+
+You can inform which flavor you want to use:
+
+  ```sh
+  $ create-cycle-app foo --flavor cycle-scripts-es-browserify
+
+  $ create-cycle-app foo --flavor cycle-scripts-es-browserify@x.y.z
+
+  $ create-cycle-app foo --flavor ./relative/path/to/cycle-scripts-es-browserify
+  ```
+
+## How to create a custom flavor
 
 A flavor is a npm module with a set of scripts and template files that is used to configure a new Cycle.js project.
 
