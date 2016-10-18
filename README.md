@@ -19,6 +19,8 @@ Then choose the flavor and stream library you prefer. After installing dependenc
   $ npm start
   ```
 
+Open your browser at [http://localhost:8000](http://localhost:8000).
+
 # Principles
 
 ## Single development dependency
