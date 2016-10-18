@@ -19,7 +19,6 @@
     "cycle-scripts": "./index.js"
   },
   "dependencies": {
-    "@cycle/base": "^4.1.1",
     "@types/core-js": "^0.9.34",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.45",
