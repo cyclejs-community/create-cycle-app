@@ -1,3 +1,12 @@
+# v0.2.1 (2016-10-19)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-webpack): Test can now be written ine ES6 as well [2a45a9e1](https://github.com/nickbalestra/cycle-scripts-es-webpack/commits/2a45a9e1eb96ffc2a1150028ea5a0fa04f6c25b2)
+
+
 # v0.2.0 (2016-10-15)
 ---
 
