@@ -1,4 +1,4 @@
-var assert = require('assert')
+const assert = require('assert')
 
 describe('App', function () {
   it('should test something', function () {
