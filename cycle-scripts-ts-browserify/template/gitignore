@@ -46,3 +46,6 @@ jspm_packages
 *.tgz
 
 
+build
+test
+lib
