@@ -19,6 +19,22 @@ Then choose the flavor and stream library you prefer. After installing dependenc
   $ npm start
   ```
 
+# Commands
+
+Each project is provided with these [npm scripts](https://docs.npmjs.com/misc/scripts):
+
+## npm start
+
+This will start a development server listening on your machine address with port 8000. The flavors have enabled Live Reload in order to refresh the browser when the code changes.
+
+## npm test
+
+This will run the test script outputing results in console. The TypeScript flavors could create a `test` folder, with compiled JavaScript. This folder is *gitignored*.
+
+## npm run build
+
+This will bundle app files as static assets on `build` folder, optimized for production. This folder is *gitignored*.
+
 # Custom flavor
 
 You can inform which flavor you want to use:
