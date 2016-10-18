@@ -1,4 +1,4 @@
-var assert = require('assert')
+import assert from 'assert'
 
 describe('App', function () {
   it('should test something', function () {
