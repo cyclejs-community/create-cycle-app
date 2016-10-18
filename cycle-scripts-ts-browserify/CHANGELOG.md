@@ -1,3 +1,12 @@
+# v0.1.1 (2016-10-17)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-ts-browserify): Removing dependency on @cycle/base due cyclejs/cyclejs#452 [cc0d1e24](https://github.com/geovanisouza92/create-cycle-app/commits/cc0d1e244f40dbfeb2a99e8bb74ebe4c96718a89)
+
+
 # v0.1.0 (2016-10-13)
 ---
 
