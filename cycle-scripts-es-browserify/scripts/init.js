@@ -142,6 +142,9 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
     'build': 'cycle-scripts build',
     'take-off-training-wheels': 'cycle-scripts take-off-training-wheels'
   }
+  appPackage.babel = {
+    'presets': ['es2015']
+  }
   fs.writeFileSync(
     appPackageJson,
     JSON.stringify(appPackage, null, 2)
