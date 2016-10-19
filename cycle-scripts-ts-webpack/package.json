@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
+    "url": "git+https://github.com/cyclejs-community/create-cycle-app.git"
   },
   "author": "Nick Balestra <nick@balestra.ch>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/geovanisouza92/create-cycle-app/issues"
+    "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
   },
-  "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
+  "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
   "bin": {
     "cycle-scripts": "./index.js"
   },

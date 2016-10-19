@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geovanisouza92/create-cycle-app.git"
+    "url": "git+https://github.com/cyclejs-community/create-cycle-app.git"
   },
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/geovanisouza92/create-cycle-app/issues"
+    "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
   },
-  "homepage": "https://github.com/geovanisouza92/create-cycle-app#readme",
+  "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
   "config": {
     "ghooks": {
       "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
