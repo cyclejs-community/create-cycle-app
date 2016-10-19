@@ -129,10 +129,8 @@ function discoverFlavors (cb) {
   console.log(chalk.cyan('Fetching community flavors...'))
   console.log()
 
-  // NOTE: change the method to discover flavors to the published communityFlavors.json
-  // following is just for testing
   request({
-    url: 'https://api.github.com/repos/nickbalestra/create-cycle-app-community-flavors/contents/communityFlavors.json',
+    url: 'https://api.github.com/repos/cyclejs-community/create-cycle-app/contents/create-cycle-app/communityFlavors.json',
     headers: {
       'User-Agent': 'create-cycle-app ' + VERSION
     }
