@@ -1,3 +1,12 @@
+# v0.7.4 (2016-10-19)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): Allow writing test in ES6 [2e018ff6](https://github.com/cyclejs-community/create-cycle-app/commits/2e018ff6286754504f1bcc3a66bf29ce876597bc)
+
+
 # v0.7.3 (2016-10-15)
 ---
 
