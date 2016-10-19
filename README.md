@@ -31,12 +31,16 @@ Must be the first and only dependency needed to create a Cycle.js project, hidin
 
 Each flavor represents a pair of programming language and build tool. All the underlying dependencies and configuration needed must be hidden behind the flavor. All flavors must adhere to the same basic structure and commands.
 
-### Available flavors
+### Core flavors
 
 - [cycle-scripts-es-browserify](./cycle-scripts-es-browserify/): ES6 (babel) + Browserify
 - [cycle-scripts-ts-browserify](./cycle-scripts-ts-browserify/): TypeScript + Browserify
 - [cycle-scripts-es-webpack](./cycle-scripts-es-webpack/): ES6 (babel) + Webpack
 - [cycle-scripts-ts-webpack](./cycle-scripts-ts-webpack/): TypeScript + Webpack
+
+### Community flavors
+
+- [cycle-scripts-widdershin](https://github.com/Widdershin/cycle-scripts-widdershin): Semicolons + browserify + babel(with object spread plugin)
 
 ## Simple commands
 
