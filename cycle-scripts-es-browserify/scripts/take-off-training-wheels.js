@@ -26,6 +26,9 @@ Object.keys(appPackageJson.devDependencies)
   })
 devDependencies = Object.assign({}, devDependencies, ownPackageJson.dependencies)
 
+// Delete babel config in package.json
+delete appPackageJson.babel
+
 // Write the new package.json
 var newPackageJson = Object.assign({}, appPackageJson, {scripts: scripts, devDependencies: devDependencies})
 fs.writeFileSync(
@@ -33,13 +36,17 @@ fs.writeFileSync(
   JSON.stringify(newPackageJson, null, 2)
 )
 
-// Copy scripts
 mkdirp(scriptsPath, function () {
-  function copy (script) {
-    fs.copySync(path.join(__dirname, script), path.join(scriptsPath, script))
+  function copy (script, subDir, inRoot) {
+    subDir = subDir || ''
+    fs.copySync(path.join(__dirname, subDir, script), path.join(inRoot ? '' : scriptsPath, script))
   }
 
+  // Copy scripts
   copy('start.js')
   copy('test.js')
   copy('build.js')
+
+  // Copy configs
+  copy('.babelrc', 'configs', true)
 })
