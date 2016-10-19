@@ -1,3 +1,15 @@
+# v0.5.0 (2016-10-19)
+---
+
+
+## Features
+
+- feat(create-cycle-app): Change interaction while asking the flavor [829456e4](https://github.com/cyclejs-community/create-cycle-app/commits/829456e4689555cadb73be758f2c33ea1d080601)
+- feat(create-cycle-app): Separating flavors list from code [396d9427](https://github.com/cyclejs-community/create-cycle-app/commits/396d94279ee2564593f6561145f6346fcf2e9077)
+- feat(create-cycle-app): community vs core flavor discovery mechanism [38314428](https://github.com/cyclejs-community/create-cycle-app/commits/38314428c229b7924080da0d82f20adcdc78f79c)
+- feat(create-cycle-app): Added community registry file [747e7a7b](https://github.com/cyclejs-community/create-cycle-app/commits/747e7a7ba9a38554b4747e4176a2528a16d000c9)
+
+
 # v0.4.4 (2016-10-10)
 ---
 
