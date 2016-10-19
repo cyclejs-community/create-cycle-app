@@ -40,14 +40,20 @@ function createApp (name, verbose, flavor) {
     process.exit(1)
   }
 
-  var coreFlavors = require('./flavors.json')
-    // TODO: Uncomment to enable proper discovery
-    // .concat([
-    //   {
-    //     name: 'Discover more...',
-    //     value: 'run-discovery'
-    //   }
-    // ])
+  function byName (a, b) {
+    return a.name >= b.name
+  }
+
+  function withoutDiscovery (flavor) {
+    return flavor.value !== 'run-discovery'
+  }
+
+  var discoverMore = {
+    name: 'Discover more...',
+    value: 'run-discovery'
+  }
+
+  var coreFlavors = require('./coreFlavors.json')
 
   var streamLibQuestion = {
     name: 'streamLib',
@@ -87,7 +93,7 @@ function createApp (name, verbose, flavor) {
         name: 'flavor',
         message: 'Which flavor do you want to use?',
         type: 'list',
-        choices: coreFlavors
+        choices: coreFlavors.sort(byName).concat(discoverMore)
       },
       streamLibQuestion
     ]).then(function (answers) {
@@ -104,7 +110,7 @@ function createApp (name, verbose, flavor) {
               name: 'flavor',
               message: 'Which flavor do you want to use?',
               type: 'list',
-              choices: flavors
+              choices: flavors.sort(byName).concat(coreFlavors.filter(withoutDiscovery))
             },
             streamLibQuestion
           ]).then(function (answers) {
@@ -120,12 +126,13 @@ function createApp (name, verbose, flavor) {
 
 function discoverFlavors (cb) {
   console.log()
-  console.log(chalk.cyan('Discovering available flavors...'))
+  console.log(chalk.cyan('Fetching community flavors...'))
   console.log()
 
-  // NOTE: Maybe change the method to discover flavors
+  // NOTE: change the method to discover flavors to the published communityFlavors.json
+  // following is just for testing
   request({
-    url: 'https://api.github.com/gists/0f33b55f62baca22c6bdb73b56333311',
+    url: 'https://api.github.com/repos/nickbalestra/create-cycle-app-community-flavors/contents/communityFlavors.json',
     headers: {
       'User-Agent': 'create-cycle-app ' + VERSION
     }
@@ -138,9 +145,9 @@ function discoverFlavors (cb) {
       return
     }
 
-    var gist = JSON.parse(body)
+    var gitContent = JSON.parse(body)
     request({
-      url: gist.files['flavors.json'].raw_url,
+      url: gitContent.download_url,
       headers: {
         'User-Agent': 'create-cycle-app ' + VERSION
       }
