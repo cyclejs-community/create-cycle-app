@@ -11,7 +11,6 @@ var argv = require('minimist')(process.argv.slice(2))
 var pathExists = require('path-exists')
 var request = require('request')
 var inquirer = require('inquirer')
-var githubUrlFromNpm = require('github-url-from-npm')
 
 var VERSION = require(path.resolve(__dirname, 'package.json')).version
 
@@ -154,29 +153,18 @@ function discoverFlavors (cb) {
 
     var npmContent = JSON.parse(body).rows
     var communityFlavors = npmContent.map(function (itemFound) {
-      return new Promise(function (resolve, reject) {
-        githubUrlFromNpm(itemFound.key[1], function (err, url) {
-          if (err) {
-            reject(err)
-          } else {
-            resolve({
-              // name: itemFound.key[1],
-              // Use package.json description to show the name
-              name: itemFound.key[2],
-              value: url
-            })
-          }
-        })
-      })
+      return {
+        // Use package.json description to show the name
+        name: itemFound.key[2],
+        value: itemFound.key[1]
+      }
     })
 
-    Promise.all(communityFlavors).then(function (results) {
-      if (results.length === 0) {
-        console.log(chalk.yellow('...none found'))
-        console.log()
-      }
-      cb(null, results)
-    })
+    if (communityFlavors.length === 0) {
+      console.log(chalk.yellow('...none found'))
+      console.log()
+    }
+    cb(null, communityFlavors)
   })
 }
 
