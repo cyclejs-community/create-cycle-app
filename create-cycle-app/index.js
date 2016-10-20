@@ -11,6 +11,7 @@ var argv = require('minimist')(process.argv.slice(2))
 var pathExists = require('path-exists')
 var request = require('request')
 var inquirer = require('inquirer')
+var githubUrlFromNpm = require('github-url-from-npm')
 
 var VERSION = require(path.resolve(__dirname, 'package.json')).version
 
@@ -41,10 +42,10 @@ function createApp (name, verbose, flavor) {
   }
 
   function byName (a, b) {
-    return a.name >= b.name
+    return a.name > b.name
   }
 
-  function withoutDiscovery (flavor) {
+  function notDiscovery (flavor) {
     return flavor.value !== 'run-discovery'
   }
 
@@ -110,7 +111,7 @@ function createApp (name, verbose, flavor) {
               name: 'flavor',
               message: 'Which flavor do you want to use?',
               type: 'list',
-              choices: flavors.sort(byName).concat(coreFlavors.filter(withoutDiscovery))
+              choices: flavors.sort(byName).concat(coreFlavors.filter(notDiscovery))
             },
             streamLibQuestion
           ]).then(function (answers) {
@@ -126,11 +127,19 @@ function createApp (name, verbose, flavor) {
 
 function discoverFlavors (cb) {
   console.log()
-  console.log(chalk.cyan('Fetching community flavors...'))
+  console.log(chalk.cyan('Searching for flavors on npm...'))
   console.log()
 
+  var keyword = 'create-cycle-app-flavor'
+  var level = 3
+  var url = 'https://registry.npmjs.org/' +
+    '-/_view/byKeyword?' +
+    'startkey=[%22' + keyword + '%22]' +
+    '&endkey=[%22' + keyword + '%22,%7B%7D]' +
+    '&group_level=' + level
+
   request({
-    url: 'https://api.github.com/repos/cyclejs-community/create-cycle-app/contents/create-cycle-app/communityFlavors.json',
+    url: url,
     headers: {
       'User-Agent': 'create-cycle-app ' + VERSION
     }
@@ -143,23 +152,30 @@ function discoverFlavors (cb) {
       return
     }
 
-    var gitContent = JSON.parse(body)
-    request({
-      url: gitContent.download_url,
-      headers: {
-        'User-Agent': 'create-cycle-app ' + VERSION
-      }
-    }, function (err, res, body) {
-      if (err) {
-        cb(err)
-      }
-      if (res.statusCode !== 200) {
-        console.error(chalk.red('Flavors request failed with status: ' + res.statusCode))
-        return
-      }
+    var npmContent = JSON.parse(body).rows
+    var communityFlavors = npmContent.map(function (itemFound) {
+      return new Promise(function (resolve, reject) {
+        githubUrlFromNpm(itemFound.key[1], function (err, url) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve({
+              // name: itemFound.key[1],
+              // Use package.json description to show the name
+              name: itemFound.key[2],
+              value: url
+            })
+          }
+        })
+      })
+    })
 
-      var flavors = JSON.parse(body)
-      cb(null, flavors)
+    Promise.all(communityFlavors).then(function (results) {
+      if (results.length === 0) {
+        console.log(chalk.yellow('...none found'))
+        console.log()
+      }
+      cb(null, results)
     })
   })
 }
