@@ -1,6 +1,6 @@
 {
   "name": "create-cycle-app",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Create Cycle.js with no build configuration.",
   "scripts": {
     "test": "echo \"Maybe later\""
