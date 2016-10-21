@@ -1,3 +1,17 @@
+# v1.0.0 (2016-10-21)
+---
+
+
+## Breaking Changes
+
+- feat(create-cycle-app): Removed communityFlavors registry [5031510e](https://github.com/cyclejs-community/create-cycle-app/commits/5031510e01f3774687d11c698d4de9844768ed91)
+- feat(create-cycle-app): Discovery now search for flavors on npm [51689bb8](https://github.com/cyclejs-community/create-cycle-app/commits/51689bb890d9c4465bb62891219b3fe6ba50ee78)
+
+## Features
+
+- feat(create-cycle-app): Added dependency [3b09d484](https://github.com/cyclejs-community/create-cycle-app/commits/3b09d484ae04643d6a61287ad9390b305bc7f243)
+
+
 # v0.5.0 (2016-10-19)
 ---
 
