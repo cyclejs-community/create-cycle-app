@@ -1,121 +1,80 @@
-
-# create-cycle-app
+# Create Cycle App
 
 Create [Cycle.js](https://cycle.js.org/) apps with no build configuration.
 
-# How to use it
+* [Getting Started](#getting-started) – How to create a new app.
+* [Custom Flavors](#flavors) – How to develop and publish new flavors
 
-  ```sh
-  $ npm install --global create-cycle-app
-
-  $ create-cycle-app my-awesome-cycle-app
-  ```
-
-Then choose the flavor and stream library you prefer. After installing dependencies, type:
-
-  ```sh
-  $ cd my-awesome-cycle-app
-
-  $ npm start
-  ```
-
-Open your browser at [http://localhost:8000](http://localhost:8000).
-
-# Principles
-
-## Single development dependency
-
-Must be the first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults.
-
-## Flavors
-
-Each flavor represents a pair of programming language and build tool. All the underlying dependencies and configuration needed must be hidden behind the flavor. All flavors must adhere to the same basic structure and commands.
-
-### Core flavors
-
-- [cycle-scripts-es-browserify](./cycle-scripts-es-browserify/): ES6 (babel) + Browserify
-- [cycle-scripts-ts-browserify](./cycle-scripts-ts-browserify/): TypeScript + Browserify
-- [cycle-scripts-es-webpack](./cycle-scripts-es-webpack/): ES6 (babel) + Webpack
-- [cycle-scripts-ts-webpack](./cycle-scripts-ts-webpack/): TypeScript + Webpack
-
-### Community flavors
-
-- [cycle-scripts-widdershin](https://github.com/Widdershin/cycle-scripts-widdershin): Semicolons + browserify + babel(with object spread plugin)
-
-## Simple commands
-
-Each flavor expose these commands:
-
-- `npm start`: Start development server (possibly with [ live | hot module ] reload) listening on port 8000
-- `npm test`: Run the default test tool for each language (some flavors could create a `test` folder, but this folder is *gitignored*)
-- `npm run build`: Generate a production-ready build content, on the `build` folder (this folder is *gitignored*)
-- `npm run take-off-training-wheels`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on the flavored `cycle-scripts`. This is irreversible.
-
-## No lock-in
-
-This is a tool focused on Cycle.js beginners and to provide fast bootstrap for new projects, and doesn't have the ambition to be **the** tool for working with Cycle.js projects in the long term. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
-
-# Custom flavor
-
-You can inform which flavor you want to use:
-
-  ```sh
-  $ create-cycle-app foo --flavor cycle-scripts-es-browserify
-
-  $ create-cycle-app foo --flavor cycle-scripts-es-browserify@x.y.z
-
-  $ create-cycle-app foo --flavor ./relative/path/to/cycle-scripts-es-browserify
-  ```
-
-## How to create a custom flavor
-
-A flavor is a npm module with a set of scripts and template files that is used to configure a new Cycle.js project.
-
-Take a look at [cycle-scripts-es-browserify](./cycle-scripts-es-browserify) as an example.
-
-## Basic structure
-
-```
-.
-├── index.js
-├── package.json
-├── scripts
-│   ├── build.js
-│   ├── init.js
-│   ├── start.js
-│   ├── take-off-training-wheels.js
-│   └── test.js
-└── template
-    ├── gitignore
-    ├── public
-    │   ├── favicon.ico
-    │   └── index.html
-    └── src
-        ├── app.js
-        ├── app.test.js
-        └── index.js
-
-4 directories, 13 files
-```
-
-`package.json` is used to declare dependencies for this particular flavor, that acts as devDependencies to the target project. It declares the `cycle-scripts` command script (generally `index.js`), from where each underlying scripts is called.
-
-`index.js` is the entry point for each command exposed to the target project. It could be really simple, just calling the next script file without ceremony.
-
-`scripts/` directory holds each script used in the project. The `start.js` script is used to start a development server. `test.js`, as the name suggests, call the test tool. `build.js` is used to bundle the target project to an deliverable set of files, production-ready. `take-off-training-wheels.js` is mostly a copy-and-paste tool, that adapts the target project to reproduce the same commands from the flavor. Last, but not least, `init.js` is the script called by `create-cycle-app` command, in order to install development dependencies and copy initial files.
-
-`templates/` directory holds template files for the target project. This is optional, and unlike other files, could have any structure you desire.
-
-Each flavor has great freedom to choose it's own dependencies, configuration, tools and file structure, as the user will choose which is the best (desired) flavor.
-
-To use the custom flavor, you could run the command:
+## TL;DR
 
 ```sh
-$ create-cycle-app <name> --flavor <flavor>
+$ npm install —g create-cycle-app
+$ create-cycle-app my-awesome-cycle-app
 ```
 
-`<flavor>` could be a name of a published flavor, a `.tar` file, a git URL, or basically, anything that `npm` could install and node could require.
+You will be prompted to choose the flavour and stream library you prefer.
 
-## Publishing
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app'>
 
-If you want your flavor published in the up front list, please, drop an issue referring the repository or npm package, and we will put it on our [highly advanced publishing system](https://gist.github.com/geovanisouza92/0f33b55f62baca22c6bdb73b56333311).
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-streamLib.png'>
+
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/70a21579e75e1e02bda38e8d3de807d709fe9a1e/create-cycle-app.png' width='600' alt='create-cycle-app'>
+
+Then, simply follow the suggestion in your terminal and type:
+
+```sh
+$ cd my-awesome-cycle-app/
+$ npm start
+```
+
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/npm-start.png' width='600' alt=’npm-start’>
+
+Open your browser at [http://localhost:8000](http://localhost:8000) to see your app.
+
+Once you’re ready to deploy to production, create a minified bundle with
+
+```sh
+$ npm run build
+```
+
+## Principles
+
+* **One dependency:** The first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults.
+
+* **Zero Configuration:** There are no configuration files. Configuring both development and production builds is handled for you so you can focus on writing code.
+
+* **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 4 core flavors that you can mix and match with your favorite reactive stream library. Furthermore, a discovery mechanism allows to find and use any flavor published on the npm registry. Alternatively, you can use your own flavors from any registry such as GitHub or your own.
+
+* **No Lock-In:** Specifically made for beginners and to provide fast bootstrap for new projects, create-cycle-app doesn't have the ambition to be _the_ tool for working with Cycle.js projects. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
+
+## Why Use This?
+
+**If you’re getting started** with Cycle.js, use `create-cycle-app` to automate the build of your app. There is no configuration file, and `cycle-scripts-<flavorName>` is the only extra build dependency in your `package.json`. Your environment will have everything you need to build a Cycle.js app.
+
+**If you’re a power user** simply use it as a boilerplate generator, by passing in your own flavor.
+
+
+## Getting Started
+### Installation
+### Creating an App
+### `npm start`
+### `npm test`
+### `npm run build`
+### `npm run take-off-training-wheels`
+### How to Update to New Versions?
+
+## Flavors
+### Core flavors
+### Custom flavour
+#### How to create a custom flavor
+#### Basic structure
+#### Publish
+
+## Contributing
+
+We'd love to have your help on `create-cycle-app`. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+
+
+## Alternatives
+
+Create-cycle-app doesn't have the ambition to be _the_ tool for working with Cycle.js projects. You might want to explore alternatives. Check [awesome-cycle](https://github.com/cyclejs-community/awesome-cyclejs#boilerplates) for a list of boilerplates.
