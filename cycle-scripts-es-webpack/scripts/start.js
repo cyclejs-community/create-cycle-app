@@ -4,9 +4,12 @@ var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
+var host = 'http://localhost'
+var port = 8000
+
 var config = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8000',
+    'webpack-dev-server/client?' + host + ':' + port.toString(),
     'webpack/hot/dev-server',
     './src/'
   ],
@@ -33,13 +36,13 @@ var config = {
 }
 
 var compiler = webpack(config)
+compiler.plugin('done', function () {
+  console.log('App is running at ' + host + ':' + port)
+})
 var server = new WebpackDevServer(compiler, {
   historyApiFallback: true,
   hot: true,
   contentBase: './public',
-  stats: {
-    colors: true,
-    inline: true
-  }
+  stats: 'errors-only'
 })
-server.listen(8000)
+server.listen(port)
