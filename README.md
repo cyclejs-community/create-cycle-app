@@ -14,11 +14,11 @@ $ create-cycle-app my-awesome-cycle-app
 
 You will be prompted to choose the flavour and stream library you prefer.
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app'>
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app-select-flavor'>
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-streamLib.png'>
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/create-cycle-app-select-streamLib.png' width='600' alt='create-cycle-app-select-stream-library'>
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/70a21579e75e1e02bda38e8d3de807d709fe9a1e/create-cycle-app.png' width='600' alt='create-cycle-app'>
+<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/70a21579e75e1e02bda38e8d3de807d709fe9a1e/create-cycle-app.png' width='600' alt='create-cycle-app-success'>
 
 Then, simply follow the suggestion in your terminal and type:
 
