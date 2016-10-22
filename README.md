@@ -158,11 +158,10 @@ $ create-cycle-app my-app --flavor ./relative/path/to/cycle-scripts-es-webpack
 
 ##### Discovering published flavors
 
-If no `--flavor` flag is passed, `create-cycle-app` will allow you to discover more flavors aside the core ones:
+If no `--flavor` flag is passed, `create-cycle-app` will allow you to discover more flavors aside the core ones.
+Create-cycle-app will look up on the NPM registry for published flavors and if any get selected install it from there.
 
 <img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/f823f598980e4ed67caa2d0b698fa2b695954e25/create-cycle-app-discover-flavor.png' width='600' alt='create-cycle-app-discover-flavor'>
-
-Create-cycle-app will look up on the NPM registry for published flavors and if any get selected install it from there.
 
 #### How to create a custom flavor
 A flavor is a npm module with a set of scripts and template files that are used to configure a new Cycle.js project.
