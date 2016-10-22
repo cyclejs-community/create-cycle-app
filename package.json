@@ -6,7 +6,8 @@
   "scripts": {
     "test": "northbrook eslint && standard */*.js */scripts/*.js",
     "commit": "northbrook commit",
-    "release": "northbrook release"
+    "release": "northbrook release",
+    "check-release": "northbrook release --check"
   },
   "repository": {
     "type": "git",
