@@ -29,7 +29,7 @@ The flavor generate the following file structure:
 ```
 my-awesome-cycle-app/
 ├── node_modules/
-├── puplic/
+├── public/
 │   ├── favicon.ico
 │   └── index.html
 ├── src/
