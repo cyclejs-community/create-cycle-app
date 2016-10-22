@@ -83,7 +83,7 @@ Inside that directory, it will generate the following initial project structure*
 ```
 my-awesome-cycle-app/
 ├── node_modules/
-├── puplic/
+├── public/
 │   ├── favicon.ico
 │   └── index.html
 ├── src/
@@ -101,8 +101,6 @@ Once the installation is done, you can run the following commands from within th
 ### `npm start`
 
 Runs the app in development mode by starting the development server.
-
-Core flavors come with [ live | hot module ] reload so that the page will reload if you make edits.
 
 Server will be listening on port 8000
 
