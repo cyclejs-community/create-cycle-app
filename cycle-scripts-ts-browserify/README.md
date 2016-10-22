@@ -34,6 +34,9 @@ my-awesome-cycle-app/
 │   ├── app.ts
 │   ├── app.test.ts
 │   └── index.ts
-└── package.json
+├── package.json
+└── tsconfig.json
 ```
 
+### Config files
+* .tsconfig.json
