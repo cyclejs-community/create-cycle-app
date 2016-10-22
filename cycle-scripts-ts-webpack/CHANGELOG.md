@@ -1,3 +1,12 @@
+# v0.3.0 (2016-10-22)
+---
+
+
+## Features
+
+- feat(cycle-scripts-ts-webpack): Silence webpack output and address of dev server output on terminal [355ba55b](https://github.com/cyclejs-community/create-cycle-app/commits/355ba55b455c8aef13172920b88d774777e7c926)
+
+
 # v0.2.1 (2016-10-17)
 ---
 
