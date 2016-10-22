@@ -1,3 +1,12 @@
+# v0.3.0 (2016-10-22)
+---
+
+
+## Features
+
+- feat(cycle-scripts-es-webpack): Silenced webpack output in dev mode, showing server address on termi [66b8804a](https://github.com/nickbalestra/cycle-scripts-es-webpack/commits/66b8804adc982477aee8fc9320ebbdb64a5ad0d6)
+
+
 # v0.2.1 (2016-10-19)
 ---
 
