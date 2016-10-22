@@ -16,11 +16,11 @@ $ create-cycle-app my-awesome-cycle-app
 
 You will be prompted to choose the flavour and stream library you prefer.
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/09050074f7cf9e29442bd196046024f4fec71464/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app-select-flavor'>
+<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app-select-flavor'>
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/09050074f7cf9e29442bd196046024f4fec71464/create-cycle-app-select-streamLib.png' width='600' alt='create-cycle-app-select-stream-library'>
+<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-select-streamLib.png' width='600' alt='create-cycle-app-select-stream-library'>
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/70a21579e75e1e02bda38e8d3de807d709fe9a1e/create-cycle-app.png' width='600' alt='create-cycle-app-success'>
+<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app.png' width='600' alt='create-cycle-app-success'>
 
 Then, simply follow the suggestion in your terminal and type:
 
@@ -29,7 +29,7 @@ $ cd my-awesome-cycle-app/
 $ npm start
 ```
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/724e9b02b73fc370ebd5869c5e9fae7bf3a2f08b/npm-start.png' width='600' alt=’npm-start’>
+<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/npm-start.png' width='600' alt=’npm-start’>
 
 Open your browser at [http://localhost:8000](http://localhost:8000) to see your app.
 
@@ -161,7 +161,7 @@ $ create-cycle-app my-app --flavor ./relative/path/to/cycle-scripts-es-webpack
 If no `--flavor` flag is passed, `create-cycle-app` will allow you to discover more flavors aside the core ones.
 Create-cycle-app will look up on the NPM registry for published flavors and if any get selected install it from there.
 
-<img src='https://gist.githubusercontent.com/nickbalestra/1ccf4730b2d48e46a8badba9eeefbcd9/raw/f823f598980e4ed67caa2d0b698fa2b695954e25/create-cycle-app-discover-flavor.png' width='600' alt='create-cycle-app-discover-flavor'>
+<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-discover-flavor.png' width='600' alt='create-cycle-app-discover-flavor'>
 
 #### How to create a custom flavor
 A flavor is a npm module with a set of scripts and template files that are used to configure a new Cycle.js project.
