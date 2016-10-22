@@ -34,8 +34,11 @@ my-awesome-cycle-app/
 │   ├── app.ts
 │   ├── app.test.ts
 │   └── index.ts
-└── package.json
+├── package.json
+└── tsconfig.json
+```
 ```
 
 ### Config files
 * .babelrc (Added on the root after running the take-off-training-wheels script)
+* .tsconfig.json
