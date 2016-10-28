@@ -11,7 +11,6 @@ var argv = require('minimist')(process.argv.slice(2))
 var pathExists = require('path-exists')
 var request = require('request')
 var inquirer = require('inquirer')
-
 var VERSION = require(path.resolve(__dirname, 'package.json')).version
 
 // Command line prelude (version and usage)
@@ -31,6 +30,11 @@ createApp(commands[0], argv.verbose, argv.flavor)
 function createApp (name, verbose, flavor) {
   var appFolder = path.resolve(name)
   var appName = path.basename(appFolder)
+  var coreFlavors = require('./coreFlavors.json')
+  var discoverMore = {
+    name: 'Discover more...',
+    value: 'run-discovery'
+  }
 
   // Check the folder for files that can conflict
   if (!pathExists.sync(appFolder)) {
@@ -48,12 +52,11 @@ function createApp (name, verbose, flavor) {
     return flavor.value !== 'run-discovery'
   }
 
-  var discoverMore = {
-    name: 'Discover more...',
-    value: 'run-discovery'
+  function isCoreFlavor (flavor) {
+    return Boolean(
+      coreFlavors.find(function (coreFlavor) { return coreFlavor.value === flavor })
+    )
   }
-
-  var coreFlavors = require('./coreFlavors.json')
 
   var streamLibQuestion = {
     name: 'streamLib',
@@ -78,7 +81,10 @@ function createApp (name, verbose, flavor) {
       }
     ],
     when: function (currentAnswers) {
-      return currentAnswers.flavor !== 'run-discovery'
+      return (
+        currentAnswers.flavor !== 'run-discovery' &&
+        isCoreFlavor(currentAnswers.flavor)
+      )
     }
   }
 
