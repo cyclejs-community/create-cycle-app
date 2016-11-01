@@ -1,3 +1,12 @@
+# v2.0.0 (2016-11-01)
+---
+
+
+## Breaking Changes
+
+- feat(create-cycle-app): Allow to select stream library only for core flavors [ea188047](https://github.com/cyclejs-community/create-cycle-app/commits/ea1880479f7e846fe1ff3eef388774ec74c383fb)
+
+
 # v1.0.0 (2016-10-21)
 ---
 
