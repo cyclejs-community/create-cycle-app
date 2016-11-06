@@ -10,7 +10,7 @@ Create [Cycle.js](https://cycle.js.org/) apps with no build configuration.
 ## Quick Start
 
 ```sh
-$ npm install —g create-cycle-app
+$ npm install -g create-cycle-app
 $ create-cycle-app my-awesome-cycle-app
 ```
 
