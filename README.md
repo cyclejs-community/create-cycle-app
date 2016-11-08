@@ -73,7 +73,7 @@ $ npm install --g create-cycle-app
 To create a new cycle.js app, run:
 
 ```
-$ create-cycke-app my-awesome-cycle-app
+$ create-cycle-app my-awesome-cycle-app
 $ cd my-awesome-cycle-app
 ```
 
