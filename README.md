@@ -214,6 +214,9 @@ If you want your flavor to be used upfront by anyone, just publish it on the NPM
 
 We'd love to have your help on `create-cycle-app`. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
 
+## Acknowledgements
+
+A simple thank you goes a long way. That's why we would like to thank the [create-react-app](https://github.com/facebookincubator/create-react-app) team: you have been a fantastic inspiration and a great example for this project.
 
 ## Alternatives
 
