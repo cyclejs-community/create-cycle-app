@@ -132,6 +132,10 @@ function successMsg (appName, appPath) {
   console.log(chalk.cyan('  cd ' + appName))
   console.log(chalk.cyan('  npm start'))
   console.log()
+  console.log('If you have questions, issues or feedback about Cycle.js and create-cycle-app, please, join us on the Gitter:')
+  console.log()
+  console.log(chalk.cyan('  https://gitter.im/cyclejs/cyclejs'))
+  console.log()
   console.log('Happy cycling!')
 }
 
