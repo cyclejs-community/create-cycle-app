@@ -123,7 +123,7 @@ function successMsg (appName, appPath) {
   console.log(chalk.cyan('  npm run build'))
   console.log('    Bundles the app into static files for production')
   console.log()
-  console.log(chalk.cyan('  npm run take-off-training-wheels'))
+  console.log(chalk.cyan('  npm run eject'))
   console.log('    Removes this tool and copies build dependencies, configuration files')
   console.log('    and scripts into the app directory. If you do this, you can\'t go back!')
   console.log()
@@ -152,7 +152,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
     'start': 'cycle-scripts start',
     'test': 'cycle-scripts test',
     'build': 'cycle-scripts build',
-    'take-off-training-wheels': 'cycle-scripts take-off-training-wheels'
+    'eject': 'cycle-scripts eject'
   }
   fs.writeFileSync(
     appPackageJson,

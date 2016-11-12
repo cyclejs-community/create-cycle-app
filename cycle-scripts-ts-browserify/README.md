@@ -17,7 +17,7 @@ Browserify configured with
 - `npm start`: Start development server listening on port 8000
 - `npm test`: Run the default test tool
 - `npm run build`: Generate a production-ready build content, on the `build` folder (this folder is *gitignored*)
-- `npm run take-off-training-wheels`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on the flavored `cycle-scripts`. This is irreversible.
+- `npm run eject`: Copy flavor's dependencies and configurations to the project folder, update `package.json` and remove the dependency on the flavored `cycle-scripts`. This is irreversible.
 
 
 ## Boilerplate:
