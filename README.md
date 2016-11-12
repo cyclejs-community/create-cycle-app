@@ -47,7 +47,7 @@ $ npm run build
 
 * **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 4 core flavors that you can mix and match with your favorite reactive stream library. Furthermore, a discovery mechanism allows to find and use any flavor published on the npm registry. Alternatively, you can use your own flavors from any registry such as GitHub or your own.
 
-* **No Lock-In:** Specifically made for beginners and to provide fast bootstrap for new projects, create-cycle-app doesn't have the ambition to be __the__ tool for working with Cycle.js projects. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run take-off-training-wheels`.
+* **No Lock-In:** Specifically made for beginners and to provide fast bootstrap for new projects, create-cycle-app doesn't have the ambition to be __the__ tool for working with Cycle.js projects. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run eject`.
 
 ## Why Use This?
 
@@ -113,7 +113,7 @@ Run the default test tool.
 
 Generate a production-ready build content, on the build folder (this folder is gitignored)
 
-### `npm run take-off-training-wheels`
+### `npm run eject`
 
 Copy dependencies and configurations to the project folder, update package.json and remove the dependency on the flavored cycle-scripts.
 
@@ -176,7 +176,7 @@ Take a look at [cycle-scripts-es-browserify](./cycle-scripts-es-browserify) as a
 │   ├── build.js
 │   ├── init.js
 │   ├── start.js
-│   ├── take-off-training-wheels.js
+│   ├── eject.js
 │   └── test.js
 └── template
     ├── gitignore
@@ -195,7 +195,7 @@ Take a look at [cycle-scripts-es-browserify](./cycle-scripts-es-browserify) as a
 
 `index.js` is the entry point for each command exposed to the target project. It could be really simple, just calling the next script file without ceremony.
 
-`scripts/` directory holds each script used in the project. The `start.js` script is used to start a development server. `test.js`, as the name suggests, call the test tool. `build.js` is used to bundle the target project to a deliverable set of files, production-ready. `take-off-training-wheels.js` is mostly a copy-and-paste tool, that adapts the target project to reproduce the same commands from the flavor. Last, but not least, `init.js` is the script called by `create-cycle-app` command, in order to install development dependencies and copy initial files.
+`scripts/` directory holds each script used in the project. The `start.js` script is used to start a development server. `test.js`, as the name suggests, call the test tool. `build.js` is used to bundle the target project to a deliverable set of files, production-ready. `eject.js` is mostly a copy-and-paste tool, that adapts the target project to reproduce the same commands from the flavor. Last, but not least, `init.js` is the script called by `create-cycle-app` command, in order to install development dependencies and copy initial files.
 
 `templates/` directory holds template files for the target project. This is optional, and unlike other files, could have any structure you desire.
 
