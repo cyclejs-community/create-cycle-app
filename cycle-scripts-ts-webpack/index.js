@@ -10,7 +10,7 @@ switch (script) {
   case 'start':
   case 'test':
   case 'build':
-  case 'take-off-training-wheels':
+  case 'eject':
     var result = spawn.sync(
       'node',
       [require.resolve('./scripts/' + script)].concat(args),
