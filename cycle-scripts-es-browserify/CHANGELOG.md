@@ -1,3 +1,12 @@
+# v0.7.5 (2016-11-24)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-es-browserify): removed test directory in .gitignore [58df254b](https://github.com/cyclejs-community/create-cycle-app/commits/58df254b00f2258c309088c196ca6a78daf27aa9)
+
+
 # v0.7.4 (2016-10-19)
 ---
 
