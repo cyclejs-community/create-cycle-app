@@ -88,10 +88,49 @@ function createApp (name, verbose, flavor) {
     }
   }
 
+  var testLibQuestion = {
+    name: 'testLib',
+    message: 'Which test library do you want to use?',
+    type: 'list',
+    choices: [
+      {
+        name: "Good ol' Mocha",
+        value: 'mocha'
+      },
+      {
+        name: 'Ava, the Futuristic JavaScript test runner',
+        value: 'ava'
+      }
+    }]
+  }
+
+  var cycleCoreLib = {
+    name: 'cycleLib',
+    message: 'Which cycle core library do you want to use?',
+    type: 'list',
+    choices: [
+      {
+        name: "A basic Cycle",
+        value: 'cycle'
+      },
+      {
+        name: 'A super powerful Motorcycle',
+        value: 'motorcycle'
+      }
+    }]
+  }
+
+
   if (flavor) {
     // Ask just for the stream library
-    inquirer.prompt([streamLibQuestion]).then(function (answers) {
-      preparePackageJson(appFolder, appName, flavor, answers.streamLib, verbose)
+    inquirer.prompt([cycleCoreLib, streamLibQuestion, testLibQuestion]).then(function (answers) {
+      var libs = {
+        stream: answers.streamLib,
+        test: answers.testLib
+        cycle: answers.cycleLib
+      }
+
+      preparePackageJson(appFolder, appName, flavor, libs, verbose)
     })
   } else {
     inquirer.prompt([
@@ -103,6 +142,13 @@ function createApp (name, verbose, flavor) {
       },
       streamLibQuestion
     ]).then(function (answers) {
+
+      var libs = {
+        stream: answers.streamLib,
+        test: answers.testLib
+        cycle: answers.cycleLib
+      }
+
       // When run-discovery was choosed, we need to discover
       // flavors somewhere else
       if (answers.flavor === 'run-discovery') {
@@ -120,11 +166,11 @@ function createApp (name, verbose, flavor) {
             },
             streamLibQuestion
           ]).then(function (answers) {
-            preparePackageJson(appFolder, appName, answers.flavor, answers.streamLib, verbose)
+            preparePackageJson(appFolder, appName, answers.flavor, libs, verbose)
           })
         })
       } else {
-        preparePackageJson(appFolder, appName, answers.flavor, answers.streamLib, verbose)
+        preparePackageJson(appFolder, appName, answers.flavor, libs, verbose)
       }
     })
   }
@@ -174,7 +220,7 @@ function discoverFlavors (cb) {
   })
 }
 
-function preparePackageJson (appFolder, appName, flavor, streamLib, verbose) {
+function preparePackageJson (appFolder, appName, flavor, libs, verbose) {
   // Start creating the new app
   console.log(chalk.green('Creating a new Cycle.js app in ' + appFolder + '.'))
   console.log()
@@ -190,11 +236,11 @@ function preparePackageJson (appFolder, appName, flavor, streamLib, verbose) {
     JSON.stringify(packageJson, null, 2)
   )
 
-  installScripts(appFolder, appName, flavor, streamLib, verbose)
+  installScripts(appFolder, appName, flavor, libs, verbose)
 }
 
 // Install and init scripts
-function installScripts (appFolder, appName, flavor, streamLib, verbose) {
+function installScripts (appFolder, appName, flavor, libs, verbose) {
   var originalDirectory = process.cwd()
   process.chdir(appFolder)
 
@@ -236,7 +282,7 @@ function installScripts (appFolder, appName, flavor, streamLib, verbose) {
     var init = require(initScriptPath)
 
     // Execute the cycle-scripts's specific initialization
-    init(appFolder, appName, streamLib, verbose, originalDirectory)
+    init(appFolder, appName, libs.stream, verbose, originalDirectory)
   })
 }
 
