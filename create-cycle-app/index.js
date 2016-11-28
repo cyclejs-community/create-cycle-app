@@ -101,7 +101,7 @@ function createApp (name, verbose, flavor) {
         name: 'Ava, the Futuristic JavaScript test runner',
         value: 'ava'
       }
-    }]
+    ]
   }
 
   var cycleCoreLib = {
@@ -110,23 +110,22 @@ function createApp (name, verbose, flavor) {
     type: 'list',
     choices: [
       {
-        name: "A basic Cycle",
+        name: 'A basic Cycle',
         value: 'cycle'
       },
       {
         name: 'A super powerful Motorcycle',
         value: 'motorcycle'
       }
-    }]
+    ]
   }
-
 
   if (flavor) {
     // Ask just for the stream library
     inquirer.prompt([cycleCoreLib, streamLibQuestion, testLibQuestion]).then(function (answers) {
       var libs = {
         stream: answers.streamLib,
-        test: answers.testLib
+        test: answers.testLib,
         cycle: answers.cycleLib
       }
 
@@ -142,10 +141,9 @@ function createApp (name, verbose, flavor) {
       },
       streamLibQuestion
     ]).then(function (answers) {
-
       var libs = {
         stream: answers.streamLib,
-        test: answers.testLib
+        test: answers.testLib,
         cycle: answers.cycleLib
       }
 

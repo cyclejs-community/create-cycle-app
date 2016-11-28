@@ -8,11 +8,13 @@ var ejs = require('ejs')
 
 function dependencies (libs) {
   var basicDependencies = []
-
+  var core = {
+    cycle: ['@cycle/dom', 'xstream'],
+    motorcycle: ['@motorcycle/core', '@motorcycle/dom']
+  }
   var extras = ['immutable', '@cycle/isolate']
-  var core = libs.cycle === 'motorcycle' ? ['@motorcycle/core', '@motorcycle/dom'], ['@cycle/dom', 'xstream']
 
-  basicDependencies.concat(core, extras)
+  basicDependencies.concat(core[libs.cycle], extras)
 
   switch (libs.stream) {
     case 'xstream':
@@ -109,7 +111,7 @@ function patchTestJs (appPath, testLib) {
 
   var templateContent = fs.readFileSync(testJsPath, {encoding: 'utf-8'})
 
-  var testContent = ejs.compile(templateContent).render({test: testLib});
+  var testContent = ejs.compile(templateContent).render({test: testLib})
   fs.writeFileSync(
     testJsPath,
     testContent
@@ -154,22 +156,22 @@ module.exports = function (appPath, appName, libs, verbose, originalDirectory) {
 
   if (libs.test === 'ava') {
     appPackage.ava = {
-      "files": [
-        "src/**/*.test.{js}",
-        "!dist/**/*"
+      files: [
+        'src/**/*.test.{js}',
+        '!dist/**/*'
       ],
-      "source": [
-        "src/**/*.{js,jsx}",
-        "!dist/**/*"
+      source: [
+        'src/**/*.{js,jsx}',
+        '!dist/**/*'
       ],
-      "concurrency": 5,
-      "failFast": true,
-      "tap": true,
-      "powerAssert": true,
-      "require": [
-        "babel-register"
+      concurrency: 5,
+      failFast: true,
+      tap: true,
+      powerAssert: true,
+      require: [
+        'babel-register'
       ],
-      "babel": "inherit"
+      babel: 'inherit'
     }
   }
 

@@ -4,14 +4,17 @@ var fs = require('fs-extra')
 var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
+var ejs = require('ejs')
 
 function dependencies (libs) {
   var basicDependencies = []
-
+  var core = {
+    cycle: ['@cycle/dom', 'xstream'],
+    motorcycle: ['@motorcycle/core', '@motorcycle/dom']
+  }
   var extras = ['immutable', '@cycle/isolate']
-  var core = libs.cycle === 'motorcycle' ? ['@motorcycle/core', '@motorcycle/dom'], ['@cycle/dom', 'xstream']
 
-  basicDependencies.concat(core, extras)
+  basicDependencies.concat(core[libs.cycle], extras)
 
   switch (libs.stream) {
     case 'xstream':
@@ -116,7 +119,7 @@ function patchTestTs (appPath, testLib) {
 
   var templateContent = fs.readFileSync(testJsPath, {encoding: 'utf-8'})
 
-  var testContent = ejs.compile(templateContent).render({test: testLib});
+  var testContent = ejs.compile(templateContent).render({test: testLib})
   fs.writeFileSync(
     testJsPath,
     testContent
@@ -161,22 +164,18 @@ module.exports = function (appPath, appName, libs, verbose, originalDirectory) {
 
   if (libs.test === 'ava') {
     appPackage.ava = {
-      "files": [
-        "src/**/*.test.{js}",
-        "!dist/**/*"
+      files: [
+        'src/**/*.test.{ts}',
+        '!dist/**/*'
       ],
-      "source": [
-        "src/**/*.{js,jsx}",
-        "!dist/**/*"
+      source: [
+        'src/**/*.{ts,tsx}',
+        '!dist/**/*'
       ],
-      "concurrency": 5,
-      "failFast": true,
-      "tap": true,
-      "powerAssert": true,
-      "require": [
-        "babel-register"
-      ],
-      "babel": "inherit"
+      concurrency: 5,
+      failFast: true,
+      tap: true,
+      powerAssert: true
     }
   }
 
