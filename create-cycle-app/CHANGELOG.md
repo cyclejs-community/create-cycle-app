@@ -1,3 +1,14 @@
+# v2.1.0 (2016-11-28)
+---
+By: kmandrup@gmail.com
+
+- Allow selection of core cycle library: cycle or motorcycle
+- Allow selection of test runner: mocha or ava
+- Add immutable and @cycle/isolate as basic dependencies
+- Make generator infrastructure more extensible by:
+    - passing libs object
+    - use EJS templating to generate initial test file
+
 # v2.0.0 (2016-11-01)
 ---
 

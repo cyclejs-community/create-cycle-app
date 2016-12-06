@@ -4,14 +4,19 @@ var fs = require('fs-extra')
 var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
+var ejs = require('ejs')
 
-function dependencies (streamLib) {
-  var basicDependencies = [
-    '@cycle/dom',
-    'xstream'
-  ]
+function dependencies (libs) {
+  var basicDependencies = []
+  var core = {
+    cycle: ['@cycle/dom', 'xstream'],
+    motorcycle: ['@motorcycle/core', '@motorcycle/dom']
+  }
+  var extras = ['immutable', '@cycle/isolate']
 
-  switch (streamLib) {
+  basicDependencies.concat(core[libs.cycle], extras)
+
+  switch (libs.stream) {
     case 'xstream':
       return basicDependencies.concat(['@cycle/xstream-run'])
     case 'most':
@@ -21,12 +26,12 @@ function dependencies (streamLib) {
     case 'rx':
       return basicDependencies.concat(['@cycle/rx-run', 'rx', '@types/rx'])
     default:
-      throw new Error('Unsupported stream library: ' + streamLib)
+      throw new Error('Unsupported stream library: ' + libs.stream)
   }
 }
 
-function replacements (streamLib) {
-  switch (streamLib) {
+function replacements (libs) {
+  switch (libs.stream) {
     case 'xstream':
       return {
         '--RUN-LIB--': '@cycle/xstream-run',
@@ -60,7 +65,7 @@ function replacements (streamLib) {
         '--STREAM--': 'Rx.Observable'
       }
     default:
-      throw new Error('Unsupported stream library: ' + streamLib)
+      throw new Error('Unsupported stream library: ' + libs.streams)
   }
 }
 
@@ -109,6 +114,18 @@ function patchAppTs (appPath, tags) {
   )
 }
 
+function patchTestTs (appPath, testLib) {
+  var testJsPath = path.join(appPath, 'src', 'app.test.ts')
+
+  var templateContent = fs.readFileSync(testJsPath, {encoding: 'utf-8'})
+
+  var testContent = ejs.compile(templateContent).render({test: testLib})
+  fs.writeFileSync(
+    testJsPath,
+    testContent
+  )
+}
+
 function successMsg (appName, appPath) {
   console.log()
   console.log('Success! Created ' + appName + ' at ' + appPath)
@@ -139,11 +156,28 @@ function successMsg (appName, appPath) {
   console.log('Happy cycling!')
 }
 
-module.exports = function (appPath, appName, streamLib, verbose, originalDirectory) {
+module.exports = function (appPath, appName, libs, verbose, originalDirectory) {
   var ownPackageName = require(path.resolve(__dirname, '..', 'package.json')).name
   var ownPath = path.join(appPath, 'node_modules', ownPackageName)
   var appPackageJson = path.join(appPath, 'package.json')
   var appPackage = require(appPackageJson)
+
+  if (libs.test === 'ava') {
+    appPackage.ava = {
+      files: [
+        'src/**/*.test.{ts}',
+        '!dist/**/*'
+      ],
+      source: [
+        'src/**/*.{ts,tsx}',
+        '!dist/**/*'
+      ],
+      concurrency: 5,
+      failFast: true,
+      tap: true,
+      powerAssert: true
+    }
+  }
 
   // Manipulate app's package.json
   appPackage.dependencies = appPackage.dependencies || {}
@@ -162,8 +196,9 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   // Copy flavor files
   fs.copySync(path.join(ownPath, 'template'), appPath)
 
+  patchTestTs(appPath, libs.test)
   patchGitignore(appPath)
-  var tags = replacements(streamLib)
+  var tags = replacements(libs)
   patchIndexTs(appPath, tags)
   patchAppTs(appPath, tags)
 
@@ -174,7 +209,7 @@ module.exports = function (appPath, appName, streamLib, verbose, originalDirecto
   var args = [
     'install'
   ].concat(
-    dependencies(streamLib)
+    dependencies(libs)
   ).concat([
     '--save',
     verbose && '--verbose'
