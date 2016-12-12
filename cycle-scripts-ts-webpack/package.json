@@ -22,7 +22,7 @@
     "@types/core-js": "^0.9.34",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.45",
-    "awesome-typescript-loader": "^2.2.4",
+    "awesome-typescript-loader": "^3.0.0-beta",
     "chalk": "^1.1.3",
     "cross-spawn": "^4.0.2",
     "fs-extra": "^0.30.0",

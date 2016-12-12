@@ -3,6 +3,7 @@
 var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+var { CheckerPlugin } = require('awesome-typescript-loader')
 
 var host = 'http://localhost'
 var port = 8000
@@ -31,7 +32,8 @@ var config = {
   devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ProgressBarPlugin()
+    new ProgressBarPlugin(),
+    new CheckerPlugin()
   ]
 }
 
