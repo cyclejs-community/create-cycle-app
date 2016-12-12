@@ -5,6 +5,7 @@ var path = require('path')
 var mkdirp = require('mkdirp')
 var webpack = require('webpack')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+var { CheckerPlugin } = require('awesome-typescript-loader')
 
 var buildPath = path.join(process.cwd(), 'build')
 var publicPath = path.join(process.cwd(), 'public')
@@ -32,7 +33,8 @@ var compiler = webpack({
   },
   plugins: [
     new ProgressBarPlugin(),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new CheckerPlugin()
   ]
 })
 
