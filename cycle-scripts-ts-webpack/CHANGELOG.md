@@ -1,3 +1,12 @@
+# v0.3.1 (2016-12-14)
+---
+
+
+## Bug Fixes
+
+- fix(cycle-scripts-ts-webpack): fix build failing with Typescript 2.1 [c6197dda](https://github.com/cyclejs-community/create-cycle-app/commits/c6197ddac4cc6f5cce5b5ad6a023b0a5b0e87295)
+
+
 # v0.3.0 (2016-10-22)
 ---
 
