@@ -41,7 +41,7 @@ $ npm run build
 
 ## Principles
 
-* **One dependency:** The first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults.
+* **One dependency:** The first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults. Just update `create-cycle-app` to get selected changes to the core flavors. 
 
 * **Zero Configuration:** There are no configuration files. Configuring both development and production builds is handled for you so you can focus on writing code.
 
