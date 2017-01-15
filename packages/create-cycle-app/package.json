@@ -3,7 +3,7 @@
   "version": "3.0.0-beta.1",
   "description": "Create Cycle.js with no build configuration.",
   "scripts": {
-    "test": "echo \"Maybe later\""
+    "test": "jest"
   },
   "keywords": [],
   "author": "Geovani Souza <geovanisouza92@gmail.com>",

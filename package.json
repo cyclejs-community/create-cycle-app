@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "test": "standard && lerna run test",
+    "test": "lerna run test",
     "publish": "lerna publish",
     "updated": "lerna updated"
   },
@@ -21,8 +21,11 @@
   "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "standard && npm run test"
     }
+  },
+  "standard": {
+    "globals": [ "describe", "test", "it", "expect" ]
   },
   "devDependencies": {
     "ghooks": "^2.0.0",
