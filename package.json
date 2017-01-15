@@ -19,7 +19,14 @@
     "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
   },
   "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "devDependencies": {
-    "standard": "^8.3.0"
+    "ghooks": "^2.0.0",
+    "standard": "^8.3.0",
+    "validate-commit-msg": "^2.8.2"
   }
 }
