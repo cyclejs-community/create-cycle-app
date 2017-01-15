@@ -4,10 +4,10 @@
   "description": "Create Cycle.js apps with no configuration.",
   "private": true,
   "scripts": {
-    "test": "standard",
-    "commit": "",
-    "release": "",
-    "check-release": ""
+    "postinstall": "lerna bootstrap",
+    "test": "standard && lerna run test",
+    "publish": "lerna publish",
+    "updated": "lerna updated"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "ghooks": "^2.0.0",
+    "lerna": "2.0.0-beta.32",
     "standard": "^8.3.0",
-    "validate-commit-msg": "^2.8.2",
-    "lerna": "2.0.0-beta.32"
+    "validate-commit-msg": "^2.8.2"
   }
 }
