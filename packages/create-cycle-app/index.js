@@ -6,7 +6,6 @@ var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
 var argv = require('minimist')(process.argv.slice(2))
-var pathExists = require('path-exists')
 var VERSION = require(path.resolve(__dirname, 'package.json')).version
 
 // Command line prelude (version and usage)
@@ -29,7 +28,7 @@ function createApp (name, verbose, flavor) {
   flavor = flavor || 'cycle-scripts'
 
   // Check the folder for files that can conflict
-  if (!pathExists.sync(appFolder)) {
+  if (!fs.existsSync(appFolder)) {
     fs.mkdirSync(appFolder)
   } else if (!isSafeToCreateProjectIn(appFolder)) {
     console.log(chalk.red('The directory `' + appFolder + '` contains file(s) that could conflict. Aborting.'))
