@@ -1,13 +1,13 @@
 {
   "name": "create-cycle-app",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "description": "Create Cycle.js apps with no configuration.",
   "private": true,
   "scripts": {
-    "test": "northbrook eslint && standard */*.js */scripts/*.js",
-    "commit": "northbrook commit",
-    "release": "northbrook release",
-    "check-release": "northbrook release --check"
+    "test": "standard",
+    "commit": "",
+    "release": "",
+    "check-release": ""
   },
   "repository": {
     "type": "git",
@@ -19,19 +19,7 @@
     "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
   },
   "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
-  "config": {
-    "ghooks": {
-      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
-    },
-    "validate-commit-msg": {
-      "types": "@northbrook/commit-types"
-    }
-  },
   "devDependencies": {
-    "ghooks": "^1.3.2",
-    "northbrook": "^3.2.1",
-    "northbrook-eslint": "^1.1.0",
-    "standard": "^8.3.0",
-    "validate-commit-msg": "^2.8.2"
+    "standard": "^8.3.0"
   }
 }
