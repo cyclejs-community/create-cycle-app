@@ -2,14 +2,7 @@
 
 var fs = require('fs-extra')
 var path = require('path')
-var spawn = require('cross-spawn')
 var chalk = require('chalk')
-
-var dependencies = [
-  '@cycle/dom',
-  'xstream',
-  '@cycle/xstream-run'
-]
 
 function patchGitignore (appPath) {
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
@@ -86,28 +79,6 @@ module.exports = function (appPath, appName, verbose, originalDirectory) {
 
   // Copy flavor files
   fs.copySync(path.join(ownPath, 'template'), appPath)
-
   patchGitignore(appPath)
-
-  console.log('Installing dependencies from npm...')
-  console.log()
-
-  var args = [
-    'install'
-  ].concat(
-    dependencies // Flavor dependencies
-  ).concat([
-    '--save',
-    verbose && '--verbose'
-  ]).filter(Boolean)
-
-  var proc = spawn('npm', args, {stdio: 'inherit'})
-  proc.on('close', function (code) {
-    if (code !== 0) {
-      console.error(chalk.red('`npm ' + args.join(' ') + '` failed'))
-      return
-    }
-
-    successMsg(appName, appPath)
-  })
+  successMsg(appName, appPath)
 }

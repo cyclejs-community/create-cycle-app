@@ -4,7 +4,7 @@
   "description": "create-cycle-app core flavor",
   "main": "index.js",
   "scripts": {
-     "test": "echo \"Maybe later\""
+    "test": "echo \"Maybe later\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "cycle-scripts": "./index.js"
   },
   "dependencies": {
+    "@cycle/dom": "^14.3.0",
+    "@cycle/xstream-run": "^4.2.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
@@ -31,6 +33,7 @@
     "mocha": "^3.1.2",
     "progress-bar-webpack-plugin": "^1.9.0",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "xstream": "^9.3.0"
   }
 }
