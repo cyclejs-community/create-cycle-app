@@ -1,4 +1,4 @@
-#!/usr/bin/env nodeå
+#!/usr/bin/env node
 'use strict'
 
 const spawn = require('cross-spawn')

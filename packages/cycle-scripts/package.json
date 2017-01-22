@@ -1,6 +1,6 @@
 {
   "name": "cycle-scripts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "create-cycle-app core flavor",
   "main": "index.js",
   "scripts": {
