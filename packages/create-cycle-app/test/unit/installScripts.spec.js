@@ -1,5 +1,4 @@
 var path = require('path')
-
 jest.mock('cross-spawn')
 var spawn = require('cross-spawn')
 spawn.mockImplementation(() => ({ on: jest.fn() }))
@@ -7,7 +6,6 @@ jest.mock('../../src/getPackageName')
 var getPackageName = require('../../src/getPackageName')
 jest.mock('console')
 var consoleMock = require('console')
-
 var installScripts = require('../../src/installScripts')
 
 describe('installScripts module', () => {
