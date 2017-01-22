@@ -7,7 +7,7 @@ const installScripts = require('./installScripts')
 module.exports = function createApp (name, verbose, flavor) {
   const appFolder = path.resolve(name)
   const appName = path.basename(appFolder)
-  flavor = flavor || 'cycle-scripts'
+  flavor = flavor || 'cycle-scripts@next'
 
   createProjectIn(appFolder)
   preparePackageJson(appFolder, appName, () => {
