@@ -35,8 +35,6 @@ module.exports = function installScripts (appFolder, appName, flavor, verbose) {
       return
     }
 
-    // Validate node version
-    // checkNodeVersion(packageName)
     const initScriptPath = path.resolve(
       process.cwd(),
       'node_modules',
