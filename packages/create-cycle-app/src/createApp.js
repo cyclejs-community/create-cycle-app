@@ -4,6 +4,7 @@ const path = require('path')
 const chalk = require('chalk')
 const preparePackageJson = require('./preparePackageJson')
 const isSafeToCreateProjectIn = require('./isSafeToCreateProjectIn')
+const installScripts = require('./installScripts')
 
 module.exports = function createApp (name, verbose, flavor) {
   const appFolder = path.resolve(name)
@@ -17,5 +18,7 @@ module.exports = function createApp (name, verbose, flavor) {
     console.log(chalk.red(`The directory \`${appFolder}\` contains file(s) that could conflict. Aborting.`))
     process.exit(1)
   }
-  preparePackageJson(appFolder, appName, flavor, verbose)
+  preparePackageJson(appFolder, appName, () => {
+    installScripts(appFolder, appName, flavor, verbose)
+  })
 }

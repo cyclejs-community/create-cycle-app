@@ -2,9 +2,8 @@
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
-const installScripts = require('./installScripts')
 
-module.exports = function preparePackageJson (appFolder, appName, flavor, verbose) {
+module.exports = function preparePackageJson (appFolder, appName, cb) {
   // Start creating the new app
   console.log(chalk.green(`Creating a new Cycle.js app in ${appFolder}.`))
   console.log()
@@ -19,6 +18,5 @@ module.exports = function preparePackageJson (appFolder, appName, flavor, verbos
     path.join(appFolder, 'package.json'),
     JSON.stringify(packageJson, null, 2)
   )
-
-  installScripts(appFolder, appName, flavor, verbose)
+  cb()
 }
