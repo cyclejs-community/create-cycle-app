@@ -1,12 +1,12 @@
 'use strict'
 
-var path = require('path')
-var spawn = require('cross-spawn')
-var chalk = require('chalk')
+const path = require('path')
+const spawn = require('cross-spawn')
+const chalk = require('chalk')
 
-var mocha = path.resolve(process.cwd(), 'node_modules', '.bin', 'mocha')
+const mocha = path.resolve(process.cwd(), 'node_modules', '.bin', 'mocha')
 
-var args = [
+const args = [
   '--colors',
   '--require',
   'babel-register',

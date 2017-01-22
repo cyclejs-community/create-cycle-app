@@ -1,19 +1,19 @@
 'use strict'
 
-var fs = require('fs-extra')
-var path = require('path')
-var chalk = require('chalk')
+const fs = require('fs-extra')
+const path = require('path')
+const chalk = require('chalk')
 
 function patchGitignore (appPath) {
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
   // See: https://github.com/npm/npm/issues/1862
-  var gitignorePath = path.join(appPath, 'gitignore')
-  var dotGitignorePath = path.join(appPath, '.gitignore')
-  fs.move(gitignorePath, dotGitignorePath, [], function (err) {
+  const gitignorePath = path.join(appPath, 'gitignore')
+  const dotGitignorePath = path.join(appPath, '.gitignore')
+  fs.move(gitignorePath, dotGitignorePath, [], (err) => {
     if (err) {
       // Append if there's already a `.gitignore` file there
       if (err.code === 'EEXIST') {
-        var content = fs.readFileSync(gitignorePath)
+        const content = fs.readFileSync(gitignorePath)
         fs.appendFileSync(dotGitignorePath, content)
         fs.unlinkSync(gitignorePath)
       } else {
@@ -25,7 +25,7 @@ function patchGitignore (appPath) {
 
 function successMsg (appName, appPath) {
   console.log()
-  console.log('Success! Created ' + appName + ' at ' + appPath)
+  console.log(`Success! Created ${appName} at ${appPath}`)
   console.log('Inside that directory, you can run several commands:')
   console.log()
   console.log(chalk.cyan('  npm start'))
@@ -43,7 +43,7 @@ function successMsg (appName, appPath) {
   console.log()
   console.log('We suggest that you begin by typing:')
   console.log()
-  console.log(chalk.cyan('  cd ' + appName))
+  console.log(chalk.cyan(`  cd ${appName}`))
   console.log(chalk.cyan('  npm start'))
   console.log()
   console.log('If you have questions, issues or feedback about Cycle.js and create-cycle-app, please, join us on the Gitter:')
@@ -51,13 +51,14 @@ function successMsg (appName, appPath) {
   console.log(chalk.cyan('  https://gitter.im/cyclejs/cyclejs'))
   console.log()
   console.log('Happy cycling!')
+  console.log()
 }
 
-module.exports = function (appPath, appName, verbose, originalDirectory) {
-  var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
-  var ownPath = path.join(appPath, 'node_modules', ownPackageName)
-  var appPackageJson = path.join(appPath, 'package.json')
-  var appPackage = require(appPackageJson)
+module.exports = function init (appPath, appName, verbose, originalDirectory) {
+  const ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
+  const ownPath = path.join(appPath, 'node_modules', ownPackageName)
+  const appPackageJson = path.join(appPath, 'package.json')
+  const appPackage = require(appPackageJson)
 
   // Manipulate app's package.json
   appPackage.dependencies = appPackage.dependencies || {}
@@ -68,7 +69,7 @@ module.exports = function (appPath, appName, verbose, originalDirectory) {
     'build': 'cycle-scripts build',
     'eject': 'cycle-scripts eject'
   }
-  // to be moved into own babel config file
+  // TODO: move into own babel config file
   appPackage.babel = {
     'presets': ['es2015']
   }

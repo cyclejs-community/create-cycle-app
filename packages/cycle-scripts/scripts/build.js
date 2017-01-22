@@ -1,17 +1,17 @@
 'use strict'
 
-var fs = require('fs-extra')
-var path = require('path')
-var mkdirp = require('mkdirp')
-var webpack = require('webpack')
-var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const fs = require('fs-extra')
+const path = require('path')
+const mkdirp = require('mkdirp')
+const webpack = require('webpack')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
-var buildPath = path.join(process.cwd(), 'build')
-var publicPath = path.join(process.cwd(), 'public')
+const buildPath = path.join(process.cwd(), 'build')
+const publicPath = path.join(process.cwd(), 'public')
 
 mkdirp.sync(buildPath)
 
-var compiler = webpack({
+const compiler = webpack({
   entry: [
     './src/'
   ],
@@ -37,7 +37,7 @@ var compiler = webpack({
   ]
 })
 
-compiler.run(function (err, stats) {
+compiler.run((err, stats) => {
   if (err) {
     console.log(err)
   } else {

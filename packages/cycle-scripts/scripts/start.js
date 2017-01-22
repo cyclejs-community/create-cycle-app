@@ -1,15 +1,15 @@
 'use strict'
 
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
-var host = 'http://localhost'
-var port = 8000
+const host = 'http://localhost'
+const port = 8000
 
-var config = {
+const config = {
   entry: [
-    'webpack-dev-server/client?' + host + ':' + port.toString(),
+    `webpack-dev-server/client?${host}:${port.toString()}`,
     'webpack/hot/dev-server',
     './src/'
   ],
@@ -35,11 +35,11 @@ var config = {
   ]
 }
 
-var compiler = webpack(config)
-compiler.plugin('done', function () {
-  console.log('App is running at ' + host + ':' + port)
+const compiler = webpack(config)
+compiler.plugin('done', () => {
+  console.log(`App is running at ${host}:${port}`)
 })
-var server = new WebpackDevServer(compiler, {
+const server = new WebpackDevServer(compiler, {
   historyApiFallback: true,
   hot: true,
   contentBase: './public',
