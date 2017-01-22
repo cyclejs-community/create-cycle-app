@@ -1,12 +1,12 @@
-var path = require('path')
+const path = require('path')
 jest.mock('cross-spawn')
-var spawn = require('cross-spawn')
+const spawn = require('cross-spawn')
 spawn.mockImplementation(() => ({ on: jest.fn() }))
 jest.mock('../../src/getPackageName')
-var getPackageName = require('../../src/getPackageName')
+const getPackageName = require('../../src/getPackageName')
 jest.mock('console')
-var consoleMock = require('console')
-var installScripts = require('../../src/installScripts')
+const consoleMock = require('console')
+const installScripts = require('../../src/installScripts')
 
 describe('installScripts module', () => {
   test('should be a function with arity 4', () => {
@@ -35,7 +35,7 @@ describe('installScripts module', () => {
       )
     })
 
-    test('should console log the correct information', function () {
+    test('should console log the correct information', () => {
       expect(consoleMock.log.mock.calls[0][0]).toContain(
         'Installing packages. This might take a couple minutes.',
       )
