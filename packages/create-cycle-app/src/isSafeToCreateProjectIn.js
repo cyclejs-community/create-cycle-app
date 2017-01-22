@@ -1,8 +1,8 @@
 'use strict'
-var fs = require('fs')
+const fs = require('fs')
 
 module.exports = function isSafeToCreateProjectIn (appFolder) {
-  var whitelist = [
+  const whitelist = [
     '.DS_Store',
     'Thumbs.db',
     '.git',
@@ -12,7 +12,7 @@ module.exports = function isSafeToCreateProjectIn (appFolder) {
     'LICENSE'
   ]
   return fs.readdirSync(appFolder)
-    .every(function (file) {
+    .every((file) => {
       return whitelist.indexOf(file) >= 0
     })
 }
