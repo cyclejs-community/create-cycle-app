@@ -10,7 +10,9 @@ describe('create-cycle-app', () => {
     beforeEach((done) => {
       spawn.sync('node', [
         path.resolve(__dirname, '../../index.js'),
-        appName
+        appName,
+        '--flavor',
+        'cycle-scripts@1.0.3'
       ])
       dir = fs.readdirSync(appName)
       done()

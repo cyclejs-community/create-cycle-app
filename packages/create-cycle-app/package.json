@@ -3,7 +3,7 @@
   "version": "3.0.2",
   "description": "Create Cycle.js with no build configuration.",
   "scripts": {
-    "test": "jest --verbose"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Geovani Souza <geovanisouza92@gmail.com>",

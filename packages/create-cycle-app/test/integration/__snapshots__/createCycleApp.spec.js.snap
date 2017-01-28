@@ -4,7 +4,7 @@ exports[`create-cycle-app when invoked with the a directory it generate a correc
   \"version\": \"0.1.0\",
   \"private\": true,
   \"devDependencies\": {
-    \"cycle-scripts\": \"1.0.2\"
+    \"cycle-scripts\": \"1.0.3\"
   },
   \"dependencies\": {},
   \"scripts\": {
