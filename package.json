@@ -4,6 +4,7 @@
   "description": "Create Cycle.js apps with no configuration.",
   "private": true,
   "scripts": {
+    "precommit": "standard && npm run test",
     "postinstall": "lerna bootstrap",
     "test": "lerna run test",
     "publish": "lerna publish",
@@ -19,17 +20,20 @@
     "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
   },
   "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
-  "config": {
-    "ghooks": {
-      "pre-commit": "standard && npm run test"
-    }
-  },
   "standard": {
-    "globals": [ "describe", "test", "it", "expect", "jest", "beforeEach", "afterEach" ]
+    "globals": [
+      "describe",
+      "test",
+      "it",
+      "expect",
+      "jest",
+      "beforeEach",
+      "afterEach"
+    ]
   },
   "devDependencies": {
-    "ghooks": "^2.0.0",
-    "lerna": "2.0.0-beta.33",
+    "husky": "^0.13.1",
+    "lerna": "2.0.0-beta.32",
     "standard": "^8.3.0"
   }
 }
