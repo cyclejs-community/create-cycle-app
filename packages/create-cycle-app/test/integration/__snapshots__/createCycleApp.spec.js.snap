@@ -1,0 +1,22 @@
+exports[`create-cycle-app  1`] = `
+"{
+  \"name\": \"MYCYCLEAPP\",
+  \"version\": \"0.1.0\",
+  \"private\": true,
+  \"devDependencies\": {
+    \"cycle-scripts\": \"1.0.2\"
+  },
+  \"dependencies\": {},
+  \"scripts\": {
+    \"start\": \"cycle-scripts start\",
+    \"test\": \"cycle-scripts test\",
+    \"build\": \"cycle-scripts build\",
+    \"eject\": \"cycle-scripts eject\"
+  },
+  \"babel\": {
+    \"presets\": [
+      \"es2015\"
+    ]
+  }
+}"
+`;

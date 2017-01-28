@@ -17,6 +17,7 @@
     "minimist": "^1.2.0"
   },
   "devDependencies": {
+    "fs-extra": "^2.0.0",
     "jest": "^18.1.0"
   },
   "repository": {
