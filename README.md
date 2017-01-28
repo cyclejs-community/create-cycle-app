@@ -14,11 +14,7 @@ $ npm install -g create-cycle-app
 $ create-cycle-app my-awesome-cycle-app
 ```
 
-You will be prompted to choose the flavour and stream library you prefer.
-
-<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-select-flavor.png' width='600' alt='create-cycle-app-select-flavor'>
-
-<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-select-streamLib.png' width='600' alt='create-cycle-app-select-stream-library'>
+Once your app has been created a success message with further info will be displayed:
 
 <img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app.png' width='600' alt='create-cycle-app-success'>
 
@@ -41,11 +37,11 @@ $ npm run build
 
 ## Principles
 
-* **One dependency:** The first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults. Just update `create-cycle-app` to get selected changes to the core flavors. 
+* **One dependency:** The first and only dependency needed to create a Cycle.js project, hiding tooling complexity and providing smart defaults. Just update `create-cycle-app` to get selected changes to the core flavors.
 
 * **Zero Configuration:** There are no configuration files. Configuring both development and production builds is handled for you so you can focus on writing code.
 
-* **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 4 core flavors that you can mix and match with your favorite reactive stream library. Furthermore, a discovery mechanism allows to find and use any flavor published on the npm registry. Alternatively, you can use your own flavors from any registry such as GitHub or your own.
+* **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 1 core flavors but allows you to provide your own from any registry such as GitHub or your own.
 
 * **No Lock-In:** Specifically made for beginners and to provide fast bootstrap for new projects, create-cycle-app doesn't have the ambition to be __the__ tool for working with Cycle.js projects. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run eject`.
 
@@ -93,7 +89,7 @@ my-awesome-cycle-app/
 └── package.json
 ```
 
-_* Generated structure and files may change depending on the flavor being used, The above structure hold true for any of the 4 core flavors._
+_* Generated structure and files may change depending on the flavor being used, The above structure hold true for the core flavor._
 
 No configuration or complicated folder structures, just the files you need to build your cycle app.
 Once the installation is done, you can run the following commands from within the project folder:
@@ -122,19 +118,16 @@ Copy dependencies and configurations to the project folder, update package.json 
 ## Flavors
 Each flavor represents a pair of programming language and builds tool. All the underlying dependencies and configuration are hidden behind the flavor. All flavors must adhere to the same basic structure and commands. Please make sure to check a specific flavor documentation for more details.
 
-### Core flavors
+### Core flavor
 
-Create-cycle-app come packed with 4 core flavors for you to choose from, namely:
+Create-cycle-app come packed with 1 core flavor:
 
-* [ES6 (babel) + Browserify](https://github.com/cyclejs-community/create-cycle-app/blob/master/cycle-scripts-es-browserify)
-* [ES6 (babel) + Webpack](https://github.com/cyclejs-community/create-cycle-app/blob/master/cycle-scripts-es-webpack)
-* [TypeScript + Browserify](https://github.com/cyclejs-community/create-cycle-app/blob/master/cycle-scripts-ts-browserify)
-* [TypeScript + Webpack](https://github.com/cyclejs-community/create-cycle-app/blob/master/cycle-scripts-ts-webpack)
+* [cycle-scripts](https://github.com/cyclejs-community/create-cycle-app/blob/master/packages/cycle-scripts)
 
 ### Custom flavour
 
 Custom flavors allow generating starting projects to fulfil specific needs.
-They can be published to npm, becoming instantaneously available to everybody via the create-cycle-app CLI.
+They can be published to npm, or being used locally via the create-cycle-app CLI.
 
 #### How to use custom flavors
 
@@ -154,17 +147,10 @@ $ create-cycle-app my-app --flavor cycle-scripts-es-webpack@x.y.z
 $ create-cycle-app my-app --flavor ./relative/path/to/cycle-scripts-es-webpack
 ```
 
-##### Discovering published flavors
-
-If no `--flavor` flag is passed, `create-cycle-app` will allow you to discover more flavors aside the core ones.
-Create-cycle-app will look up on the NPM registry for published flavors and if any get selected install it from there.
-
-<img src='https://raw.githubusercontent.com/cyclejs-community/create-cycle-app/master/docs/create-cycle-app-discover-flavor.png' width='600' alt='create-cycle-app-discover-flavor'>
-
 #### How to create a custom flavor
 A flavor is a npm module with a set of scripts and template files that are used to configure a new Cycle.js project.
 
-Take a look at [cycle-scripts-es-browserify](./cycle-scripts-es-browserify) as an example.
+Take a look at [cycle-scripts](./packages/cycle-scripts) as an example.
 
 ##### Basic structure
 
@@ -201,10 +187,10 @@ Take a look at [cycle-scripts-es-browserify](./cycle-scripts-es-browserify) as a
 
 Each flavor has great freedom to choose it's own dependencies, configuration, tools and file structure, as the user will choose which is the best (desired) flavor.
 
-##### Example:
+##### Flavors:
 
-A flavor starring Semicolons!, browserify, babel and the object spread babel plugin with a really long name!
-Check it out [here](https://github.com/Widdershin/cycle-scripts-widdershin)
+- A flavor starring Semicolons!, browserify, babel and the object spread babel plugin with a really long name!
+[cycle-scripts-widdershin](https://github.com/Widdershin/cycle-scripts-widdershin)
 
 #### Publish
 
