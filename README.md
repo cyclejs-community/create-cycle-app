@@ -203,6 +203,7 @@ We'd love to have your help on `create-cycle-app`. See [CONTRIBUTING.md](CONTRIB
 ## Acknowledgements
 
 A simple thank you goes a long way. That's why we would like to thank the [create-react-app](https://github.com/facebookincubator/create-react-app) team: you have been a fantastic inspiration and a great example for this project.
+We would also like to thank the [standard project](https://github.com/feross/standard) for their update-authors script.
 
 ## Alternatives
 
