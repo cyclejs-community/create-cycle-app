@@ -1,6 +1,6 @@
 {
   "name": "cycle-scripts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "create-cycle-app core flavor",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,14 @@
   },
   "author": "Nick Balestra <nick@balestra.ch>",
   "contributors": [
-    { "name": "Geovani Souza", "email": "geovanisouza92@gmail.com" },
-    { "name": "Nick Balestra", "email": "nick@balestra.ch" }
+    {
+      "name": "Geovani Souza",
+      "email": "geovanisouza92@gmail.com"
+    },
+    {
+      "name": "Nick Balestra",
+      "email": "nick@balestra.ch"
+    }
   ],
   "license": "MIT",
   "bugs": {

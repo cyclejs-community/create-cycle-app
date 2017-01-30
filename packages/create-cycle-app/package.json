@@ -1,6 +1,6 @@
 {
   "name": "create-cycle-app",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Create Cycle.js with no build configuration.",
   "scripts": {
     "test": "jest"
@@ -8,8 +8,14 @@
   "keywords": [],
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "contributors": [
-    { "name": "Geovani Souza", "email": "geovanisouza92@gmail.com" },
-    { "name": "Nick Balestra", "email": "nick@balestra.ch" }
+    {
+      "name": "Geovani Souza",
+      "email": "geovanisouza92@gmail.com"
+    },
+    {
+      "name": "Nick Balestra",
+      "email": "nick@balestra.ch"
+    }
   ],
   "license": "ISC",
   "bin": {
