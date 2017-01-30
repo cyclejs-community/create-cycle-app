@@ -4,6 +4,7 @@
   "description": "Create Cycle.js apps with zero configuration.",
   "private": true,
   "scripts": {
+    "update-authors": "./bin/update-authors.sh",
     "precommit": "standard && npm run test",
     "postinstall": "lerna bootstrap",
     "test": "lerna run test",
