@@ -15,6 +15,10 @@
     "url": "git+https://github.com/cyclejs-community/create-cycle-app.git"
   },
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
+  "contributors": [
+    { "name": "Geovani Souza", "email": "geovanisouza92@gmail.com" },
+    { "name": "Nick Balestra", "email": "nick@balestra.ch" }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
