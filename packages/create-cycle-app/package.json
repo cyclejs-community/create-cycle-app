@@ -1,0 +1,31 @@
+{
+  "name": "create-cycle-app",
+  "version": "3.0.3",
+  "description": "Create Cycle.js with no build configuration.",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Geovani Souza <geovanisouza92@gmail.com>",
+  "license": "ISC",
+  "bin": {
+    "create-cycle-app": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "cross-spawn": "^4.0.2",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^2.0.0",
+    "jest": "^18.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyclejs-community/create-cycle-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
+  },
+  "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme"
+}
