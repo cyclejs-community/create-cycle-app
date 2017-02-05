@@ -4,7 +4,30 @@ const appName = path.resolve(__dirname, 'MYCYCLEAPP')
 const spawn = require('cross-spawn')
 
 describe('create-cycle-app', () => {
-  describe('when invoked with the a directory', () => {
+  describe('when invoked with the wrong arguments', () => {
+    test('should throw an error', () => {
+      expect(
+        spawn.sync('node', [
+          path.resolve(__dirname, '../../index.js'),
+          appName,
+          '--flavour',
+          'cycle-scripts@1.0.3'
+        ])
+      ).toThrowError()
+    })
+
+    test('should throw an error', () => {
+      expect(
+        spawn.sync('node', [
+          path.resolve(__dirname, '../../index.js'),
+          appName,
+          '--verbos'
+        ])
+      ).toThrowError()
+    })
+  })
+
+  describe('when invoked with the the correct arguments', () => {
     let dir
 
     beforeEach((done) => {

@@ -1,4 +1,4 @@
-exports[`create-cycle-app when invoked with the a directory it generate a correct package.json file 1`] = `
+exports[`create-cycle-app when invoked with the the correct arguments it generate a correct package.json file 1`] = `
 "{
   \"name\": \"MYCYCLEAPP\",
   \"version\": \"0.1.0\",
