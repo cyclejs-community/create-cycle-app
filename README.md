@@ -147,54 +147,9 @@ $ create-cycle-app my-app --flavor cycle-scripts-es-webpack@x.y.z
 $ create-cycle-app my-app --flavor ./relative/path/to/cycle-scripts-es-webpack
 ```
 
-#### How to create a custom flavor
-A flavor is a npm module with a set of scripts and template files that are used to configure a new Cycle.js project.
-
-Take a look at [cycle-scripts](./packages/cycle-scripts) as an example.
-
-##### Basic structure
-
-```
-.
-├── index.js
-├── package.json
-├── scripts
-│   ├── build.js
-│   ├── init.js
-│   ├── start.js
-│   ├── eject.js
-│   └── test.js
-└── template
-    ├── gitignore
-    ├── public
-    │   ├── favicon.ico
-    │   └── index.html
-    └── src
-        ├── app.js
-        ├── app.test.js
-        └── index.js
-
-4 directories, 13 files
-```
-
-`package.json` is used to declare dependencies for this particular flavor, that acts as devDependencies to the target project. It declares the `cycle-scripts` command script (generally `index.js`), from where each underlying scripts is called.
-
-`index.js` is the entry point for each command exposed to the target project. It could be really simple, just calling the next script file without ceremony.
-
-`scripts/` directory holds each script used in the project. The `start.js` script is used to start a development server. `test.js`, as the name suggests, call the test tool. `build.js` is used to bundle the target project to a deliverable set of files, production-ready. `eject.js` is mostly a copy-and-paste tool, that adapts the target project to reproduce the same commands from the flavor. Last, but not least, `init.js` is the script called by `create-cycle-app` command, in order to install development dependencies and copy initial files.
-
-`templates/` directory holds template files for the target project. This is optional, and unlike other files, could have any structure you desire.
-
-Each flavor has great freedom to choose it's own dependencies, configuration, tools and file structure, as the user will choose which is the best (desired) flavor.
-
 ##### Flavors:
 
-- A flavor starring Semicolons!, browserify, babel and the object spread babel plugin with a really long name!
-[cycle-scripts-widdershin](https://github.com/Widdershin/cycle-scripts-widdershin)
-
-#### Publish
-
-If you want your flavor to be used upfront by anyone, just publish it on the NPM registry. Make sure to use the keyword `create-cycle-app-flavor` and add a short self-explanatory description in your flavor's package.json.
+- Check [available flavors](https://github.com/cyclejs-community/create-cycle-app-flavors)
 
 ## Contributing
 
