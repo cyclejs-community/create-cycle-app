@@ -7,7 +7,7 @@ const spawn = require('cross-spawn')
 
 const basicDependencies = [
   '@cycle/dom',
-  '@cycle/xstream-run',
+  '@cycle/run',
   'xstream'
 ]
 
