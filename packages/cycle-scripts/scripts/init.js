@@ -76,10 +76,21 @@ module.exports = function init (appPath, appName, verbose, originalDirectory) {
     'build': 'cycle-scripts build',
     'eject': 'cycle-scripts eject'
   }
-  // TODO: move into own babel config file
+
   appPackage.babel = {
-    'presets': ['es2015']
+    presets: [
+      [ 'env', {
+        'targets': {
+          'browsers': ['last 2 versions', 'safari >= 7']
+        }
+      }]
+    ],
+    plugins: [
+      'syntax-jsx',
+      ['transform-react-jsx', { pragma: 'snabb.html' }]
+    ]
   }
+
   fs.writeFileSync(
     appPackageJson,
     JSON.stringify(appPackage, null, 2)
