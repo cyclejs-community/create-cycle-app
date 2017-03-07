@@ -50,18 +50,3 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map'
 }
-
-// BASIC TO IMPLEMENT
-// [X] webpack2
-// [X] preset-env
-// [ ] babili
-// [ ] cross-spawn
-// [X] HtmlWebpackPlugin
-// [ ] CopyWebpackPlugin
-// [X] JSX -> ProvidePlugin({snabb: 'snabbdom-jsx'})
-
-// NICE TO HAVE
-// [ ] prettier => prettier-webpack-plugin
-// [X] devServer.proxy({'/api': { target: 'http://localhost:3000' }})
-// [ ] CSS: postcss, extractText, type-style
-// [ ] YARN
