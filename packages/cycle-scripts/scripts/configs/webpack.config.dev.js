@@ -1,12 +1,16 @@
+'use strict'
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const devServer = require('./webpackDevServer.config')
 
 module.exports = {
   entry: {
     main: [
-      path.join(process.cwd(), 'src', 'index.js'),
-      'webpack/hot/only-dev-server'
+      `webpack-dev-server/client?http://${devServer.host}:${devServer.port.toString()}`,
+      'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server'
+      path.join(process.cwd(), 'src', 'index.js')
     ]
   },
   output: {
@@ -28,7 +32,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './index.ejs',
+      template: 'public/index.html',
       inject: true,
       favicon: 'public/favicon.png',
       hash: true
@@ -37,16 +41,5 @@ module.exports = {
       snabb: 'snabbdom-jsx'
     })
   ],
-  devServer: {
-    port: 8000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000'
-      }
-    },
-    hot: true,
-    historyApiFallback: true,
-    inline: true
-  },
   devtool: 'cheap-module-source-map'
 }
