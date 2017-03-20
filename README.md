@@ -7,6 +7,8 @@ Create [Cycle.js](https://cycle.js.org/) apps with no build configuration.
 * [Getting Started](#getting-started) – How to create a new app.
 * [Custom Flavors](#flavors) – How to develop and publish new flavors
 
+The project is inspired by [create-react-app](https://github.com/facebookincubator/create-react-app)
+
 ## Quick Start
 
 ```sh
@@ -147,13 +149,13 @@ Some examples of how a flavor can be specified:
 *npm name*
 
 ```sh
-$ create-cycle-app my-app --flavor cycle-scripts-es-webpack ()
+$ create-cycle-app my-app --flavor cycle-scripts-one-fits-all
 ```
 
 *npm name with specific version*
 
 ```sh
-$ create-cycle-app my-app --flavor cycle-scripts-es-webpack@x.y.z
+$ create-cycle-app my-app --flavor cycle-scripts-one-fits-all@1.1.0
 ```
 
 *github account/repo*
@@ -165,7 +167,7 @@ $ create-cycle-app my-app --flavor github:my-account/my-cycle-flavor
 *reference to local file path*
 
 ```sh
-$ create-cycle-app my-app --flavor ./relative/path/to/cycle-scripts-es-webpack
+$ create-cycle-app my-app --flavor ./relative/path/to/my-cycle-flavor
 ```
 
 ##### Flavors:
@@ -201,6 +203,7 @@ The default flavor package has the following structure:
   /src
 index.js
 package.json
+Readme.md
 ```
 
 ## Single flavor from lerna project
@@ -274,7 +277,7 @@ $ cycle-flavor my-sweet-flavor cycle-scripts-ts-browserify[https://github.com/cy
 Specify local repo, remote lerna package and git location
 
 ```sh
-$ cycle-flavor my-sweet-flavor cycle-scripts-ts-browserifyhttps://github.com/my-account/my-cycle-flavors.git
+$ cycle-flavor my-sweet-flavor cycle-scripts-ts-browserify https://github.com/my-account/my-cycle-flavors.git
 ```
 
 Now from `~/cycle-projects` reference your local custom flavor of choice :)
