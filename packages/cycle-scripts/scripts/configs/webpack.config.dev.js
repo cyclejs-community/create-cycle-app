@@ -38,7 +38,7 @@ module.exports = {
       hash: true
     }),
     new webpack.ProvidePlugin({
-      snabb: 'snabbdom-jsx'
+      Snabbdom: 'snabbdom-pragma'
     })
   ],
   devtool: 'cheap-module-source-map'

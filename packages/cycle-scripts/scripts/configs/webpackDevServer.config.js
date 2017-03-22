@@ -6,7 +6,7 @@ module.exports = {
   inline: true,
   historyApiFallback: true,
   hot: true,
-  // stats: 'errors-only'
+  stats: 'errors-only',
   clientLogLevel: 'none',
   compress: true,
   quiet: true,
