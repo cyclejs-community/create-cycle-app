@@ -3,13 +3,13 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const devServer = require('./webpackDevServer.config')
 
 module.exports = {
   entry: {
     main: [
-      `webpack-dev-server/client?http://${devServer.host}:${devServer.port.toString()}`,
-      'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server',
+      require.resolve('../utils/webpackHotDevClient'),
+      // `webpack-dev-server/client?http://${devServer.host}:${devServer.port.toString()}`,
+      // 'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server',
       path.join(process.cwd(), 'src', 'index.js')
     ]
   },

@@ -30,6 +30,7 @@
     "cycle-scripts": "./index.js"
   },
   "dependencies": {
+    "anser": "^1.2.7",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
     "babel-plugin-transform-react-jsx": "^6.23.0",
@@ -41,6 +42,8 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
     "snabbdom-pragma": "^1.7.0",
+    "sockjs-client": "^1.1.2",
+    "strip-ansi": "^3.0.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"
   }
