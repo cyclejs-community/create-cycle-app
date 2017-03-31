@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     main: [
       `webpack-dev-server/client?http://${devServer.host}:${devServer.port.toString()}`,
-      'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server'
+      'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server',
       path.join(process.cwd(), 'src', 'index.js')
     ]
   },
@@ -39,6 +39,10 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       Snabbdom: 'snabbdom-pragma'
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
     })
   ],
   devtool: 'cheap-module-source-map'

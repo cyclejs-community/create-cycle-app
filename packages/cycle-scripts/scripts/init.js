@@ -81,7 +81,8 @@ module.exports = function init (appPath, appName, verbose, originalDirectory) {
     presets: [
       [ 'env', {
         'targets': {
-          'browsers': ['last 2 versions']
+          'browsers': ['last 2 versions'],
+          uglify: true
         }
       }]
     ],
