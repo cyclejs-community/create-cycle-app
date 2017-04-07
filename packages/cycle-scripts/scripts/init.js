@@ -5,6 +5,7 @@ const path = require('path')
 const chalk = require('chalk')
 const spawn = require('cross-spawn')
 
+// To be moved to separate module
 const basicDependencies = [
   '@cycle/dom@16.0.0',
   '@cycle/run@3.0.0',
@@ -68,6 +69,7 @@ module.exports = function init (appPath, appName, verbose, originalDirectory) {
   const appPackage = require(appPackageJson)
 
   // Manipulate app's package.json
+  // To be moved to separate module
   appPackage.dependencies = appPackage.dependencies || {}
   appPackage.devDependencies = appPackage.devDependencies || {}
   appPackage.scripts = {
@@ -77,19 +79,19 @@ module.exports = function init (appPath, appName, verbose, originalDirectory) {
     'eject': 'cycle-scripts eject'
   }
 
-  appPackage.babel = {
-    presets: [
-      [ 'env', {
-        'targets': {
-          'browsers': ['last 2 versions'],
-          uglify: true
-        }
-      }]
-    ],
-    plugins: [
-      ['transform-react-jsx', { pragma: 'Snabbdom.createElement' }]
-    ]
-  }
+  // appPackage.babel = {
+  //   presets: [
+  //     [ 'env', {
+  //       'targets': {
+  //         'browsers': ['last 2 versions'],
+  //         uglify: true
+  //       }
+  //     }]
+  //   ],
+  //   plugins: [
+  //     ['transform-react-jsx', { pragma: 'Snabbdom.createElement' }]
+  //   ]
+  // }
 
   fs.writeFileSync(
     appPackageJson,
