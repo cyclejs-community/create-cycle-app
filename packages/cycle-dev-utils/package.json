@@ -1,0 +1,31 @@
+{
+  "name": "cycle-dev-utils",
+  "version": "0.0.1",
+  "author": "Nick Balestra <nick@balestra.ch>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyclejs-community/create-cycle-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyclejs-community/create-cycle-app/issues"
+  },
+  "homepage": "https://github.com/cyclejs-community/create-cycle-app#readme",
+  "files": [
+    "ansiHTML.js",
+    "clearConsole.js",
+    "createWebpackCompiler.js",
+    "openBrowser.js",
+    "webpackHotDevClient.js",
+    "formatWebpackMessages.js"
+  ],
+  "dependencies": {
+    "anser": "^1.2.7",
+    "chalk": "^1.1.3",
+    "html-entities": "^1.2.0",
+    "opn": "^4.0.2",
+    "sockjs-client": "^1.1.2",
+    "strip-ansi": "^3.0.1",
+    "webpack": "^2.3.3"
+  }
+}
