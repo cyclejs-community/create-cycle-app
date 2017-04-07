@@ -1,7 +1,7 @@
-import xs from 'xstream'
+module.exports = replacements => `${replacements.import}
 
 export function App (sources) {
-  const vtree$ = xs.of(
+  const vtree$ = ${replacements.stream}.of(
     <div>My Awesome Cycle.js app</div>
   )
   const sinks = {
@@ -9,3 +9,4 @@ export function App (sources) {
   }
   return sinks
 }
+`
