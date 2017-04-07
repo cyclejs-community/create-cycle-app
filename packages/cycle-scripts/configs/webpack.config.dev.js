@@ -7,9 +7,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: {
     main: [
-      require.resolve('../utils/webpackHotDevClient'),
-      // `webpack-dev-server/client?http://${devServer.host}:${devServer.port.toString()}`,
-      // 'webpack/hot/dev-server',  // 'webpack/hot/only-dev-server',
+      require.resolve('cycle-dev-utils/webpackHotDevClient'),
       path.join(process.cwd(), 'src', 'index.js')
     ]
   },
@@ -23,7 +21,17 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
-          cacheDirectory: true
+          cacheDirectory: true,
+          presets: [
+            [ 'env', {
+              'targets': {
+                'browsers': ['last 2 versions']
+              }
+            }]
+          ],
+          plugins: [
+            ['transform-react-jsx', { pragma: 'Snabbdom.createElement' }]
+          ]
         },
         exclude: /node_modules/
       }
