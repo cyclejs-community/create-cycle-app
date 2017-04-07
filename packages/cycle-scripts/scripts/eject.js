@@ -5,12 +5,14 @@ const path = require('path')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 
+const scriptsPath = path.join(process.cwd(), 'scripts')
 const ownPackageJsonPath = path.resolve(__dirname, '..', 'package.json')
 const appPackageJsonPath = path.join(process.cwd(), 'package.json')
 const ownPackageJson = JSON.parse(fs.readFileSync(ownPackageJsonPath))
 const appPackageJson = JSON.parse(fs.readFileSync(appPackageJsonPath))
-const scriptsPath = path.join(process.cwd(), 'scripts')
 
+// Ask the user for confirmation before ejecting.
+// Abort in case of negative answer (default)
 const ejectConfirmation = {
   type: 'confirm',
   name: 'doEject',
@@ -41,9 +43,6 @@ Object.keys(appPackageJson.devDependencies)
   })
 devDependencies = Object.assign({}, devDependencies, ownPackageJson.dependencies)
 
-// Delete babel config in package.json
-delete appPackageJson.babel
-
 // Write the new package.json
 const newPackageJson = Object.assign({}, appPackageJson, {scripts: scripts, devDependencies: devDependencies})
 fs.writeFileSync(
@@ -63,3 +62,5 @@ copyScript('build.js')
 
 // Copy configs
 fs.copySync(path.join(__dirname, '../', 'configs'), path.join('configs'))
+
+// Todo: provide some success info on success
