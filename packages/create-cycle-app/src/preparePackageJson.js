@@ -1,7 +1,8 @@
 'use strict'
+
+const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
-const chalk = require('chalk')
 
 module.exports = function preparePackageJson (appFolder, appName, cb) {
   // Start creating the new app

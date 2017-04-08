@@ -1,12 +1,14 @@
 'use strict'
-const path = require('path')
+
 const chalk = require('chalk')
 const spawn = require('cross-spawn')
-const getPackageName = require('./getPackageName')
 const console = require('console')
+const path = require('path')
 const process = require('process')
 
-module.exports = function installScripts (appFolder, appName, flavor, verbose) {
+const getPackageName = require('./getPackageName')
+
+module.exports = function installScripts (appFolder, appName, flavor, verbose, options) {
   const originalDirectory = process.cwd()
   process.chdir(appFolder)
 
@@ -45,6 +47,6 @@ module.exports = function installScripts (appFolder, appName, flavor, verbose) {
     const init = require(initScriptPath)
 
     // Execute the cycle-scripts's specific initialization
-    init(appFolder, appName, verbose, originalDirectory)
+    init(appFolder, appName, verbose, originalDirectory, options)
   })
 }

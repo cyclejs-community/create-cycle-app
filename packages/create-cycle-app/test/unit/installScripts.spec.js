@@ -9,9 +9,9 @@ const consoleMock = require('console')
 const installScripts = require('../../src/installScripts')
 
 describe('installScripts module', () => {
-  test('should be a function with arity 4', () => {
+  test('should be a function with arity 5', () => {
     expect(typeof installScripts).toBe('function')
-    expect(installScripts.length).toBe(4)
+    expect(installScripts.length).toBe(5)
   })
 
   describe('when invoked with a flavor published on npm', () => {

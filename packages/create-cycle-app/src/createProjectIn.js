@@ -1,7 +1,9 @@
 'use strict'
-const fs = require('fs')
+
 const chalk = require('chalk')
 const console = require('console')
+const fs = require('fs')
+
 const isSafeToCreateProjectIn = require('./isSafeToCreateProjectIn')
 
 module.exports = function createProjectIn (appFolder) {
