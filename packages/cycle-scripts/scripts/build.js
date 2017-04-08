@@ -37,11 +37,12 @@ process.env.NODE_ENV = 'production'
 const fs = require('fs-extra')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const config = require('../configs/webpack.config.prod')
 const path = require('path')
 
 const buildPath = path.join(process.cwd(), 'build')
 const publicPath = path.join(process.cwd(), 'public')
+const ccaConfig = require(path.join(process.cwd(), 'package.json'))['create-cycle-app']
+const config = require(path.join('../configs/', ccaConfig.language, 'webpack.config.dev'))
 
 // Remove all content but keep the directory so that
 // if you're in it, you don't end up in Trash

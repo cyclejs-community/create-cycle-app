@@ -124,6 +124,8 @@ function setup (appPath, appName, verbose, originalDirectory, options) {
     'eject': 'cycle-scripts eject'
   }
 
+  appPackage['create-cycle-app'] = options
+
   fs.writeFileSync(
     appPackageJson,
     JSON.stringify(appPackage, null, 2)
@@ -152,10 +154,7 @@ function setup (appPath, appName, verbose, originalDirectory, options) {
 
   fs.copySync(path.join(ownPath, 'template/src', language), path.join(appPath, 'src'))
 
-  // for each file in template/src load them, replace and write them
-
-  // for each library
-
+  // TODO
   // patchGitignore(appPath)
 
   const dependecyList = depsToInstall
@@ -189,5 +188,5 @@ module.exports = function init (appPath, appName, verbose, originalDirectory, op
   if (options) {
     return setup(appPath, appName, verbose, originalDirectory, options)
   }
-  return initQuestions(anwers => setup(appPath, appName, verbose, originalDirectory, anwers))
+  return initQuestions(answers => setup(appPath, appName, verbose, originalDirectory, answers))
 }

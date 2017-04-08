@@ -34,12 +34,14 @@
 
 const WebpackDevServer = require('webpack-dev-server')
 const chalk = require('chalk')
+const path = require('path')
 
-const config = require('../configs/webpack.config.dev')
 const devServerConfig = require('../configs/webpackDevServer.config')
 const createWebpackCompiler = require('./utils/createWebpackCompiler')
 const openBrowser = require('react-dev-utils/openBrowser')
+const ccaConfig = require(path.join(process.cwd(), 'package.json'))['create-cycle-app']
 
+const config = require(path.join('../configs/', ccaConfig.language, 'webpack.config.dev'))
 process.env.NODE_ENV = 'development'
 
 const cli = 'npm'

@@ -12,7 +12,7 @@ describe('initQuedstion module', () => {
     })
     test('should prompt for question if no custom flavor is provided', () => {
       const callback = jest.fn()
-      const answer = {language: 'JavaScript', streamLib: 'xstream'}
+      const answer = {language: 'javascript', streamLib: 'xstream'}
       inquirer.prompt.mockReturnValue({
         then: jest.fn(answers => callback(answer))
       })

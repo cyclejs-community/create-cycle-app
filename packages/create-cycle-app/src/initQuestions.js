@@ -7,7 +7,16 @@ const initQuestions = [
     type: 'list',
     name: 'language',
     default: 0,
-    choices: ['JavaScript', 'TypeScript'],
+    choices: [
+      {
+        name: 'JavaScript',
+        value: 'javascript'
+      },
+      {
+        name: 'TypeScript',
+        value: 'typescript'
+      }
+    ],
     message: 'Which language do you want to use to write your cycle app?'
   },
   {
