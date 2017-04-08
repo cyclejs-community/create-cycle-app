@@ -37,8 +37,8 @@ const chalk = require('chalk')
 
 const config = require('../configs/webpack.config.dev')
 const devServerConfig = require('../configs/webpackDevServer.config')
-const createWebpackCompiler = require('cycle-dev-utils/createWebpackCompiler')
-const openBrowser = require('cycle-dev-utils/openBrowser')
+const createWebpackCompiler = require('./utils/createWebpackCompiler')
+const openBrowser = require('react-dev-utils/openBrowser')
 
 process.env.NODE_ENV = 'development'
 

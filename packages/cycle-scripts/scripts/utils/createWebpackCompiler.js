@@ -34,8 +34,8 @@
 
 const chalk = require('chalk')
 const webpack = require('webpack')
-const clearConsole = require('./clearConsole')
-const formatWebpackMessages = require('./formatWebpackMessages')
+const clearConsole = require('react-dev-utils/clearConsole')
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 
 const isInteractive = process.stdout.isTTY
 let handleCompile

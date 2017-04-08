@@ -60,6 +60,9 @@ copyScript('start.js')
 copyScript('test.js')
 copyScript('build.js')
 
+// Copy utils
+fs.copySync(path.join(__dirname, 'utils'), path.join(scriptsPath, 'utils'))
+
 // Copy configs
 fs.copySync(path.join(__dirname, '../', 'configs'), path.join('configs'))
 
