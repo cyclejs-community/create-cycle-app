@@ -41,18 +41,29 @@ const path = require('path')
 
 const buildPath = path.join(process.cwd(), 'build')
 const publicPath = path.join(process.cwd(), 'public')
-const ccaConfig = require(path.join(process.cwd(), 'package.json'))['create-cycle-app']
-const config = require(path.join('../configs/', ccaConfig.language, 'webpack.config.dev'))
+const notEjected = require(path.join(process.cwd(), 'package.json')).cca
 
-// Remove all content but keep the directory so that
-// if you're in it, you don't end up in Trash
-fs.emptyDirSync(buildPath)
+const FileSizeReporter = require('react-dev-utils/FileSizeReporter')
+const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
+const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild
 
-// Start the webpack build
-build()
+const config = require(path.join(
+  '../configs/',
+  notEjected
+  ? notEjected.language
+  : '',
+  'webpack.config.prod')
+)
 
-// Merge with the public folder
-copyPublicFolder()
+measureFileSizesBeforeBuild(buildPath).then(previousFileSizes => {
+  // Remove all content but keep the directory so that
+  // if you're in it, you don't end up in Trash
+  fs.emptyDirSync(buildPath)
+  // Start the webpack build
+  build(previousFileSizes)
+  // Merge with the public folder
+  copyPublicFolder()
+})
 
 // Print out errors
 function printErrors (summary, errors) {
@@ -73,7 +84,7 @@ function copyPublicFolder () {
 }
 
 // Create the production build and print the deployment instructions.
-function build () {
+function build (previousFileSizes) {
   console.log('Creating an optimized production build...')
 
   let compiler
@@ -105,50 +116,11 @@ function build () {
 
     console.log(chalk.green('Compiled successfully.'))
     console.log()
+
+    console.log('File sizes after gzip:')
+    console.log()
+    printFileSizesAfterBuild(stats, previousFileSizes)
+    console.log()
   })
+  // todo better output
 }
-
-// const fs = require('fs-extra')
-// const path = require('path')
-// const mkdirp = require('mkdirp')
-// const webpack = require('webpack')
-// const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-
-// const buildPath = path.join(process.cwd(), 'build')
-// const publicPath = path.join(process.cwd(), 'public')
-
-// mkdirp.sync(buildPath)
-
-// const compiler = webpack({
-//   entry: [
-//     './src/'
-//   ],
-//   output: {
-//     filename: 'bundle.js',
-//     path: './public/'
-//   },
-//   module: {
-//     loaders: [
-//       {
-//         test: /\.js$/,
-//         loader: 'babel',
-//         query: {
-//           presets: ['es2015']
-//         },
-//         exclude: /node_modules/
-//       }
-//     ]
-//   },
-//   plugins: [
-//     new ProgressBarPlugin(),
-//     new webpack.optimize.UglifyJsPlugin({minimize: true})
-//   ]
-// })
-
-// compiler.run((err, stats) => {
-//   if (err) {
-//     console.log(err)
-//   } else {
-//     fs.copySync(publicPath, buildPath)
-//   }
-// })

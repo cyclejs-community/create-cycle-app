@@ -39,9 +39,15 @@ const path = require('path')
 const devServerConfig = require('../configs/webpackDevServer.config')
 const createWebpackCompiler = require('./utils/createWebpackCompiler')
 const openBrowser = require('react-dev-utils/openBrowser')
-const ccaConfig = require(path.join(process.cwd(), 'package.json'))['create-cycle-app']
+const notEjected = require(path.join(process.cwd(), 'package.json')).cca
 
-const config = require(path.join('../configs/', ccaConfig.language, 'webpack.config.dev'))
+const config = require(path.join(
+  '../configs/',
+  notEjected
+    ? notEjected.language
+    : '',
+  'webpack.config.dev')
+)
 process.env.NODE_ENV = 'development'
 
 const cli = 'npm'

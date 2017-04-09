@@ -2,7 +2,7 @@
 
 const inquirer = require('inquirer')
 
-const initQuestions = [
+const questions = [
   {
     type: 'list',
     name: 'language',
@@ -41,4 +41,4 @@ const initQuestions = [
   }
 ]
 
-module.exports = cb => inquirer.prompt(initQuestions).then(cb)
+module.exports = callback => inquirer.prompt(questions).then(callback)
