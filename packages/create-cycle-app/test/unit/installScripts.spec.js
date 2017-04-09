@@ -7,16 +7,16 @@ const getPackageName = require('../../src/getPackageName')
 jest.mock('console')
 const consoleMock = require('console')
 const installScripts = require('../../src/installScripts')
-
+// installScripts(appFolder, appName, { flavor, verbose, answers: false })
 describe('installScripts module', () => {
-  test('should be a function with arity 5', () => {
+  test('should be a function with arity 3', () => {
     expect(typeof installScripts).toBe('function')
-    expect(installScripts.length).toBe(5)
+    expect(installScripts.length).toBe(3)
   })
 
   describe('when invoked with a flavor published on npm', () => {
     getPackageName.mockImplementation(name => name)
-    installScripts('./', 'appName', 'cycle-scripts')
+    installScripts('./', 'appName', { flavor: 'cycle-scripts', cli: 'npm' })
 
     test('should call getPackageName with the name of the npm module', () => {
       expect(getPackageName).toBeCalledWith('cycle-scripts')
@@ -31,7 +31,7 @@ describe('installScripts module', () => {
           '--save-exact',
           'cycle-scripts'
         ],
-        {'stdio': 'inherit'}
+        {'cwd': './', 'stdio': 'inherit'}
       )
     })
 
@@ -48,7 +48,7 @@ describe('installScripts module', () => {
 
   describe('when invoked with a local flavor', () => {
     getPackageName.mockImplementation(name => path.basename(name))
-    installScripts('./', 'appName', './cycle-scripts')
+    installScripts('./', 'appName', { flavor: './cycle-scripts', cli: 'npm' })
 
     test('should console log the correct information', () => {
       expect(consoleMock.log.mock.calls[4][0]).toContain(
@@ -57,13 +57,13 @@ describe('installScripts module', () => {
     })
 
     test('should call spawn with the correct arguments', () => {
-      expect(spawn.mock.calls[1][1][3]).toContain('/create-cycle-app/packages/create-cycle-app/cycle-scripts')
+      expect(spawn.mock.calls[1][1][3]).toContain('./cycle-scripts')
     })
   })
 
   describe('when invoked with a verbose flag', () => {
     getPackageName.mockImplementation(name => name)
-    installScripts('./', 'appName', 'cycle-scripts', true)
+    installScripts('./', 'appName', { flavor: 'cycle-scripts', verbose: true, cli: 'npm' })
 
     test('should call spawn with the correct arguments', () => {
       expect(spawn.mock.calls[2]).toMatchObject([
@@ -75,7 +75,7 @@ describe('installScripts module', () => {
           '--save-exact',
           'cycle-scripts'
         ],
-        {'stdio': 'inherit'}
+        {'cwd': './', 'stdio': 'inherit'}
       ])
     })
   })

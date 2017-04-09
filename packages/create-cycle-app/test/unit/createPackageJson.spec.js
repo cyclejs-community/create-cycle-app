@@ -1,12 +1,14 @@
-const preparePackageJson = require('../../src/preparePackageJson')
+const createPackageJson = require('../../src/createPackageJson')
 jest.mock('fs')
 const fs = require('fs')
+jest.mock('console')
+const console = require('console')
+const chalk = require('chalk')
 
-describe('preparePackageJson module', () => {
+describe('createPackageJson module', () => {
   describe('when calling it', () => {
     test('should correctly prepare package.json and write it to disk', () => {
-      const callback = jest.fn()
-      preparePackageJson('testPath', 'testName', callback)
+      createPackageJson('testPath', 'testName')
 
       expect(fs.writeFileSync.mock.calls[0][0]).toBe('testPath/package.json')
       expect(fs.writeFileSync.mock.calls[0][1]).toBe(JSON.stringify({
@@ -14,7 +16,8 @@ describe('preparePackageJson module', () => {
         version: '0.1.0',
         private: true
       }, null, 2))
-      expect(callback).toBeCalled()
+      expect(console.log).toHaveBeenCalledTimes(2)
+      expect(console.log).toHaveBeenCalledWith(chalk.green('Creating a new Cycle.js app in testPath.'))
     })
   })
 })
