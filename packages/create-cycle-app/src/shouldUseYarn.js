@@ -1,10 +1,10 @@
-const execSync = require('child_process').execSync;
+const execSync = require('child_process').execSync
 
-module.exports = function shouldUseYarn() {
+module.exports = function shouldUseYarn () {
   try {
-    execSync('yarnpkg --version', { stdio: 'ignore' });
-    return true;
+    execSync('yarnpkg --version', { stdio: 'ignore' })
+    return true
   } catch (e) {
-    return false;
+    return false
   }
 }

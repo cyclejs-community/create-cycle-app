@@ -41,11 +41,6 @@ const initQuestions = [
   }
 ]
 
-module.exports = (flavor, cb) => {
-  if (flavor) {
-    return cb(false)
-  }
-  inquirer.prompt(initQuestions).then(answers => {
-    return cb(answers)
-  })
+module.exports = cb => {
+  inquirer.prompt(initQuestions).then(cb)
 }
