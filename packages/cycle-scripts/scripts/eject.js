@@ -21,9 +21,9 @@ const ejectConfirmation = {
 // Ask the user for confirmation before ejecting.
 inquirer.prompt([ejectConfirmation]).then(answers => {
   // Abort in case of negative answer (default)
-  if (answers.doEject.value) {
+  if (!answers.doEject) {
     console.log(chalk.cyan('Eject aborted!'))
-    process.exit(0)
+    return process.exit(0)
   }
 
   // STEP 1 - Prepare package.json
