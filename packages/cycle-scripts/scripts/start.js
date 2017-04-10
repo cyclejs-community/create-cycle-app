@@ -32,28 +32,22 @@
 
 'use strict'
 
+process.env.NODE_ENV = 'development'
+
 const WebpackDevServer = require('webpack-dev-server')
 const chalk = require('chalk')
 const path = require('path')
 
-const devServerConfig = require('../configs/webpackDevServer.config')
 const createWebpackCompiler = require('./utils/createWebpackCompiler')
 const openBrowser = require('react-dev-utils/openBrowser')
 const notEjected = require(path.join(process.cwd(), 'package.json')).cca
 
-const config = require(path.join(
-  '../configs/',
-  notEjected
-    ? notEjected.language
-    : '',
-  'webpack.config.dev')
-)
-process.env.NODE_ENV = 'development'
+const config = require('../configs/webpack.config')(notEjected.language)
 
 const cli = 'npm'
-const protocol = devServerConfig.https ? 'https' : 'http'
-const host = devServerConfig.host
-const port = devServerConfig.port
+const protocol = 'http'
+const host = 'localhost'
+const port = 8080
 
 function run (port) {
   const compiler = createWebpackCompiler(

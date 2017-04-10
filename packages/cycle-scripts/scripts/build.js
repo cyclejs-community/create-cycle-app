@@ -47,22 +47,11 @@ const FileSizeReporter = require('react-dev-utils/FileSizeReporter')
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild
 
-const config = require(path.join(
-  '../configs/',
-  notEjected
-  ? notEjected.language
-  : '',
-  'webpack.config.prod')
-)
+const config = require('../configs/webpack.config')(notEjected.language)
 
 measureFileSizesBeforeBuild(buildPath).then(previousFileSizes => {
-  // Remove all content but keep the directory so that
-  // if you're in it, you don't end up in Trash
-  fs.emptyDirSync(buildPath)
   // Start the webpack build
   build(previousFileSizes)
-  // Merge with the public folder
-  copyPublicFolder()
 })
 
 // Print out errors
@@ -72,14 +61,6 @@ function printErrors (summary, errors) {
   errors.forEach(err => {
     console.log(err.message || err)
     console.log()
-  })
-}
-
-// Merge with the public folder
-function copyPublicFolder () {
-  fs.copySync(publicPath, buildPath, {
-    dereference: true
-    // filter: file => file !== resolveApp('public/index.html'),
   })
 }
 
