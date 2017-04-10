@@ -34,7 +34,7 @@ Object.keys(argv)
     return true
   })
 
-const flavor = argv.flavor || 'cycle-scripts'
+const flavor = argv.flavor || 'cycle-scripts@>=1.0.0 <2.0.0'
 const verbose = argv.verbose || false
 const name = commands[0]
 
