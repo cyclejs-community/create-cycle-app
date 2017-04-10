@@ -15,7 +15,7 @@ module.exports = function setup (appPath, appName, options) {
 
   // STEP #1 - Create boilerplate files
   const flavorPath = path.join(appPath, 'node_modules', 'cycle-scripts')
-  const templateStrings = require(path.join(flavorPath, 'template/config', language, 'flavor.js'))
+  const templateStrings = require(path.join(flavorPath, 'template/config', language, 'flavor.js')).replacements
   const templatePath = path.join(flavorPath, 'template/src', language)
   // Create ./public directory
   fs.ensureDirSync(path.join(appPath, 'public'))
