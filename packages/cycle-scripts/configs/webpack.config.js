@@ -72,7 +72,7 @@ module.exports = function(language) {
     ]),
     env('development', [
         devServer({}, require.resolve('react-dev-utils/webpackHotDevClient')),
-        sourceMaps()
+        sourceMaps() //The default is cheap-module-source-map
     ]),
     env('production', [
         addPlugins([
