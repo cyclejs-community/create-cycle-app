@@ -2,10 +2,6 @@ const dependencies = {
   basics: [
     '@cycle/dom@17.1.0'
   ],
-  language: {
-    'javascript': [],
-    'typescript': []
-  },
   streamLib: {
     xstream: [
       '@cycle/run@3.1.0',
@@ -26,17 +22,23 @@ const replacements = {
   xstream: {
     run: '@cycle/run',
     import: 'import xs from \'xstream\'',
-    stream: 'xs'
+    typeImport: 'import {Stream} from \'xstream\'',
+    stream: 'xs',
+    streamType: 'Stream'
   },
   rxjs: {
     run: '@cycle/rxjs-run',
     import: 'import Rx from \'rxjs/Rx\'',
-    stream: 'Rx.Observable'
+    typeImport: 'import {Observable} from \'rxjs\'',
+    stream: 'Rx.Observable',
+    streamType: 'Observable'
   },
   most: {
     run: '@cycle/most-run',
     import: 'import * as most from \'most\'',
-    stream: 'most'
+    typeImport: 'import {Stream} from \'most\'',
+    stream: 'most',
+    streamType: 'Stream'
   }
 }
 

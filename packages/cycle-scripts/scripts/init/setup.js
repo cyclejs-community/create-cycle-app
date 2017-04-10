@@ -5,7 +5,6 @@ const path = require('path')
 const chalk = require('chalk')
 const spawn = require('cross-spawn')
 
-const flavorConfig = require('../../configs/flavor')
 const success = require('./success')
 
 module.exports = function setup (appPath, appName, options) {
@@ -16,7 +15,7 @@ module.exports = function setup (appPath, appName, options) {
 
   // STEP #1 - Create boilerplate files
   const flavorPath = path.join(appPath, 'node_modules', 'cycle-scripts')
-  const templateStrings = flavorConfig.replacements
+  const templateStrings = require(path.join(flavorPath, 'template/config', language, 'flavor.js'))
   const templatePath = path.join(flavorPath, 'template/src', language)
   // Create ./public directory
   fs.ensureDirSync(path.join(appPath, 'public'))
@@ -70,10 +69,8 @@ module.exports = function setup (appPath, appName, options) {
   // Taking into consideration user choices for language and stream library
   // All the dependency locks and configurations can be found in /configs/flavor.js
   const basicDependencies = flavorConfig.dependencies.basics
-  const languageDependencies = flavorConfig.dependencies.language[language]
   const streamLibDependencies = flavorConfig.dependencies.streamLib[streamLib]
   const dependenciesToInstall = basicDependencies
-    .concat(languageDependencies)
     .concat(streamLibDependencies)
   const dependecyList = dependenciesToInstall
     .slice(0, (dependenciesToInstall.length - 1))
