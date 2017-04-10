@@ -5,6 +5,7 @@ const path = require('path')
 const chalk = require('chalk')
 const spawn = require('cross-spawn')
 
+const dependencies = require('../../configs/flavor');
 const success = require('./success')
 
 module.exports = function setup (appPath, appName, options) {
@@ -69,10 +70,11 @@ module.exports = function setup (appPath, appName, options) {
   // Gather together all the dependencies needed for the flavor
   // Taking into consideration user choices for language and stream library
   // All the dependency locks and configurations can be found in /configs/flavor.js
-  const basicDependencies = flavorConfig.dependencies.basics
-  const streamLibDependencies = flavorConfig.dependencies.streamLib[streamLib]
+  const basicDependencies = dependencies.basics
+  const streamLibDependencies = dependencies.streamLib[streamLib]
   const dependenciesToInstall = basicDependencies
     .concat(streamLibDependencies)
+    .concat(flavorConfig.dependencies)
   const dependecyList = dependenciesToInstall
     .slice(0, (dependenciesToInstall.length - 1))
     .join(', ')
