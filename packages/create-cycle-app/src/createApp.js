@@ -24,7 +24,7 @@ module.exports = function createApp (name, verbose, flavor, noyarn, forceprompt)
   // We set the flavor to be 'cycle-scripts'
   if (flavor === 'core' || forceprompt) {
     if (flavor === 'core') {
-      flavor = 'cycle-scripts@">=2.0.0"'
+      flavor = 'cycle-scripts@>=2.0.0'
     }
     initQuestions(answers => {
       createAppDir(appPath)
