@@ -10,7 +10,8 @@ const VERSION = require(path.resolve(__dirname, 'package.json')).version
 const validCommands = {
   'verbose': true,
   'flavor': true,
-  'noyarn': true
+  'noyarn': true,
+  'forceprompt': true
 }
 
 // Command line prelude (version and usage)
@@ -38,7 +39,8 @@ Object.keys(argv)
 const flavor = argv.flavor || 'core'
 const verbose = argv.verbose || false
 const noyarn = argv.noyarn || false
+const forceprompt = argv.forceprompt || false
 const name = commands[0]
 
 // Parse the command line options and run the setup
-createApp(name, verbose, flavor, noyarn)
+createApp(name, verbose, flavor, noyarn, forceprompt)

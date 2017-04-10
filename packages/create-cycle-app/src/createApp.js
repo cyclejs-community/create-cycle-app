@@ -8,7 +8,7 @@ const installScripts = require('./installScripts')
 const createPackageJson = require('./createPackageJson')
 const shouldUseYarn = require('./shouldUseYarn')
 
-module.exports = function createApp (name, verbose, flavor, noyarn) {
+module.exports = function createApp (name, verbose, flavor, noyarn, forceprompt) {
   // The path where the cycle app will be created
   const appPath = path.resolve(name)
   // The name of the cycle app to create
@@ -22,8 +22,10 @@ module.exports = function createApp (name, verbose, flavor, noyarn) {
   // If no --flavor is passed (flavor === 'core')
   // We prompt for language and stream library
   // We set the flavor to be 'cycle-scripts'
-  if (flavor === 'core') {
-    const flavor = 'cycle-scripts@">=2.0.0"'
+  if (flavor === 'core' || forceprompt) {
+    if (flavor === 'core') {
+      flavor = 'cycle-scripts@">=2.0.0"'
+    }
     initQuestions(answers => {
       createAppDir(appPath)
       createPackageJson(appPath, appName)
