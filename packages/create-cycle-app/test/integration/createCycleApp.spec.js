@@ -11,7 +11,8 @@ describe('create-cycle-app', () => {
           path.resolve(__dirname, '../../index.js'),
           appName,
           '--flavour',
-          'cycle-scripts@1.0.3'
+          'cycle-scripts@1.0.3',
+          '--noyarn'
         ])
       ).toThrowError()
     })
@@ -35,7 +36,8 @@ describe('create-cycle-app', () => {
         path.resolve(__dirname, '../../index.js'),
         appName,
         '--flavor',
-        'cycle-scripts@1.0.3'
+        'cycle-scripts@1.0.3',
+        '--noyarn'
       ])
       dir = fs.readdirSync(appName)
       done()

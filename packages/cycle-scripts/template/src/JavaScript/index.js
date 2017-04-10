@@ -1,11 +1,12 @@
-import {run} from '@cycle/run'
+module.exports = replacements => `import {run} from '${replacements.run}'
 import {makeDOMDriver} from '@cycle/dom'
 import {App} from './app'
 
 const main = App
 
 const drivers = {
-  DOM: makeDOMDriver('#app')
+  DOM: makeDOMDriver('#root')
 }
 
 run(main, drivers)
+`

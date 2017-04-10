@@ -1,7 +1,8 @@
 'use strict'
+
 const fs = require('fs')
 
-module.exports = function isSafeToCreateProjectIn (appFolder) {
+module.exports = function isSafeToCreateApp (appFolder) {
   const whitelist = [
     '.DS_Store',
     'Thumbs.db',
