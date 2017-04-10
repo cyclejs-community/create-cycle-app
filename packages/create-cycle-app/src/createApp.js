@@ -23,7 +23,7 @@ module.exports = function createApp (name, verbose, flavor, noyarn) {
   // We prompt for language and stream library
   // We set the flavor to be 'cycle-scripts'
   if (flavor === 'core') {
-    const flavor = 'cycle-scripts'
+    const flavor = 'cycle-scripts@">=2.0.0"'
     initQuestions(answers => {
       createAppDir(appPath)
       createPackageJson(appPath, appName)
