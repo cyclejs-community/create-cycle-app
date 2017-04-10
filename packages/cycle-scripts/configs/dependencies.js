@@ -2,6 +2,10 @@ module.exports = {
   basics: [
     '@cycle/dom@17.1.0'
   ],
+  language: {
+    javascript: [],
+    typescript: []
+  },
   streamLib: {
     xstream: [
       '@cycle/run@3.1.0',

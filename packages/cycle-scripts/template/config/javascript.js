@@ -1,6 +1,4 @@
-const dependencies = []
-
-const replacements = {
+module.exports = {
   xstream: {
     run: '@cycle/run',
     import: 'import xs from \'xstream\'',
@@ -16,9 +14,4 @@ const replacements = {
     import: 'import * as most from \'most\'',
     stream: 'most'
   }
-}
-
-module.exports = {
-  dependencies,
-  replacements
 }
