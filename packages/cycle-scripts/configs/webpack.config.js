@@ -4,7 +4,15 @@
 // https://github.com/vuejs/vue-loader/issues/666
 process.noDeprecation = true
 
-const { createConfig, defineConstants, env, entryPoint, setOutput, sourceMaps, addPlugins } = require('@webpack-blocks/webpack2');
+const webpack2Block = require('@webpack-blocks/webpack2');
+const createConfig = webpack2Block.createConfig
+const defineConstants = webpack2Block.defineConstant
+const env = webpack2Block.env
+const entryPoint = webpack2Block.entryPoint
+const setOutput = webpack2Block.setOutput
+const sourceMaps = webpack2Block.sourceMaps
+const addPlugins = webpack2Block.addPlugins
+
 const babel = require('@webpack-blocks/babel6');
 const devServer = require('@webpack-blocks/dev-server2');
 const typescript = require('@webpack-blocks/typescript');
@@ -12,6 +20,7 @@ const tslint = require('@webpack-blocks/tslint');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const path = require('path');
 
 const babelConfig = {
