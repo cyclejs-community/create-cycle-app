@@ -6,7 +6,7 @@ process.noDeprecation = true
 
 const webpack2Block = require('@webpack-blocks/webpack2');
 const createConfig = webpack2Block.createConfig
-const defineConstants = webpack2Block.defineConstant
+const defineConstants = webpack2Block.defineConstants
 const env = webpack2Block.env
 const entryPoint = webpack2Block.entryPoint
 const setOutput = webpack2Block.setOutput
@@ -51,11 +51,11 @@ const babelConfig = {
 }
 
 module.exports = function(language) {
-  const ending = language === 'javascript' ? 'js' : 'ts'
+  const ending = language === 'javascript' ? '.js' : '.ts'
   const baseConfig = [
     entryPoint(path.join(process.cwd(), 'src', 'index' + ending)),
     setOutput(path.join(process.cwd(), 'build', 'bundle.[hash].js')),
-    babel(),
+    babel(babelConfig),
     defineConstants({
       'process.env.NODE_ENV': process.env.NODE_ENV
     }),
@@ -85,8 +85,9 @@ module.exports = function(language) {
   const config = language === 'javascript' ? baseConfig : baseConfig
     .concat([
       typescript({
+        tsconfig: path.join(__dirname, 'tsconfig.json'),
         useBabel: true,
-        babelOptions: baseConfig,
+        babelOptions: babelConfig,
         useCache: true,
         cacheDirectory: 'node_modules/.cache/at-loader'
       }),

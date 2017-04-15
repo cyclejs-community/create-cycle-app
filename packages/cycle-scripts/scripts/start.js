@@ -69,7 +69,7 @@ function run (port) {
     }
   )
 
-  const devServer = new WebpackDevServer(compiler, devServerConfig)
+  const devServer = new WebpackDevServer(compiler)
 
   devServer.listen(port, err => {
     if (err) {
