@@ -84,7 +84,12 @@ module.exports = function(language) {
 
   const config = language === 'javascript' ? baseConfig : baseConfig
     .concat([
-      typescript(),
+      typescript({
+        useBabel: true,
+        babelOptions: baseConfig,
+        useCache: true,
+        cacheDirectory: 'node_modules/.cache/at-loader'
+      }),
       tslint()
     ])
 
