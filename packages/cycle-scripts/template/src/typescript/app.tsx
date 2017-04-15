@@ -1,12 +1,14 @@
 module.exports = replacements => `${replacements.import}
 ${replacements.typeImport}
 import { DOMSource, VNode } from '@cycle/dom'
-import { Sources, Sinks, Reducer } from './interfaces'
+import { Sources, Sinks } from './interfaces'
 
 export type AppState = {
-  count : number;
+  count : number
 }
 export type AppReducer = (prevState : AppState) => AppState
+
+const initalState : AppState = { count: 0 }
 
 export function App({ DOM } : Sources) : Sinks {
   const action$ : ${replacements.streamType}<AppReducer> = intent(DOM)
@@ -17,8 +19,6 @@ export function App({ DOM } : Sources) : Sinks {
     DOM: vdom$
   }
 }
-
-const initalState : AppState = { count: 0 }
 
 function intent(DOM : DOMSource) : ${replacements.streamType}<AppReducer> {
   const add$ = DOM.select('.add').events('click')

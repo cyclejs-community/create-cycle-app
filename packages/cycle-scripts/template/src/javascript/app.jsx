@@ -1,5 +1,7 @@
 module.exports = replacements => `${replacements.import}
 
+const initalState = { count: 0 }
+
 export function App (sources) {
   const action$ = intent(sources.DOM)
   const model$ = model(action$)
@@ -10,8 +12,6 @@ export function App (sources) {
   }
   return sinks
 }
-
-const initalState = { count: 0 }
 
 function intent(DOM) {
   const add$ = DOM.select('.add').events('click')
