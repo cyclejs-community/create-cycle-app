@@ -16,7 +16,6 @@ const addPlugins = webpack2Block.addPlugins
 const babel = require('@webpack-blocks/babel6');
 const devServer = require('@webpack-blocks/dev-server2');
 const typescript = require('@webpack-blocks/typescript');
-const tslint = require('@webpack-blocks/tslint');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -90,8 +89,7 @@ module.exports = function(language) {
         babelOptions: babelConfig,
         useCache: true,
         cacheDirectory: 'node_modules/.cache/at-loader'
-      }),
-      tslint()
+      })
     ])
 
   return createConfig(config)
