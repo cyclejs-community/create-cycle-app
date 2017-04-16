@@ -1,9 +1,7 @@
-'use strict'
-
+module.exports = (language, ejected = false) => `'use strict'
 // Silence webpack2 deprecation warnings
 // https://github.com/vuejs/vue-loader/issues/666
 process.noDeprecation = true
-
 const webpack2Block = require('@webpack-blocks/webpack2');
 const createConfig = webpack2Block.createConfig
 const defineConstants = webpack2Block.defineConstants
@@ -12,21 +10,15 @@ const entryPoint = webpack2Block.entryPoint
 const setOutput = webpack2Block.setOutput
 const sourceMaps = webpack2Block.sourceMaps
 const addPlugins = webpack2Block.addPlugins
-
 const babel = require('@webpack-blocks/babel6');
 const devServer = require('@webpack-blocks/dev-server2');
-const typescript = require('@webpack-blocks/typescript');
-const webpack = require('webpack');
+${language === 'javascript' ? '' : `const typescript = require('@webpack-blocks/typescript');
+`}const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
-
 const babelConfig = {
-  // This is a feature of `babel-loader` for webpack (not Babel itself).
-  // It enables caching results in ./node_modules/.cache/babel-loader/
-  // directory for faster rebuilds.
-  cacheDirectory: true,
   // Instead of relying on a babelrc file to configure babel (or in package.json configs)
   // We speficy here which presets to use. In the future this could be moved to it's own
   // package as create-react-app does with their 'babel-preset-react-app module.
@@ -48,49 +40,44 @@ const babelConfig = {
     ['transform-object-rest-spread']
   ]
 }
-
-module.exports = function(language) {
-  const ending = language === 'javascript' ? '.js' : '.ts'
-  const baseConfig = [
-    entryPoint(path.join(process.cwd(), 'src', 'index' + ending)),
-    setOutput(path.join(process.cwd(), 'build', 'bundle.[hash].js')),
-    babel(babelConfig),
-    defineConstants({
-      'process.env.NODE_ENV': process.env.NODE_ENV
+const config = [
+  entryPoint(path.join(process.cwd(), 'src', 'index.${language === 'javascript' ? 'js' : 'ts' }')),
+  setOutput(path.join(process.cwd(), 'build', 'bundle.[hash].js')),
+  babel(Object.assign({}, babelConfig, { cacheDirectory: true })),
+  defineConstants({
+    'process.env.NODE_ENV': process.env.NODE_ENV
+  }),
+  addPlugins([
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+      inject: true,
+      favicon: 'public/favicon.png',
+      hash: true
     }),
+    new webpack.ProvidePlugin({
+      Snabbdom: 'snabbdom-pragma'
+    })
+  ]),
+  env('development', [
+    devServer({}, require.resolve('react-dev-utils/webpackHotDevClient')),
+    sourceMaps() //The default is cheap-module-source-map
+  ]),
+  env('production', [
     addPlugins([
-        new HtmlWebpackPlugin({
-          template: 'public/index.html',
-          inject: true,
-          favicon: 'public/favicon.png',
-          hash: true
-        }),
-        new webpack.ProvidePlugin({
-          Snabbdom: 'snabbdom-pragma'
-        })
-    ]),
-    env('development', [
-        devServer({}, require.resolve('react-dev-utils/webpackHotDevClient')),
-        sourceMaps() //The default is cheap-module-source-map
-    ]),
-    env('production', [
-        addPlugins([
-          new webpack.optimize.UglifyJsPlugin(),
-          new CopyWebpackPlugin([{ from: 'public', to: '' }])
-        ])
-    ])
-  ]
-
-  const config = language === 'javascript' ? baseConfig : baseConfig
-    .concat([
-      typescript({
-        tsconfig: path.join(__dirname, 'tsconfig.json'),
-        useBabel: true,
-        babelOptions: babelConfig,
-        useCache: true,
-        cacheDirectory: 'node_modules/.cache/at-loader'
+      new webpack.optimize.UglifyJsPlugin(),
+      new CopyWebpackPlugin([{ from: 'public', to: '' }]),
+      new CleanWebpackPlugin([ path.join(process.cwd(), 'build') ], {
+        root: process.cwd()
       })
     ])
-
-  return createConfig(config)
-}
+  ])${language === 'javascript' ? '' : `,
+  typescript({${ !ejected ? `
+    configFileName:path.join(__dirname, '..', 'configs', 'tsconfig.json'),` : '' }
+    useBabel: true,
+    babelOptions: babelConfig,
+    useCache: true,
+    cacheDirectory: 'node_modules/.cache/at-loader'
+  })` }
+]
+module.exports = createConfig(config)
+`

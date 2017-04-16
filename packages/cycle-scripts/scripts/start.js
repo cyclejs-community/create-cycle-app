@@ -42,7 +42,7 @@ const createWebpackCompiler = require('./utils/createWebpackCompiler')
 const openBrowser = require('react-dev-utils/openBrowser')
 const notEjected = require(path.join(process.cwd(), 'package.json')).cca
 
-const config = require('../configs/webpack.config')(notEjected.language)
+const config = notEjected ? eval(require('../configs/webpack.config.template')(notEjected.language)) : require(path.join(process.cwd(), 'webpack.config.js'))
 
 const cli = 'npm'
 const protocol = 'http'

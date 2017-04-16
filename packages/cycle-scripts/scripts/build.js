@@ -47,7 +47,7 @@ const FileSizeReporter = require('react-dev-utils/FileSizeReporter')
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild
 
-const config = require('../configs/webpack.config')(notEjected.language)
+const config = notEjected ? eval(require('../configs/webpack.config.template')(notEjected.language)) : require(path.join(process.cwd(), 'webpack.config.js'))
 
 measureFileSizesBeforeBuild(buildPath).then(previousFileSizes => {
   // Start the webpack build
