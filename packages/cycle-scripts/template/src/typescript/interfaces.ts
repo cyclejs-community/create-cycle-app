@@ -1,4 +1,5 @@
 module.exports = replacements => `${replacements.import}
+${replacements.typeImport}
 import {DOMSource, VNode} from '@cycle/dom'
 
 export type Sources = {

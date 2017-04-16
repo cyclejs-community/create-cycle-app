@@ -33,6 +33,7 @@ inquirer.prompt([ejectConfirmation]).then(answers => {
     test: 'node scripts/test.js',
     build: 'node scripts/build.js'
   }
+  const language = appPackageJson.cca.language
   // Remove flavor from devpendencies
   delete appPackageJson.devDependencies[flavorPackageJson.name]
   // Remove cca settings
@@ -74,8 +75,11 @@ inquirer.prompt([ejectConfirmation]).then(answers => {
   fs.copySync(path.join(__dirname, 'utils'), path.join(appScriptsPath, 'utils'))
 
   // STEP 4 - Copy configs
-  fs.copySync(path.join(__dirname, '../', 'configs', language), path.join(appPath, 'configs'))
-  fs.copySync(path.join(__dirname, '../', 'configs', 'webpackDevServer.config.js'), path.join(appPath, 'configs', 'webpackDevServer.config.js'))
+  const configString = require(path.join(__dirname, '..', 'configs', 'webpack.config.template.js'))(language)
+  fs.writeFileSync(path.join(appPath, 'webpack.config.js'), configString)
+  if(language === 'typescript') {
+    fs.copySync(path.join(__dirname, '../', 'configs', 'tsconfig.json'), path.join(appPath, 'tsconfig.json'))
+  }
 
   // TODO sucess message
 })
