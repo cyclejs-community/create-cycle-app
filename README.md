@@ -41,7 +41,7 @@ $ npm run build
 
 * **Zero Configuration:** There are no configuration files. Configuring both development and production builds is handled for you so you can focus on writing code.
 
-* **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 1 core flavors but allows you to provide your own from any registry such as GitHub or your own.
+* **Many Flavors:** We like to be together not the same, that’s why create-cycle-app comes with 1 core flavor but allows you to provide your own from any registry such as GitHub or your own.
 
 * **No Lock-In:** Specifically made for beginners and to provide fast bootstrap for new projects, create-cycle-app doesn't have the ambition to be __the__ tool for working with Cycle.js projects. With that in mind, it's easy to leave `create-cycle-app` defaults and follow your own steps, by running `npm run eject`.
 
