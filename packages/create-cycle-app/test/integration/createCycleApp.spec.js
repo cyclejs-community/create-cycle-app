@@ -36,8 +36,7 @@ describe('create-cycle-app', () => {
         path.resolve(__dirname, '../../index.js'),
         appName,
         '--flavor',
-        'cycle-scripts@1.0.3',
-        '--noyarn'
+        'cycle-scripts@1.0.3'
       ])
       dir = fs.readdirSync(appName)
       done()
@@ -48,13 +47,13 @@ describe('create-cycle-app', () => {
     })
 
     test('it generate the correct folder structure and install dependencies', () => {
-      expect(dir).toMatchObject([
+      expect(dir).toEqual(expect.arrayContaining([
         '.gitignore',
         'node_modules',
         'package.json',
         'public',
         'src'
-      ])
+      ]))
     })
 
     test('it generate a correct package.json file', () => {

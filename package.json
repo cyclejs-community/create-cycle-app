@@ -17,8 +17,14 @@
   },
   "author": "Geovani Souza <geovanisouza92@gmail.com>",
   "contributors": [
-    { "name": "Geovani Souza", "email": "geovanisouza92@gmail.com" },
-    { "name": "Nick Balestra", "email": "nick@balestra.ch" }
+    {
+      "name": "Geovani Souza",
+      "email": "geovanisouza92@gmail.com"
+    },
+    {
+      "name": "Nick Balestra",
+      "email": "nick@balestra.ch"
+    }
   ],
   "license": "ISC",
   "bugs": {

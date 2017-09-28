@@ -22,14 +22,26 @@
     "create-cycle-app": "./index.js"
   },
   "dependencies": {
+    "@cycle/dom": "^18.0.0",
+    "@cycle/http": "^14.0.0",
+    "@cycle/isolate": "^3.0.0",
+    "@cycle/run": "^3.1.0",
+    "@cycle/time": "^0.8.0",
     "chalk": "^1.1.3",
     "cross-spawn": "^4.0.2",
-    "inquirer": "^3.0.6",
-    "minimist": "^1.2.0"
+    "cycle-onionify": "^3.3.0",
+    "inquirer": "^3.3.0",
+    "minimist": "^1.2.0",
+    "xstream": "^10.9.0"
   },
   "devDependencies": {
-    "fs-extra": "^2.0.0",
-    "jest": "^18.1.0"
+    "cycle-restart": "^0.2.2",
+    "cyclejs-test-helpers": "^1.3.0",
+    "fs-extra": "^2.1.2",
+    "html-looks-like": "^1.0.3",
+    "jest": "^18.1.0",
+    "jsverify": "^0.8.2",
+    "snabbdom-to-html": "^3.2.0"
   },
   "repository": {
     "type": "git",

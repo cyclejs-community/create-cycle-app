@@ -8,14 +8,14 @@ const installScripts = require('./installScripts')
 const createPackageJson = require('./createPackageJson')
 const shouldUseYarn = require('./shouldUseYarn')
 
-module.exports = function createApp (name, verbose, flavor, noyarn, forceprompt) {
+module.exports = function createApp (name, verbose, flavor, yarn, forceprompt) {
   // The path where the cycle app will be created
   const appPath = path.resolve(name)
   // The name of the cycle app to create
   const appName = path.basename(appPath)
   // Which CLi to use (yarn or npm)
   let cli = 'npm'
-  if (!noyarn && shouldUseYarn()) {
+  if (yarn || shouldUseYarn()) {
     cli = 'yarn'
   }
   // console.log(cli)
