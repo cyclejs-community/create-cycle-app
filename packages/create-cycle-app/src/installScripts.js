@@ -35,7 +35,7 @@ module.exports = function installScripts (appFolder, appName, options) {
 
   // Trigger npm installation
   console.log(chalk.green('Installing packages. This might take a couple minutes.'))
-  console.log(chalk.green(`Installing ${packageName} from ${(local ? 'local' : 'npm')} ...`))
+  console.log(chalk.green(`Installing ${packageName} from ${(local ? 'local' : cli)} ...`))
   console.log()
 
   const proc = spawn(cli, args[cli], {stdio: 'inherit', cwd: appFolder})
