@@ -16,7 +16,9 @@ module.exports = function setup (appPath, appName, options) {
 
   // STEP #1 - Create boilerplate files
   const flavorPath = path.join(appPath, 'node_modules', 'cycle-scripts')
-  const templateStrings = require(path.join(flavorPath, 'template/config', language + '.js'))
+  const commonStrings = require(path.join(flavorPath, 'template/config', 'common.js'))[streamLib]
+  const languageStrings = require(path.join(flavorPath, 'template/config', language + '.js'))[streamLib]
+  const templateStrings = Object.assign({}, commonStrings, languageStrings)
   const templatePath = path.join(flavorPath, 'template/src', language)
   // Create ./public directory
   fs.ensureDirSync(path.join(appPath, 'public'))
@@ -33,7 +35,7 @@ module.exports = function setup (appPath, appName, options) {
     files.forEach(file => {
       const targetPath = path.join(appPath, 'src', file)
       const template = require(path.join(templatePath, file))
-      const targetContent = template(templateStrings[streamLib])
+      const targetContent = template(templateStrings)
       fs.outputFile(targetPath, targetContent)
     })
   })
