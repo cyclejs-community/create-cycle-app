@@ -7,11 +7,12 @@ process.noDeprecation = true
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
+const { CheckerPlugin } = require('awesome-typescript-loader')
 
 // Paths to be used for webpack configuration
 const paths = {
   appSrc: path.join(process.cwd(), 'src'),
-  appIndex: path.join(process.cwd(), 'src', 'index.js'),
+  appIndex: path.join(process.cwd(), 'src', 'index.ts'),
   appBuild: path.join(process.cwd(), 'build'),
   public: '/'
 }
@@ -80,10 +81,15 @@ module.exports = {
             ['transform-object-rest-spread']
           ]
         }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
       }
     ]
   },
   plugins: [
+    new CheckerPlugin(),
     // This is necessary to emit hot updates (currently CSS only):
     new webpack.HotModuleReplacementPlugin(),
     // Generates an `index.html` file with the <script> injected.

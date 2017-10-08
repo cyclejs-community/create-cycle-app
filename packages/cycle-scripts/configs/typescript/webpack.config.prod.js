@@ -4,14 +4,15 @@
 // https://github.com/vuejs/vue-loader/issues/666
 process.noDeprecation = true
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const { CheckerPlugin } = require('awesome-typescript-loader')
 
 // Paths to be used for webpack configuration
 const paths = {
   appSrc: path.join(process.cwd(), 'src'),
-  appIndex: path.join(process.cwd(), 'src', 'index.js'),
+  appIndex: path.join(process.cwd(), 'src', 'index.ts'),
   appBuild: path.join(process.cwd(), 'build'),
   public: '/'
 }
@@ -19,33 +20,18 @@ const paths = {
 module.exports = {
   entry: {
     main: [
-      // Include an alternative client for WebpackDevServer. A client's job is to
-      // connect to WebpackDevServer by a socket and get notified about changes.
-      // When you save a file, the client will either apply hot updates (in case
-      // of CSS changes), or refresh the page (in case of JS changes). When you
-      // make a syntax error, this client will display a syntax error overlay.
-      // Note: instead of the default WebpackDevServer client, we use a custom one
-      // to bring better experience from Create React App users. You can replace
-      // the line below with these two lines if you prefer the stock client:
-      // require.resolve('webpack-dev-server/client') + '?/',
-      // require.resolve('webpack/hot/dev-server'),
-      require.resolve('react-dev-utils/webpackHotDevClient'),
       // Your app's code
       paths.appIndex
     ]
   },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
-  },
   output: {
-    // This does not produce a real file. It's just the virtual path that is
-    // served by WebpackDevServer in development. This is the JS bundle
-    // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
-    // Not used in dev but WebpackDevServer crashes without it:
-    path: paths.appBuild,
-    // The URL that app is served from. We use "/" in development.
-    publicPath: paths.public
+    // This is the productin JS bundle containing code from all our entry points.
+    filename: 'bundle.js',
+    // The output path where webpack will write the bundle
+    path: paths.appBuild
+  },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json']
   },
   module: {
     rules: [
@@ -63,12 +49,14 @@ module.exports = {
           cacheDirectory: true,
           // Instead of relying on a babelrc file to configure babel (or in package.json configs)
           // We speficy here which presets to use. In the future this could be moved to it's own
-          // package as create-react-app does with their 'babel-preset-react-app module
-          babelrc: false,
+          // package as create-react-app does with their 'babel-preset-react-app module.
+          // As uglify doesn't support es6 code yet, the uglify param will tell babel plugin to transpile to es5
+          // in order for the output to be uglified.
           presets: [
             [ 'env', {
               'targets': {
-                'browsers': ['last 2 versions']
+                'browsers': ['last 2 versions'],
+                uglify: true
               }
             }]
           ],
@@ -80,12 +68,15 @@ module.exports = {
             ['transform-object-rest-spread']
           ]
         }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
       }
     ]
   },
   plugins: [
-    // This is necessary to emit hot updates (currently CSS only):
-    new webpack.HotModuleReplacementPlugin(),
+    new CheckerPlugin(),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       template: 'public/index.html',
@@ -93,14 +84,18 @@ module.exports = {
       favicon: 'public/favicon.png',
       hash: true
     }),
-    // Makes environment variables available to the JS code, fallback to 'development'
+    // Makes environment variables available to the JS code, fallback to 'production'
     new webpack.DefinePlugin({
-      DEVELOPMENT: JSON.stringify(process.env.NODE_ENV === 'development')
+      PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production')
     }),
     // To be used for JSX support
     new webpack.ProvidePlugin({
       Snabbdom: 'snabbdom-pragma'
+    }),
+    // Uglify plugin, depending on the devtool options, Source Maps are generated.
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: this.devtool && this.devtool.indexOf('source-map') >= 0
     })
   ],
-  devtool: 'inline-source-map'
+  devtool: 'cheap-module-source-map'
 }

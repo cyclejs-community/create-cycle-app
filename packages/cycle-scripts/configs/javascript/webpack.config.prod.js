@@ -29,6 +29,9 @@ module.exports = {
     // The output path where webpack will write the bundle
     path: paths.appBuild
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json']
+  },
   module: {
     rules: [
       {

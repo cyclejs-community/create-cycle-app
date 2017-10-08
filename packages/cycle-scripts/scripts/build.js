@@ -45,7 +45,6 @@ const notEjected = require(path.join(process.cwd(), 'package.json')).cca
 
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter')
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild
 
 const config = require(path.join(
   '../configs/',
@@ -117,9 +116,6 @@ function build (previousFileSizes) {
     console.log(chalk.green('Compiled successfully.'))
     console.log()
 
-    console.log('File sizes after gzip:')
-    console.log()
-    printFileSizesAfterBuild(stats, previousFileSizes)
     console.log()
   })
   // todo better output

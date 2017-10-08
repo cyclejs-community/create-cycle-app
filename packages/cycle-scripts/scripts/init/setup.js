@@ -26,19 +26,20 @@ module.exports = function setup (appPath, appName, options) {
   fs.ensureDirSync(path.join(appPath, 'src'))
   // Get templates in cycle-scripts/template/src/<language>
   // Interpolate them and write compiled files in ./src
-  fs.readdir(templatePath, (err, files) => {
-    if (err) {
-      throw err
-    }
-    files.forEach(file => {
-      const targetPath = path.join(appPath, 'src', file)
-      const template = require(path.join(templatePath, file))
-      const targetContent = template(templateStrings[streamLib])
-      fs.outputFile(targetPath, targetContent)
-    })
+  const files = fs.readdirSync(templatePath)
+  files.forEach(file => {
+    const targetPath = path.join(appPath, 'src', file)
+    const template = require(path.join(templatePath, file))
+    const targetContent = template(templateStrings[streamLib])
+    fs.outputFile(targetPath, targetContent)
   })
   // Copy cycle-scripts/template/gitgnore to ./.gitignore
   fs.copySync(path.join(flavorPath, 'template', 'gitignore'), path.join(appPath, '.gitignore'))
+
+  if (language === 'typescript') {
+    fs.copySync(path.join(flavorPath, 'template', 'tsconfig.json'), path.join(appPath, 'tsconfig.json'))
+    fs.copySync(path.join(flavorPath, 'template', 'custom-typings.d.ts'), path.join(appPath, 'custom-typings.d.ts'))
+  }
 
   // STEP #2 - Edit package.json
   // Retrieve package.json content

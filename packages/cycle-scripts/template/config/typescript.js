@@ -8,7 +8,7 @@ module.exports = {
   },
   rxjs: {
     run: '@cycle/rxjs-run',
-    import: 'import Rx from \'rxjs/Rx\'',
+    import: 'import * as Rx from \'rxjs\'',
     typeImport: 'import {Observable} from \'rxjs\'',
     stream: 'Rx.Observable',
     streamType: 'Observable'
