@@ -34,6 +34,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const argv = require('optimist').argv
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
 const host = process.env.HOST || 'localhost'
@@ -88,5 +89,7 @@ module.exports = {
   // Enable HTTPS if the HTTPS environment variable is set to 'true'
   https: protocol === 'https',
   host: host,
-  overlay: false
+  overlay: false,
+  // Whether to enable historyApiFallback or not
+  historyApiFallback: argv["enable-fallback"] || process.env.ENABLE_FALLBACK === 'true'
 }

@@ -45,6 +45,7 @@
   "devDependencies": {
     "husky": "^0.13.1",
     "lerna": "2.0.0-beta.36",
+    "optimist": "^0.6.1",
     "standard": "^8.3.0"
   }
 }
