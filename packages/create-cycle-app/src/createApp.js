@@ -21,7 +21,10 @@ module.exports = function createApp (name, verbose, flavor, cli, forceprompt) {
   // If no --flavor is passed (flavor === 'core')
   // We prompt for language and stream library
   // We set the flavor to be 'cycle-scripts'
-  if (flavor === 'core' || forceprompt) {
+  if (flavor === 'core') {
+    flavor = 'cycle-scripts-one-fits-all@>=6.0.0'
+  }
+  if (forceprompt) {
     if (flavor === 'core') {
       flavor = 'cycle-scripts@>=2.0.0'
     }
