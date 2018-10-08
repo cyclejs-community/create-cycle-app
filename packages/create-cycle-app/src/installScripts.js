@@ -17,17 +17,21 @@ module.exports = function installScripts (appFolder, appName, options) {
   // Get the right name of the flavor package
   const packageName = getPackageName(flavor)
   // Install dependencies
+  const npmArgs = [
+    'install',
+    verbose && '--verbose',
+    '--save-dev',
+    '--save-exact',
+    flavor
+  ].filter(a => a)
+
   const args = {
-    npm: [
-      'install',
-      verbose && '--verbose',
-      '--save-dev',
-      '--save-exact',
-      flavor
-    ].filter(a => a),
+    npm: npmArgs,
+    pnpm: npmArgs,
     yarn: [
       'add',
       '--exact',
+      '--dev',
       verbose && '--verbose',
       local ? 'file:' + flavor : flavor
     ].filter(a => a)

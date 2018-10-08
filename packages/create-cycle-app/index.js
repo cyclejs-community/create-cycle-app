@@ -11,6 +11,7 @@ const validCommands = {
   'verbose': true,
   'flavor': true,
   'yarn': true,
+  'pnpm': true,
   'forceprompt': true
 }
 
@@ -21,7 +22,7 @@ if (commands.length === 0) {
     console.log(chalk.green(`create-cycle-app version: ${VERSION}`))
     process.exit()
   }
-  console.error(chalk.red('Usage: create-cycle-app <project-directory> [--flavor] [--verbose] [--yarn]'))
+  console.error(chalk.red('Usage: create-cycle-app <project-directory> [--flavor] [--verbose] [--yarn | --pnpm]'))
   process.exit(1)
 }
 
@@ -38,9 +39,9 @@ Object.keys(argv)
 
 const flavor = argv.flavor || 'core'
 const verbose = argv.verbose || false
-const yarn = argv.yarn || false
+const cli = argv.yarn ? 'yarn' : (argv.pnpm ? 'pnpm' : 'npm')
 const forceprompt = argv.forceprompt || false
 const name = commands[0]
 
 // Parse the command line options and run the setup
-createApp(name, verbose, flavor, yarn, forceprompt)
+createApp(name, verbose, flavor, cli, forceprompt)
