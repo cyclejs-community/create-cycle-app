@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "husky": "^0.13.1",
+    "husky": "^3.0.8",
     "lerna": "2.0.0-beta.36",
     "standard": "^8.3.0"
   }
